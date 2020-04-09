@@ -1,16 +1,20 @@
 from parser import *
+from assem import *
+from config import *
 
 source = open("print.k", "r")
+output = open("run.asm", "w")
 data = source.readlines()
 
-print(data)
+#list of varibles avilble to reasign
+
 
 #remove file formating a turn into a single string
 file=""
 for line in data:
     line.strip()
     for char in line:
-        if(char=='\t'): pass
+        if(char=='\t' or char=='\n'): pass
         else: file+=char
 
 print(file)
@@ -18,7 +22,7 @@ print(file)
 print("starting compile")
 
 #parser
-parse(file)
+parse(data)
 
 t=""
 for line in source:
@@ -27,6 +31,14 @@ for line in source:
         t+=char
 
 print(t)
+
+#process line by line
+line=""
+for char in file:
+    line+=char
+    if(char == ';' or char=='{'):
+        process(line)
+        line=""
 
 
 
