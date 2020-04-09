@@ -30,5 +30,7 @@ def type(string):
 	elif(string=="u64"):
 		name="dz"+len(con.dz)
 		con.db.append(f'{name}')
+	elif (string=="void"):
+		name="void"
 
 	return name
