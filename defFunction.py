@@ -1,18 +1,23 @@
-from config import *
-
+import config as con
+from type import *
 
 def function(line):
 	length = len(line)
-	type=""
+	Type=""
 	name=""
 
 	for x in range(0, 5):
-		type+=line[x]
-		if(line[x]==' '):type=type[:-1]
-	varName= ""#type(type) 
-	varName+="db 0\n"
+		Type+=line[x]
+		if(line[x]==' '):
+			Type=Type[:-1]
+			break
 	
-	data+=varName
+	
+	varName= type(Type) 
+	varName+=" db 0"
+	
+	con.data+=varName
+	print(con.data)
 
 	for x in range (4, length):
 		name+=line[x]
@@ -20,4 +25,4 @@ def function(line):
 			name=name[:-1]
 			break
 
-	output.write(f'_{name}')
+	return
