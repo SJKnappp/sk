@@ -12,10 +12,10 @@ data = source.readlines()
 #remove file formating a turn into a single string
 file=""
 for line in data:
-    line.strip()
-    for char in line:
-        if(char=='\t' or char=='\n'): pass
-        else: file+=char
+	line.strip()
+	for char in line:
+		if(char=='\t' or char=='\n'): pass
+		else: file+=char
 
 print(file)
 
@@ -26,24 +26,37 @@ parse(data)
 
 t=""
 for line in source:
-    line.strip()
-    for char in line:
-        t+=char
+	line.strip()
+	for char in line:
+		t+=char
 
 print(t)
 
 #process line by line
 line=""
+ignore=0
 for char in file:
-    line+=char
-    if(char == ';' or char=='{'):
-        process(line)
-        line=""
+	
+	if(ignore==0): line+=char
+	print(line)
+	if((char == ';' or char=='{' or char=='}') and ignore==0):
+		process(line)
+		line=""
+	if(char == '#' and ignore==0): 
+		print("test")
+		ignore=1
+		line=line[:-1]
+		continue
+
+	if(char == '#' and ignore==1): ignore=0
 
 print(con.text)
 
 
 assemble = open("ass.asm", "w")
+assemble.write(f'section .data\n{con.data}')
+assemble.write(f'section .bss\n{con.bss}')
+assemble.write(f'section .text\n{con.text}')
 
 
 

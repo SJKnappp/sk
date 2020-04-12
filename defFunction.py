@@ -19,7 +19,7 @@ def function(line):
 	if(varType!="void"):	#only sets a varible if not void
 		varType+= varType[0:2]
 		varType+=" 0"
-		con.data+=varType
+		con.data+= "\t"+ varType+"\n"
 
 	#function name
 	varName=""
