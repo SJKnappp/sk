@@ -8,7 +8,10 @@ def process(line):
 		return
 
 	if(line[-1]=='}'):
-		con.text+="\tret\n"
+		if(con.inStart==0):	con.text+="\tret\n"
+		else:
+			con.inStart=1
+			con.data+="mov\tedx, 1\n\tint\t0x80"
 
 	Type=""
 	for x in range(0, len(line)):

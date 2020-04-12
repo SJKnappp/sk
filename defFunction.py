@@ -34,9 +34,11 @@ def function(line):
 			print("function declration requires ()")
 			quit()
 
+	if(varName=="start"): con.inStart=1
+
 	con.functions.append(varName)#adds the varible name
 
-	con.text+="_"+varName+"\n" #adds the label to the 
+	con.text+="_"+varName+":\n" #adds the label to the 
 
 
 
