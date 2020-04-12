@@ -27,7 +27,7 @@ def process(line):
 	print(words)
 	Type=type(words[0])
 	if(Type!=""):
-		con.data+="\t"+Type + "\t" + Type[0:2] + ", 0\n"
+		con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
 
 	#if(Type==""):
 	#	print("not a varible")
