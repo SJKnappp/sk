@@ -9,6 +9,8 @@ do=[]   #16byte
 dy=[]   #32byte
 dz=[]   #64byte
 
+functions = [] #stores all avilable functions
+
 data=""
 bss=""
 text=""

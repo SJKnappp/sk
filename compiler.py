@@ -1,6 +1,6 @@
 from parser import *
 from assem import *
-from config import *
+import config as con
 
 source = open("print.k", "r")
 output = open("run.asm", "w")
@@ -40,7 +40,7 @@ for char in file:
         process(line)
         line=""
 
-
+print(con.text)
 
 
 assemble = open("ass.asm", "w")

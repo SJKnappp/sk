@@ -11,15 +11,34 @@ def function(line):
 		Type+=line[x]
 		if(line[x]==' '):
 			Type=Type[:-1]
-			namPos=0
+			namPos=x+1
 			break
 	
 	#sets a varible to store the output varible of the function
-	varName= type(Type) +" "
-	if(varName!="void"):	#only sets a varible if not void
-		varName+= varName[0:2]
-		varName+=" 0"
-		con.data+=varName
+	varType= type(Type) +" "
+	if(varType!="void"):	#only sets a varible if not void
+		varType+= varType[0:2]
+		varType+=" 0"
+		con.data+=varType
+
+	#function name
+	varName=""
+	nameend=x
+	for x in range(namPos, len(line)):
+		varName+=line[x]
+		if(line[x]=='('):
+			varName=varName[:-1]
+			nameEnd=x
+			break
+		if(line[x]=='{'):
+			print("function declration requires ()")
+			quit()
+
+	con.functions.append(varName)#adds the varible name
+
+	con.text+="_"+varName+"\n" #adds the label to the 
+
+
 
 	for x in range (4, length):
 		name+=line[x]

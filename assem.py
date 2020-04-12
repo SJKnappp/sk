@@ -3,9 +3,9 @@ import config as con
 
 def process(line):
 
-    if(line[-1]=='{'):
-        function(line)
-        return
+	if(line[-1]=='{'):
+		function(line)
+		return
 
 	Type=""
 	for x in range(0, len(line)):
@@ -14,5 +14,6 @@ def process(line):
 			Type=Type[:-1]
 			break
 
-
-    
+	if(Type==""):
+		print("not a varible")
+	#else: defvar()

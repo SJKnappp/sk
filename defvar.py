@@ -6,11 +6,6 @@ def var(line):
 	Type=""
 	name=""
 
-	for x in range(0, len(line)):
-		Type+=line[x]
-		if(line[x]==' '):
-			Type=Type[:-1]
-			break
 	
 	
 	varName= type(Type) +" "
