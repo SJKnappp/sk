@@ -38,7 +38,6 @@ ignore=0
 for char in file:
 	
 	if(ignore==0): line+=char
-	print(line)
 	if((char == ';' or char=='{' or char=='}') and ignore==0):
 		process(line)
 		line=""
@@ -50,13 +49,10 @@ for char in file:
 
 	if(char == '#' and ignore==1): ignore=0
 
-print(con.text)
-
-
 assemble = open("ass.asm", "w")
 assemble.write(f'section .data\n{con.data}')
 assemble.write(f'section .bss\n{con.bss}')
-assemble.write(f'section .text\n{con.text}')
+assemble.write(f'section .text\n\tglobal _start\n{con.text}\n\tmov\tedx, 1\n\tint\t0x80')
 
 
 
