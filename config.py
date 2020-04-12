@@ -11,6 +11,9 @@ dz=[]   #64byte
 
 functions = [] #stores all avilable functions
 
+inStart=0 #tracks if in start fucntion as exit behavour is diffrent
+
+#tracks the three segments
 data=""
 bss=""
 text=""
