@@ -3,6 +3,7 @@ from defvar import *
 from checkExists import *
 import config as con
 
+#asses the line and decides what to do with it
 def process(line):
 
 	if(line[-1]=='{'):
@@ -19,24 +20,25 @@ def process(line):
 	words=[]
 	tempN="" #varible name
 	tempA=[] #varible data
-	inFunc=0
-	count=0
-	for x in range(0, len(line)):
+	tempFunc=[] #stores info on function to process
+	inFunc=0 #keeps track of in function
+	count=0 #keeps track of the number entrys
+	for x in range(0, len(line)): #loops thrugh the string to split them into lines
 		tempN+=line[x]
-		if(line[x]==' ' or line[x]==';'):
-			count+=1
-			tempN=tempN[:-1]
-			if(tempN!=''):
+		if(line[x]==' ' or line[x]==';'): #stores temp value at the end of the entry
+			count+=1	#incrments the count
+			tempN=tempN[:-1]	#removes the end stament
+			if(tempN!=''):		#removes any entre that is empty caused by double spaces
 				words.append(tempN) #adds the indvdual parts of the line 
-		if(line[x]=='='):
-
-			tempN=tempN[:-1]
-			tempA.append(tempN)
 			tempN=""
+		if(line[x]=='='): #checks for keysymble =
+			tempN=tempN[:-1]	
+			tempA.append(tempN)
+			tempN=""	
 			if(line[x+1]=='='): 
-				tempA.append("==")
-				x+=1
-			else: tempA.append("=")
+				tempA.append("==")	#checks if equality or if check exists
+				x+=1				#incremts x pos to not include = twice
+			else: tempA.append("=")	#if not == and = already been checked for places it
 
 		if(line[x]=='('):
 			inFunc=1
