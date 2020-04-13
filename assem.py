@@ -23,6 +23,7 @@ def process(line):
 	tempFunc=[] #stores info on function to process
 	inFunc=0 #keeps track of in function
 	count=0 #keeps track of the number entrys
+	countIn=0 #keeps track of number a varibles in funcion call
 	for x in range(0, len(line)): #loops thrugh the string to split them into lines
 		tempN+=line[x]
 		if(line[x]==' ' or line[x]==';'): #stores temp value at the end of the entry
@@ -40,22 +41,23 @@ def process(line):
 				x+=1				#incremts x pos to not include = twice
 			else: tempA.append("=")	#if not == and = already been checked for places it
 
-		if(line[x]=='('):
+		if(line[x]=='('): #chages into a varible call
 			inFunc=1
 			tempN=tempN[:-1]
-			tempA.append(tempN)
+			tempFunc.append(tempN)
 			#words.append(tempN)
 			tempN=""
 		if(line[x]==')'):
 			tempN=tempN[:-1]
-			tempA.append(tempN)
+			tempFunc.append(tempN)
+			tempA.append(tempFunc)
 			words.append(tempA)
 			tempA=[]
 			tempN=""
 			inFunc=0
 		if(line[x]==','):
 			tempN=tempN[:-1]
-			tempA.append(tempN)
+			tempFunc.append(tempN)
 			#words[count].append(tempN)
 			inFunc+=1
 			tempN=""
