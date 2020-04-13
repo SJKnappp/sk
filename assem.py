@@ -32,32 +32,33 @@ def process(line):
 			if(tempN!=''):		#removes any entre that is empty caused by double spaces
 				words.append(tempN) #adds the indvdual parts of the line 
 			tempN=""
-		if(line[x]=='='): #checks for keysymble =
+		
+		elif(line[x]=='='): #checks for keysymble =
 			tempN=tempN[:-1]	
-			tempA.append(tempN)
+			if(tempN!=""): words.append(tempN) #checks if entry is not empty
 			tempN=""	
 			if(line[x+1]=='='): 
-				tempA.append("==")	#checks if equality or if check exists
+				words.append("==")	#checks if equality or if check exists
 				x+=1				#incremts x pos to not include = twice
-			else: tempA.append("=")	#if not == and = already been checked for places it
+			else: words.append("=")	#if not == and = already been checked for places it
 
-		if(line[x]=='('): #chages into a varible call
+		elif(line[x]=='('): #chages into a varible call
 			inFunc=1
 			tempN=tempN[:-1]
-			tempFunc.append(tempN)
+			tempA.append(tempN)
 			#words.append(tempN)
 			tempN=""
-		if(line[x]==')'):
+		elif(line[x]==')'):
 			tempN=tempN[:-1]
-			tempFunc.append(tempN)
-			tempA.append(tempFunc)
-			words.append(tempA)
+			tempA.append(tempN)
+			#tempA.append(tempFunc)
+			words.append(tempA) #adds 
 			tempA=[]
 			tempN=""
 			inFunc=0
-		if(line[x]==','):
+		elif(line[x]==','):
 			tempN=tempN[:-1]
-			tempFunc.append(tempN)
+			tempA.append(tempN)
 			#words[count].append(tempN)
 			inFunc+=1
 			tempN=""
@@ -68,9 +69,11 @@ def process(line):
 		con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
 		start=1
 
+	print(words)
+
 	exists = 0
 	for x in range(start, len(words)):
-		print(words[x])
+		#print(words[x])
 		if(words[x]!="="): pass #checks for symbols then will run functions accordingly
 		elif(words[x]!="=="): pass
 		else:
