@@ -42,7 +42,6 @@ for char in file:
 		process(line)
 		line=""
 	if(char == '#' and ignore==0): 
-		print("test")
 		ignore=1
 		line=line[:-1]
 		continue

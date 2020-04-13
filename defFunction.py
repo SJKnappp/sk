@@ -7,7 +7,7 @@ def function(line):
 	name=""
 	namPos=0
 
-	for x in range(0, len(line)):
+	for x in range(0, len(line)): #loops though 
 		Type+=line[x]
 		if(line[x]==' '):
 			Type=Type[:-1]
@@ -16,10 +16,13 @@ def function(line):
 	
 	#sets a varible to store the output varible of the function
 	varType= type(Type) +" "
-	if(varType!="void"):	#only sets a varible if not void
+	if(varType!="void" and varType!="fail "):	#only sets a varible if not void
 		varType+= varType[0:2]
 		varType+=" 0"
 		con.data+= "\t"+ varType+"\n"
+
+	if(varType=="fail "):
+		namPos=0
 
 	#function name
 	varName=""
@@ -30,7 +33,7 @@ def function(line):
 			varName=varName[:-1]
 			nameEnd=x
 			break
-		if(line[x]=='{'):
+		if(line[x]=='{'): #thouws error if () not found
 			print("function declration requires ()")
 			quit()
 
@@ -39,13 +42,5 @@ def function(line):
 	con.functions.append(varName)#adds the varible name
 
 	con.text+="_"+varName+":\n" #adds the label to the 
-
-
-
-	for x in range (4, length):
-		name+=line[x]
-		if(line[x]=='('):
-			name=name[:-1]
-			break
 
 	return

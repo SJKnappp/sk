@@ -32,5 +32,6 @@ def type(string):
 		con.db.append(f'{name}')
 	elif (string=="void"):
 		name="void"
+	else: name="fail"
 
 	return name
