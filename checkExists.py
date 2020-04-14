@@ -15,5 +15,5 @@ def checkExistsFunction(word): #finds if function exists then returns the requir
 	for x in range(0, len(con.functions)): #loops though all of known varibles
 		if(word==con.functions[x][0]):
 			return con.functions[x]
-	requried=[] #returns empty array if failed to find the functions
+	requried=[] #returns empty array if failed to find the functions(will be used so that try and catch type arrangments can be used )
 	return requried
