@@ -1,4 +1,5 @@
 import config as con
+from breakline import *
 from type import *
 
 def function(line):
@@ -6,6 +7,9 @@ def function(line):
 	Type=""
 	name=""
 	namPos=0
+
+	words = breakline(line)
+	print(words)
 
 	for x in range(0, len(line)): #loops though 
 		Type+=line[x]

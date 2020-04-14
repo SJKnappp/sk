@@ -10,7 +10,7 @@ def breakline(line):
 	countIn=0 #keeps track of number a varibles in funcion call
 	for x in range(0, len(line)): #loops thrugh the string to split them into lines
 		tempN+=line[x]
-		if(line[x]==' ' or line[x]==';' or line[x]=='{'): #stores temp value at the end of the entry
+		if(line[x]==' ' and inFunc==0 or line[x]==';' or line[x]=='{'): #stores temp value at the end of the entry
 			count+=1	#incrments the count
 			tempN=tempN[:-1]	#removes the end stament
 			tempA.append(tempN)
@@ -31,12 +31,12 @@ def breakline(line):
 		elif(line[x]=='('): #chages into a varible call
 			inFunc=1
 			tempN=tempN[:-1]
-			tempA.append(tempN)
+			tempA.append(tempN.strip())
 			#words.append(tempN)
 			tempN=""
 		elif(line[x]==')'):
 			tempN=tempN[:-1]
-			tempA.append(tempN)
+			tempA.append(tempN.strip())
 			#tempA.append(tempFunc)
 			words.append(tempA) #adds 
 			tempA=[]
@@ -44,7 +44,8 @@ def breakline(line):
 			inFunc=0
 		elif(line[x]==','):
 			tempN=tempN[:-1]
-			tempA.append(tempN)
+			tempA.append(tempN.strip())
 			#words[count].append(tempN)
 			inFunc+=1
 			tempN=""
+	return words
