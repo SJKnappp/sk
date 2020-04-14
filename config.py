@@ -10,6 +10,7 @@ dy=[]   #32byte
 dz=[]   #64byte
 
 functions = [] #stores all avilable functions
+varibles = []
 
 inStart=0 #tracks if in start fucntion as exit behavour is diffrent
 

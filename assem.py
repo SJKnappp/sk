@@ -26,12 +26,14 @@ def process(line):
 	countIn=0 #keeps track of number a varibles in funcion call
 	for x in range(0, len(line)): #loops thrugh the string to split them into lines
 		tempN+=line[x]
-		if(line[x]==' ' or line[x]==';'): #stores temp value at the end of the entry
+		if(line[x]==' ' or line[x]==';' or line[x]=='{'): #stores temp value at the end of the entry
 			count+=1	#incrments the count
 			tempN=tempN[:-1]	#removes the end stament
+			tempA.append(tempN)
 			if(tempN!=''):		#removes any entre that is empty caused by double spaces
-				words.append(tempN) #adds the indvdual parts of the line 
+				words.append(tempA) #adds the indvdual parts of the line 
 			tempN=""
+			tempA=[]
 		
 		elif(line[x]=='='): #checks for keysymble =
 			tempN=tempN[:-1]	
@@ -72,16 +74,28 @@ def process(line):
 	print(words)
 
 	exists = 0
+
 	for x in range(start, len(words)):
-		#print(words[x])
-		if(words[x]!="="): pass #checks for symbols then will run functions accordingly
-		elif(words[x]!="=="): pass
-		else:
-			exists = checkExists(words[x])
-			if(exists==0):
-				print("function not found")
-				quit()
-			else: pass
+		print(words[x])
+
+		if(len(words[x])==1): pass
+		elif(len(words[x]>1)):
+			checkExistsFunction(words[x][0])
+			for y in range(1, len(words[x])):
+				words[x]
+
+
+
+
+
+		#if(words[x]!="="): pass #checks for symbols then will run functions accordingly
+		#elif(words[x]!="=="): pass
+		#else:
+		#	exists = checkExists(words[x])
+		#	if(exists==0):
+		#		print("function not found")
+		#		quit()
+		#	else: pass
 	#if(Type==""):
 	#	print("not a varible")
 	#else: var()
