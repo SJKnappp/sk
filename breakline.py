@@ -23,14 +23,18 @@ def breakline(line):
 			tempN=""
 			tempA=[]
 		
+		elif(line[x]== ' '): tempN=tempN[:-1]
+
 		elif(line[x]=='='): #checks for keysymble =
 			tempN=tempN[:-1]	
-			if(tempN!=""): words.append(tempN) #checks if entry is not empty
+			if(tempN!=""): 
+				if(inFunc==0): words.append(tempN) #checks if entry is not empty
+				else: tempA.append(tempN)
 			tempN=""	
 			if(line[x+1]=='='): 
-				words.append("==")	#checks if equality or if check exists
+				tempA.append("==")	#checks if equality or if check exists
 				x+=2				#incremts x pos to not include = twice
-			else: words.append("=")	#if not == and = already been checked for places it
+			elif(line[-1]=="="): tempA.append("=")	#if not == and = already been checked for places it
 
 		elif(line[x]=='('): #chages into a varible call
 			inFunc=1

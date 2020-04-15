@@ -3,7 +3,10 @@ import config as con
 
 
 def Funif(words):
-	pass
+	name="if"+str(con.ifcount)
+	con.ifcount+=1
+	con.closeStack.append(name)
+	
 
 def Funelif(words):
 	pass

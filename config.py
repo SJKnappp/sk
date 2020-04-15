@@ -11,6 +11,11 @@ dz=[]   #64byte
 
 functions = [] #stores all avilable functions
 varibles = []
+reservedFunctions = [["if"]]
+
+ifcount=0
+
+closeStack=[] #stores lables to close definitions
 
 inStart=0 #tracks if in start fucntion as exit behavour is diffrent
 
