@@ -21,8 +21,10 @@ def function(line):
 			namPos=x+1
 			break
 	
+
 	#sets a varible to store the output varible of the function
-	varType= type(words[0]) +" "
+	Type= type(words[0][0]) +" "
+	varType= Type + " "
 	if(varType=="fail "):
 		exists = checkExistsFunction(words[0])
 		if(exists==[]): #checks if function exists
@@ -35,27 +37,16 @@ def function(line):
 		varType+=" 0"
 		con.data+= "\t"+ varType+"\n"
 	
+	function = []
+	for x in range(1, len(words)):
+		if(len(words[x])>1):
+			if(words[x][0]=="start"): con.inStart=1
+			function.append(words[x][0])
+			function.append(Type[0:2])
+			for y in range(1, len(words[x])):
+				function.append(words[x][y])
 
-	if(varType=="fail "):
-		namPos=0
-
-	#function name
-	varName=""
-	nameend=x
-	for x in range(namPos, len(line)):
-		varName+=line[x]
-		if(line[x]=='('):
-			varName=varName[:-1]
-			nameEnd=x
-			break
-		if(line[x]=='{'): #thouws error if () not found
-			print("function declration requires ()")
-			quit()
-
-	if(varName=="start"): con.inStart=1
-
-	con.functions.append(varName)#adds the varible name
-
-	con.text+="_"+varName+":\n" #adds the label to the 
+	con.functions.append(function)#adds the varible name
+	con.text+="_"+function[0]+":\n" #adds the label to the 
 
 	return

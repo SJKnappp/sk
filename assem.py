@@ -26,8 +26,6 @@ def process(line):
 		con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
 		start=1
 
-	print(words)
-
 	exists = 0
 	for x in range(start, len(words)):
 	
