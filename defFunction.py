@@ -1,5 +1,7 @@
 import config as con
 from breakline import *
+from checkExists import *
+from coreFunction import *
 from type import *
 
 def function(line):
@@ -9,6 +11,7 @@ def function(line):
 	namPos=0
 
 	words = breakline(line)
+	print("fun")
 	print(words)
 
 	for x in range(0, len(line)): #loops though 
@@ -19,11 +22,19 @@ def function(line):
 			break
 	
 	#sets a varible to store the output varible of the function
-	varType= type(Type) +" "
-	if(varType!="void" and varType!="fail "):	#only sets a varible if not void
+	varType= type(words[0]) +" "
+	if(varType=="fail "):
+		exists = checkExistsFunction(words[0])
+		if(exists==[]): #checks if function exists
+			print("function not found")
+			quit()
+		else:
+			coreFun(words[0])
+	elif(varType!="void"):	#only sets a varible if not void
 		varType+= varType[0:2]
 		varType+=" 0"
 		con.data+= "\t"+ varType+"\n"
+	
 
 	if(varType=="fail "):
 		namPos=0

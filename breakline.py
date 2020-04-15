@@ -16,6 +16,10 @@ def breakline(line):
 			tempA.append(tempN)
 			if(tempN!=''):		#removes any entre that is empty caused by double spaces
 				words.append(tempA) #adds the indvdual parts of the line 
+			tempA=[]
+			if(line[x]=='{'): 
+				tempA.append("{")
+				words.append(tempA)
 			tempN=""
 			tempA=[]
 		
@@ -25,7 +29,7 @@ def breakline(line):
 			tempN=""	
 			if(line[x+1]=='='): 
 				words.append("==")	#checks if equality or if check exists
-				x+=1				#incremts x pos to not include = twice
+				x+=2				#incremts x pos to not include = twice
 			else: words.append("=")	#if not == and = already been checked for places it
 
 		elif(line[x]=='('): #chages into a varible call
