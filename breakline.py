@@ -1,6 +1,7 @@
 
 #breaks line in indvidual compenets in an array
 def breakline(line):
+	print(line)
 	words=[]
 	tempN="" #varible name
 	tempA=[] #varible data
@@ -34,7 +35,7 @@ def breakline(line):
 			if(line[x+1]=='='): 
 				tempA.append("==")	#checks if equality or if check exists
 				x+=2				#incremts x pos to not include = twice
-			elif(line[-1]=="="): tempA.append("=")	#if not == and = already been checked for places it
+			elif(line[x-1]!='='): words.append(["="])	#if not == and = already been checked for places it
 
 		elif(line[x]=='('): #chages into a varible call
 			inFunc=1
@@ -56,4 +57,5 @@ def breakline(line):
 			#words[count].append(tempN)
 			inFunc+=1
 			tempN=""
+	print(words)
 	return words

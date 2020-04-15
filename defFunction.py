@@ -11,8 +11,6 @@ def function(line):
 	namPos=0
 
 	words = breakline(line)
-	print("fun")
-	print(words)
 
 	for x in range(0, len(line)): #loops though 
 		Type+=line[x]
@@ -29,11 +27,8 @@ def function(line):
 	exists=[]
 	reserved=[]
 	if(varType=="fail "):
-		print("test")
 		exists = checkExistsFunction(words[0])
 		reserved = checkReservedFunction(words[0])
-		print("res")
-		print(reserved)
 		if(exists==[] and reversed==[]): #checks if function exists
 			print("function not found")
 			quit()

@@ -19,9 +19,6 @@ def checkExistsFunction(word): #finds if function exists then returns the requir
 	return requried
 
 def checkReservedFunction(word):
-	print("fun1")
-	print(word)
-	print(con.reservedFunctions)	
 	for x in range(0, len(con.reservedFunctions)):
 		if(word[0]==con.reservedFunctions[x][0]):
 			return con.reservedFunctions[x]

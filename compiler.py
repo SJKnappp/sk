@@ -18,7 +18,6 @@ for line in data:
 		else: file+=char
 
 print(file)
-
 print("starting compile")
 
 #parser
@@ -29,8 +28,6 @@ for line in source:
 	line.strip()
 	for char in line:
 		t+=char
-
-print(t)
 
 #process line by line
 line=""
