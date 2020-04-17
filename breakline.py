@@ -1,7 +1,6 @@
 
 #breaks line in indvidual compenets in an array
 def breakline(line):
-	print(line)
 	words=[]
 	tempN="" #varible name
 	tempA=[] #varible data
@@ -57,5 +56,4 @@ def breakline(line):
 			#words[count].append(tempN)
 			inFunc+=1
 			tempN=""
-	print(words)
 	return words

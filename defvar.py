@@ -1,14 +1,14 @@
 import config as con
 from type import *
 
-def var(line):
-	length = len(line)
+def var(Type, var, equal):
+	length = len(var)
 	Type=""
 	name=""
 
 	
 	
-	varName= type(Type) +" "
+	varName= Type +" "
 	varName+= varName[0:2]
 	varName+=" 0"
 	

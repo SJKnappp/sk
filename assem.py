@@ -22,13 +22,16 @@ def process(line):
 
 	words = breakline(line)
 
-	Type=type(words[0])
+	Type=type(words[0][0])
 	start=0
+	define=0
 	if(Type!="fail"):
 		start=1
+		define=1
 
 	exists = 0
 	equals=""
+	vari=""
 	holdequal=0
 	for x in range(start, len(words)):
 	
@@ -39,6 +42,9 @@ def process(line):
 					holdequal=1
 			if(holdequal==1):
 				equals=words[x]
+			if(define==1):
+				vari=words[x]
+				define=0
 
 		elif(len(words[x])>1):
 			requrments = checkExistsFunction(words[x][0])
@@ -51,7 +57,8 @@ def process(line):
 	if(Type!="fail"):
 		if(holdequal==1): con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
 		else: con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
-
+		con.varibles.append([vari[0], Type[0:2], Type[0:3]])
+	return
 		#print(words[x])
 		#if(words[x]!="="): pass #checks for symbols then will run functions accordingly
 		#elif(words[x]!="=="): pass
