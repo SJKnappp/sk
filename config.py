@@ -11,7 +11,7 @@ dz=[]   #64byte
 
 functions = [] #stores all avilable functions
 varibles = []  #stores all vairbles 
-reservedFunctions = [["if"]] #all of the predefined functions
+reservedFunctions = [["if"], ["elif"], ["else"]] #all of the predefined functions
 
 ifcount=0
 

@@ -55,9 +55,16 @@ def process(line):
 				words[x]
 		
 	if(Type!="fail"):
-		if(holdequal==1): con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
-		else: con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
-		con.varibles.append([vari[0], Type[0:2], Type[0:3]])
+		exist = checkExists(vari[0])
+		print(vari[0])
+		print(exist)
+		if(exist==0):
+			if(holdequal==1): con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
+			else: con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
+			con.varibles.append([vari[0], Type[0:2], Type[0:3]])
+		else:
+			print("function allready declared")
+			quit()
 	return
 		#print(words[x])
 		#if(words[x]!="="): pass #checks for symbols then will run functions accordingly

@@ -45,11 +45,12 @@ for char in file:
 
 	if(char == '#' and ignore==1): ignore=0
 
-print("varibles")
+print("varibles") #prints out the used functions and vairbles for debug
 print(con.varibles)
 
 print("fnuctions")
 print(con.functions)
+
 assemble = open("ass.asm", "w")
 assemble.write(f'section .data\n{con.data}')
 assemble.write(f'section .bss\n{con.bss}')
