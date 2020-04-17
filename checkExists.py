@@ -2,15 +2,11 @@ import config as con
 
 #checks it uses defined varibles
 def checkExists(word):
-	print(word)
-	print(con.varibles)
 	#defined list 
 	for x in range(0, len(con.varibles)): #split into two diffrent lists as they behave very diffrently
 		print(con.varibles[x][0])
 		if(word==con.varibles[x][0]):
-			print("teas")
 			return 1
-			print("vast")
 
 	return 0
 	#user defined varibles

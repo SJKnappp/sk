@@ -2,6 +2,7 @@ from defFunction import *
 from defvar import *
 from checkExists import *
 from breakline import *
+from function import *
 import config as con
 
 #asses the line and decides what to do with it
@@ -21,6 +22,7 @@ def process(line):
 		
 
 	words = breakline(line)
+	print(words)
 
 	Type=type(words[0][0])
 	start=0
@@ -51,13 +53,10 @@ def process(line):
 			if(len(requrments)==0):
 				print("function not found")
 				quit()
-			for y in range(1, len(words[x])):
-				words[x]
+			moveTo(words[x])
 		
 	if(Type!="fail"):
 		exist = checkExists(vari[0])
-		print(vari[0])
-		print(exist)
 		if(exist==0):
 			if(holdequal==1): con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
 			else: con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
