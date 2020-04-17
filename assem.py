@@ -15,7 +15,7 @@ def process(line):
 		if(con.inStart==0):	con.text+="\tret\n"
 		else:
 			con.inStart=1
-			con.text+="\tmov\tedx, 1\n\tint\t0x80\n"
+			con.text+="\tmov\teax, 1\n\tint\t0x80\n"
 		con.text+="."+con.closeStack.pop()+":\n"
 		return
 		
