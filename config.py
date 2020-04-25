@@ -26,21 +26,3 @@ data=""
 bss=""
 text=""
 
-#add to data point turned into functions to standardise
-def dataAdd(foo, tab):
-	data+="\n"
-	if(tab==1):data+="\t"
-	data+=foo
-	return
-
-def bssAdd(foo, tab):
-	data+="\n"
-	if(tab==1):data+="\t"
-	data+=foo
-	return
-
-def textAdd(foo, tab):
-	data+="\n"
-	if(tab==1):data+="\t"
-	data+=foo
-	return

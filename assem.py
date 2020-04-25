@@ -10,21 +10,20 @@ def process(line):
 
 	if(line[-1]=='{'):
 		function(line)
-		con.blockcount+=1
+		con.blockcount+=1 #counts for a check for exiting the program
 		return
 
 	if(line[-1]=='}'):
-		con.blockcount-=1
-		if(con.inStart==0):	con.text+="\tret\n"
-		elif(con.blockcount==0):
+		con.blockcount-=1 
+		if(con.inStart==0):	con.text+="\tret\n" 			#ret to previous function
+		elif(con.blockcount==0):							#if count at 0 in start function place quit condition
 			con.inStart=0
 			con.text+="\tmov\teax, 1\n\tint\t0x80\n"
-		con.text+="."+con.closeStack.pop()+":\n"
+		con.text+="."+con.closeStack.pop()+":\n"			#adds a lable the assembly
 		return
 		
 
-	words = breakline(line)
-	print(words)
+	words = breakline(line)									#breaks line to indvidual part
 
 	Type=type(words[0][0])
 	start=0
@@ -38,8 +37,6 @@ def process(line):
 	vari=""
 	holdequal=0
 	for x in range(start, len(words)):
-	
-		print(words[x])
 		if(len(words[x])==1): 
 			if(words[x]=="="):
 				if(Type!="fail"):
@@ -58,7 +55,8 @@ def process(line):
 			elif(len(requrments)==0):
 				print("function not found")
 				quit()
-			moveTo(words[x])
+			elif(len(requrments)!=0):
+				moveTo(words[x])
 		
 	if(Type!="fail"):
 		exist = checkExists(vari[0])

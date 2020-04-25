@@ -4,7 +4,6 @@ import config as con
 def checkExists(word):
 	#defined list 
 	for x in range(0, len(con.varibles)): #split into two diffrent lists as they behave very diffrently
-		print(con.varibles[x][0])
 		if(word==con.varibles[x][0]):
 			return 1
 

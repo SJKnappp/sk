@@ -56,5 +56,7 @@ assemble.write(f'section .data\n{con.data}')
 assemble.write(f'section .bss\n{con.bss}')
 assemble.write(f'section .text\n\tglobal _start\n{con.text}')
 
+print("compile compleat")
+
 
 
