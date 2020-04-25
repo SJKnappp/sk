@@ -14,6 +14,7 @@ varibles = []  #stores all vairbles
 reservedFunctions = [["if"], ["elif"], ["else"]] #all of the predefined functions
 
 ifcount=0
+blockcount=0
 
 closeStack=[] #stores lables to close definitions
 

@@ -10,12 +10,14 @@ def process(line):
 
 	if(line[-1]=='{'):
 		function(line)
+		con.blockcount+=1
 		return
 
 	if(line[-1]=='}'):
+		con.blockcount-=1
 		if(con.inStart==0):	con.text+="\tret\n"
-		else:
-			con.inStart=1
+		elif(con.blockcount==0):
+			con.inStart=0
 			con.text+="\tmov\teax, 1\n\tint\t0x80\n"
 		con.text+="."+con.closeStack.pop()+":\n"
 		return
