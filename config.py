@@ -11,10 +11,11 @@ dz=[]   #64byte
 
 functions = [] #stores all avilable functions
 varibles = []  #stores all vairbles 
-reservedFunctions = [["if"], ["elif"], ["else"], ["exit"]] #all of the reserved functions
+reservedFunctions = [["if"], ["elif"], ["else"], ["exit"], ["print"]] #all of the reserved functions
 
 ifcount=0
 blockcount=0
+printmsg=0 #holds if print msg varible has been created"
 
 closeStack=[] #stores lables to close definitions
 
@@ -24,3 +25,22 @@ inStart=0 #tracks if in start fucntion as exit behavour is diffrent
 data=""
 bss=""
 text=""
+
+#add to data point turned into functions to standardise
+def dataAdd(foo, tab):
+	data+="\n"
+	if(tab==1):data+="\t"
+	data+=foo
+	return
+
+def bssAdd(foo, tab):
+	data+="\n"
+	if(tab==1):data+="\t"
+	data+=foo
+	return
+
+def textAdd(foo, tab):
+	data+="\n"
+	if(tab==1):data+="\t"
+	data+=foo
+	return
