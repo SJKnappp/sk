@@ -11,7 +11,7 @@ dz=[]   #64byte
 
 functions = [] #stores all avilable functions
 varibles = []  #stores all vairbles 
-reservedFunctions = [["if"], ["elif"], ["else"]] #all of the predefined functions
+reservedFunctions = [["if"], ["elif"], ["else"], ["exit"]] #all of the reserved functions
 
 ifcount=0
 blockcount=0

@@ -39,7 +39,7 @@ def process(line):
 	holdequal=0
 	for x in range(start, len(words)):
 	
-
+		print(words[x])
 		if(len(words[x])==1): 
 			if(words[x]=="="):
 				if(Type!="fail"):
@@ -52,7 +52,10 @@ def process(line):
 
 		elif(len(words[x])>1):
 			requrments = checkExistsFunction(words[x][0])
-			if(len(requrments)==0):
+			reversed = checkReservedFunction(words[x])
+			if(len(reversed)!=0):
+				coreFun(words[0])
+			elif(len(requrments)==0):
 				print("function not found")
 				quit()
 			moveTo(words[x])
