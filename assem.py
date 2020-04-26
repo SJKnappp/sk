@@ -3,6 +3,7 @@ from defvar import *
 from checkExists import *
 from breakline import *
 from function import *
+from checkType import *
 import config as con
 
 #asses the line and decides what to do with it
@@ -62,27 +63,24 @@ def process(line):
 	if(Type!="fail"):
 		exist = checkExists(vari)
 		if(exist==0):
-			if(holdequal==1): con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
-			else: con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
-			con.varibles.append([vari, Type[0:2], Type[0:3]])
+			if(holdequal==0):equals='0'
+			typeCheck = checkType(words[0][0], int(equals))
+			if(typeCheck==0):
+				print("type not compatible with data")
+				quit()
+			con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
+			con.varibles.append([vari, words[0][0], Type[0:3]])
 		else:
 			print("function allready declared")
 			quit()
 	elif(vari!=""):
 		exist = checkExists(vari)
+		typeCheck = checkType(words[0][0], int(equals))
+		if(typeCheck==0):
+			print("type not compatible with data")
+			quit()
 		if(exists==0):
 			print("varible does not exist")
 			quit()
 	return
-		#print(words[x])
-		#if(words[x]!="="): pass #checks for symbols then will run functions accordingly
-		#elif(words[x]!="=="): pass
-		#else:
-		#	exists = checkExists(words[x])
-		#	if(exists==0):
-		#		print("function not found")
-		#		quit()
-		#	else: pass
-	#if(Type==""):
-	#	print("not a varible")
-	#else: var()
+
