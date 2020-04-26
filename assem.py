@@ -37,14 +37,15 @@ def process(line):
 	vari=""
 	holdequal=0
 	for x in range(start, len(words)):
-		if(len(words[x])==1): 
-			if(words[x]=="="):
+		
+		if(len(words[x])==1):
+			if(words[x][0]=='='):
 				if(Type!="fail"):
 					holdequal=1
 			if(holdequal==1):
-				equals=words[x]
+				equals=words[x][0]
 			if(define==1):
-				vari=words[x]
+				vari=words[x][0]
 				define=0
 
 		elif(len(words[x])>1):
@@ -59,13 +60,18 @@ def process(line):
 				moveTo(words[x])
 		
 	if(Type!="fail"):
-		exist = checkExists(vari[0])
+		exist = checkExists(vari)
 		if(exist==0):
 			if(holdequal==1): con.data+="\t"+Type + "\t" + Type[0:2] + " " + equals +"\n"
 			else: con.data+="\t"+Type + "\t" + Type[0:2] + " 0\n"
-			con.varibles.append([vari[0], Type[0:2], Type[0:3]])
+			con.varibles.append([vari, Type[0:2], Type[0:3]])
 		else:
 			print("function allready declared")
+			quit()
+	elif(vari!=""):
+		exist = checkExists(vari)
+		if(exists==0):
+			print("varible does not exist")
 			quit()
 	return
 		#print(words[x])

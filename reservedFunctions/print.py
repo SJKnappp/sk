@@ -19,8 +19,7 @@ def output(foo):
 		dataAdd("msg db '", 1, 1)
 		dataAdd(foo, 0, 0)
 		dataAdd("' ;print varible", 0, 0)
-		#con.data+="\n\tmov db msg '"+foo+"' ;print varible"
 		con.printmsg=1
 	else: con.text+="\n\tmov msg, '"+foo+"'"
-	con.text+="\n\tmov eax, 4\n\tmov ebx, 1\n\tmov ecx, msg\n\tmov edx, "+str(length)+"\n" 
+	textAdd("mov eax, 4\n\tmov ebx, 1\n\tmov ecx, msg\n\tmov edx, "+str(length), 1, 1)
 	textAdd("int 80h\n", 1, 1)
