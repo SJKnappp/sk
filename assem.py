@@ -28,7 +28,7 @@ def process(line):
 
 	Type=type(words[0][0])
 	start=0
-	define=0
+	define=1
 	if(Type!="fail"):
 		start=1
 		define=1
@@ -41,8 +41,7 @@ def process(line):
 		
 		if(len(words[x])==1):
 			if(words[x][0]=='='):
-				if(Type!="fail"):
-					holdequal=1
+				holdequal=1
 			if(holdequal==1):
 				equals=words[x][0]
 			if(define==1):
@@ -75,12 +74,15 @@ def process(line):
 			quit()
 	elif(vari!=""):
 		exist = checkExists(vari)
-		typeCheck = checkType(words[0][0], int(equals))
-		if(typeCheck==0):
-			print("type not compatible with data")
-			quit()
-		if(exists==0):
-			print("varible does not exist")
-			quit()
+		if(equals==""):print("warning varible call with no defintion or use")
+		elif(exist==0):print("varible does not exist")
+		else:
+			print(exist)
+			print(int(equals))
+			typeCheck = checkType(exist[1], int(equals))
+			if(typeCheck==0):
+				print("type not compatible with data")
+				quit()
+			con.text+="\tmov " + exist[0] + ", " + equals + "\n"
 	return
 
