@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
   std::string text;
   text = fileInput(text, title);
 
-  lex(text);
+  std::vector<std::string> lexed = lex(text);
 
   std::cout << text;
 

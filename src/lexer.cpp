@@ -14,14 +14,16 @@ std::string tokens(std::string word) {
     return "LPAREN";
   } else if (word == ")") {
     return "RPAREN";
+  } else if (word == "{") {
+    return "LCURLY";
+  } else if (word == "}") {
+    return "RCURLY";
   } else if (word == ";") {
     return "SEMICOLON";
   } else if (word == ",") {
     return "COMMA";
   } else if (word == ".") {
     return "PERIOD";
-  } else if (word == ":=") {
-    return "BECOMES";
   } else if (word == "=") {
     return "EQL";
   } else if (word == "!=") {
@@ -57,21 +59,21 @@ std::string tokens(std::string word) {
   } else if (word == "while") {
     return "WHILESYM";
   } else {
-    bool isIdt = false; // identifer
-    bool isNum = false; // number
-    std::string returnVal;
+    bool isIdt = false;    // identifer
+    bool isNum = false;    // number
+    std::string returnVal; // return varible
     if ((word.at(0) >= 59 && word.at(0) <= 90) ||
-        (word.at(0) >= 97 && word.at(0) <= 122)) {
+        (word.at(0) >= 97 && word.at(0) <= 122)) { // checks that a-zA-Z
       isIdt = true;
       returnVal += word.at(0);
-    } else if (word.at(0) >= 48 && word.at(0) <= 63) {
+    } else if (word.at(0) >= 48 && word.at(0) <= 63) { // checks that 0-9
       isNum = true;
       returnVal += word.at(0);
-    } else {
+    } else { // returns failed varible
       std::cout << "unkown character " << word.at(0);
       return "UNKNOWN";
     }
-    if (word.length() > 0) {
+    if (word.length() > 0) { // checks that string is not empty
       for (int i = 1; i < word.length(); i++) {
         if ((word.at(i) >= 59 && word.at(i) <= 90) ||
             (word.at(i) >= 97 && word.at(i) <= 122) && isNum == false) {
@@ -92,7 +94,7 @@ std::vector<std::string> lex(std::string src) {
   std::string word;
   std::vector<std::string> lexed;
   for (int x = 0; x < src.length(); x++) {
-    if (src.at(x) == ' ' || src.at(x) == '\n') {
+    if (src.at(x) == ' ' || src.at(x) == '\n' || src.at(x) == '\t') {
       if (word != "") {
         std::string temp = tokens(word);
         if (temp != "UNKNOWN") {
@@ -102,10 +104,29 @@ std::vector<std::string> lex(std::string src) {
         }
         word = "";
       }
+    } else if ((src.at(x) < 59 || src.at(x) > 90) &&
+               (src.at(x) < 97 || src.at(x) > 122) &&
+               (src.at(0) < 48 || src.at(x) > 63)) {
+      std::string temp;
+      if (word.length() > 0) {
+        temp = tokens(word);
+        if (temp == "UNKNOWN") {
+          return {};
+        }
+        lexed.push_back(temp);
+      }
+      word = "";
+      temp = "";
+      temp += src.at(x);
+      temp = tokens(temp);
+      if (temp == "UNKNOWN") {
+        return {};
+      }
+      lexed.push_back(temp);
     } else {
       word += src.at(x);
     }
   }
-
+  std::cout << "test";
   return lexed;
 }
