@@ -17,8 +17,12 @@ Node sort(std::vector<std::string> lexed) {
   std::vector<Node> escapePath = {};
   Node tree = Node();
   for (int i = 0; i < lexed.size(); i++) {
-    if (lexed.front().at(0) == 'c') {
-
+    if (lexed.front().at(0) == 'i') {
+    } else if (lexed.front().at(0) == 'n') {
+    } else if (lexed.front().at(0) == 'd') {
+      if (lexed.front() == "dPRAREN" || lexed.front() == "dLCURLY") {
+      }
+    } else if (lexed.front().at(0) == 'c') {
     } else if (lexed.front().at(0) == 's') {
     }
   }

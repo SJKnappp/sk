@@ -43,20 +43,10 @@ std::string tokens(std::string word) {
     return "cLEQ";
   } else if (word == ">=") {
     return "cGEQ";
-  } else if (word == "call") {
-    return "sCALLSYM";
   } else if (word == "const") {
     return "sCONSTSYM";
-  } else if (word == "do") {
-    return "sDOSYM";
-  } else if (word == "end") {
-    return "sENDSYM";
   } else if (word == "if") {
     return "sIFSYM";
-  } else if (word == "odd") {
-    return "sODDSYM";
-  } else if (word == "procedure") {
-    return "sPROCSYM";
   } else if (word == "then") {
     return "sTHENSYM";
   } else if (word == "var") {
