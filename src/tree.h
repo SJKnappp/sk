@@ -10,10 +10,26 @@
 #include "main.h"
 class Node {
 public:
-  Node(std::vector<Node> escapePath, std::vector<std::string> lexed);
+  Node();
+  Node CreateNode(std::vector<Node> escapePath, std::vector<std::string> lexed);
 
   std::string data;
   Node *branch;
 };
+
+class binaryTree : public Node {
+public:
+  Node *left;
+  Node *right;
+};
+
+class operation : public binaryTree {
+public:
+  std::string token;
+};
+
+class Num : public Node {};
+
+Node sort(std::vector<std::string> lexed);
 
 #endif // COMPILER_TREE_H

@@ -3,8 +3,10 @@
 //
 
 #include "tree.h"
+Node::Node() { data = "root"; }
 
-Node::Node(std::vector<Node> escapePath, std::vector<std::string> lexed) {
+Node Node::CreateNode(std::vector<Node> escapePath,
+                      std::vector<std::string> lexed) {
   if (lexed.size() > 0) {
     data = lexed.front();
     lexed.erase(lexed.begin());
@@ -13,6 +15,14 @@ Node::Node(std::vector<Node> escapePath, std::vector<std::string> lexed) {
 
 Node sort(std::vector<std::string> lexed) {
   std::vector<Node> escapePath = {};
-  Node tree = Node(escapePath, lexed);
+  Node tree = Node();
+  for (int i = 0; i < lexed.size(); i++) {
+    if (lexed.front().at(0) == 'c') {
+
+    } else if (lexed.front().at(0) == 's') {
+    }
+  }
+  std::cout << tree.data;
+
   return tree;
 }

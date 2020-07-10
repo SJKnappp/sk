@@ -1,73 +1,78 @@
 #include "lexer.h"
 
+// prefix s for math symbol
+// i identifier
+// n number
+// d droped ie (){} which ast dose not need
+// c condition
+// s symbol
+
 std::string tokens(std::string word) {
   std::string Token;
   if (word == "+") {
-    return "PLUS";
+    return "sPLUS";
   } else if (word == "-") {
-    return "MINUS";
+    return "sMINUS";
   } else if (word == "*") {
-    return "TIMES";
+    return "sTIMES";
   } else if (word == "/") {
-    return "SLASH";
+    return "sSLASH";
   } else if (word == "(") {
-    return "LPAREN";
+    return "dLPAREN";
   } else if (word == ")") {
-    return "RPAREN";
+    return "dRPAREN";
   } else if (word == "{") {
-    return "LCURLY";
+    return "dLCURLY";
   } else if (word == "}") {
-    return "RCURLY";
+    return "dRCURLY";
   } else if (word == ";") {
-    return "SEMICOLON";
+    return "dSEMICOLON";
   } else if (word == ",") {
-    return "COMMA";
+    return "dCOMMA";
   } else if (word == ".") {
-    return "PERIOD";
+    return "sPERIOD";
   } else if (word == "=") {
-    return "EQL";
+    return "cEQL";
   } else if (word == "!=") {
-    return "NQL";
+    return "cNQL";
   } else if (word == "<") {
-    return "LSS";
+    return "cLSS";
   } else if (word == ">") {
-    return "GTR";
+    return "cGTR";
   } else if (word == "<=") {
-    return "LEQ";
+    return "cLEQ";
   } else if (word == ">=") {
-    return "GEQ";
-  } else if (word == "begin") {
-    return "BEGINSYM";
+    return "cGEQ";
   } else if (word == "call") {
-    return "CALLSYM";
+    return "sCALLSYM";
   } else if (word == "const") {
-    return "CONSTSYM";
+    return "sCONSTSYM";
   } else if (word == "do") {
-    return "DOSYM";
+    return "sDOSYM";
   } else if (word == "end") {
-    return "ENDSYM";
+    return "sENDSYM";
   } else if (word == "if") {
-    return "IFSYM";
+    return "sIFSYM";
   } else if (word == "odd") {
-    return "ODDSYM";
+    return "sODDSYM";
   } else if (word == "procedure") {
-    return "PROCSYM";
+    return "sPROCSYM";
   } else if (word == "then") {
-    return "THENSYM";
+    return "sTHENSYM";
   } else if (word == "var") {
-    return "VARSYM";
+    return "sVARSYM";
   } else if (word == "while") {
-    return "WHILESYM";
+    return "sWHILESYM";
   } else {
-    bool isIdt = false;    // identifer
     bool isNum = false;    // number
     std::string returnVal; // return varible
     if ((word.at(0) >= 59 && word.at(0) <= 90) ||
         (word.at(0) >= 97 && word.at(0) <= 122)) { // checks that a-zA-Z
-      isIdt = true;
+      returnVal += 'n';
       returnVal += word.at(0);
     } else if (word.at(0) >= 48 && word.at(0) <= 63) { // checks that 0-9
       isNum = true;
+      returnVal += 'i';
       returnVal += word.at(0);
     } else { // returns failed varible
       std::cout << "unkown character " << word.at(0);
