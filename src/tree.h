@@ -10,14 +10,12 @@
 #include "main.h"
 class Node {
 public:
-  Node();
-  Node CreateNode(std::vector<Node> escapePath, std::vector<std::string> lexed);
-
   std::string data;
-  Node *branch;
 };
 
-class branch : public Node {};
+class branch : public Node {
+  std::vector<Node *> branches; // stores ordered list of nodes
+};
 
 class binaryTree : public Node {
 public:
