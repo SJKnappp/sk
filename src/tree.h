@@ -17,6 +17,8 @@ public:
   Node *branch;
 };
 
+class branch : public Node {};
+
 class binaryTree : public Node {
 public:
   Node *left;
@@ -27,6 +29,10 @@ class operation : public binaryTree {
 public:
   std::string token;
 };
+
+class asign : public binaryTree {};
+
+class binop : public binaryTree {};
 
 class Num : public Node {};
 
