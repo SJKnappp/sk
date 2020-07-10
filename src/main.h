@@ -7,7 +7,8 @@
 #include <vector>
 
 // defined files
-#include "include.cpp"
-#include "lexer.cpp"
+#include "include.h"
+#include "lexer.h"
+#include "tree.h"
 
 #endif // MAIN_H

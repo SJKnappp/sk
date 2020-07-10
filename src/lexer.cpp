@@ -106,7 +106,7 @@ std::vector<std::string> lex(std::string src) {
       }
     } else if ((src.at(x) < 59 || src.at(x) > 90) &&
                (src.at(x) < 97 || src.at(x) > 122) &&
-               (src.at(0) < 48 || src.at(x) > 63)) {
+               (src.at(x) < 48 || src.at(x) > 63)) {
       std::string temp;
       if (word.length() > 0) {
         temp = tokens(word);
