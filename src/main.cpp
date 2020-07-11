@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 
   std::vector<std::string> lexed = lex(text);
   sort(lexed);
-  std::cout << text;
+  //  std::cout << text;
 
   return 0;
 }

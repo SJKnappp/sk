@@ -10,19 +10,19 @@
 #include "main.h"
 class Node {
 public:
-  Node *parent;
-  std::string data;
+  Node *parent = nullptr;
+  std::string data = "";
 
 protected:
-  virtual std::string type() = "";
+  virtual std::string type() = 0;
 };
 
 class branch : public Node {
 public:
-  branch(Node *Parent);
+  branch(Node *Parent, bool top = false);
   std::vector<Node *> branches; // stores ordered list of nodes
 protected:
-  std::string type() = "branch";
+  std::string type() { return "branch"; }
 };
 
 class binaryTree : public Node {
@@ -31,24 +31,27 @@ public:
   Node *right;
 
 protected:
-  std::string type() = "binaryTree";
+  std::string type() { return "binaryTree"; }
 };
 
 class assign : public binaryTree {
 protected:
-  std::string type() = "assign";
+  std::string type() { return "assign"; }
 };
 
 class binop : public binaryTree {
+public:
+  binop(Node *Parent, std::string Keyword);
+
 protected:
-  std::string type() = "binop";
+  std::string type() { return "binop"; }
 };
 
 class Num : public Node {
 protected:
-  std::string type() = "Num";
+  std::string type() { return "Num"; }
 };
 
-Node sort(std::vector<std::string> lexed);
+void sort(std::vector<std::string> lexed);
 
 #endif // COMPILER_TREE_H

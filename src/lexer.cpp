@@ -122,6 +122,5 @@ std::vector<std::string> lex(std::string src) {
       word += src.at(x);
     }
   }
-  std::cout << "test";
   return lexed;
 }
