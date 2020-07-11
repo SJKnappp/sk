@@ -41,7 +41,7 @@ protected:
 
 class binop : public binaryTree {
 public:
-  binop(Node *Parent, std::string Keyword);
+  binop(Node *Parent, std::string *Keyword);
 
 protected:
   std::string type() { return "binop"; }
