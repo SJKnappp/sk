@@ -25,6 +25,15 @@ protected:
   std::string type() { return "branch"; }
 };
 
+class returnNode : public Node {
+public:
+  returnNode(std::vector<std::string> *lexed);
+  Node *val;
+
+protected:
+  std::string type() { return "returnNode"; }
+};
+
 class binaryTree : public Node {
 public:
   Node *left;
@@ -47,11 +56,16 @@ protected:
   std::string type() { return "binop"; }
 };
 
+class compare : public binaryTree {
+public:
+  compare(Node *Parent, std::string Keyword);
+};
+
 class Num : public Node {
 protected:
   std::string type() { return "Num"; }
 };
 
-void sort(std::vector<std::string> lexed);
-Node *build(std::vector<std::string> copy, Node *current, bool top = false);
+void condition(std::vector<std::string> *lexed, Node *current);
+Node *build(std::vector<std::string> *lexed, Node *current, bool top = false);
 #endif // COMPILER_TREE_H

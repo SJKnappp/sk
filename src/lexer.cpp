@@ -53,6 +53,12 @@ std::string tokens(std::string word) {
     return "sVARSYM";
   } else if (word == "while") {
     return "sWHILESYM";
+  } else if (word == "int") {
+    return "sINTSYM";
+  } else if (word == "void") {
+    return "sVOIDSYM";
+  } else if (word == "return") {
+    return "sRETURNSYM";
   } else {
     bool isNum = false;    // number
     std::string returnVal; // return varible

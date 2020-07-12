@@ -7,13 +7,17 @@
 // a recursive function to replace sort
 Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
   if (!top) {
-    lexed->erase(lexed->begin());
+    if (lexed->size() > 0) {
+      lexed->erase(lexed->begin());
+    } else {
+      return nullptr;
+    }
   } else {
     branch top = current;
     Node *temp;
     lexed->insert(lexed->begin(), "s");
     while (lexed->size() > 0) {
-      temp = build(*lexed, &top);
+      temp = build(lexed, &top);
       if (temp != nullptr) {
         top.branches.push_back(temp);
       } else {
@@ -21,6 +25,7 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
         return {};
       }
     }
+    return {};
   }
 
   if (lexed->size() == 0) {
@@ -35,15 +40,24 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
       bool closed = false;
       while (closed == false) {
 
-        Node *Temp = build(*lexed, &Branch);
-        if (&Temp == nullptr) {
+        Node *Temp = build(lexed, &Branch);
+        if (Temp == nullptr) {
           closed = true;
           //          pass;
+        } else {
+          Branch.branches.push_back(Temp);
         }
-        Branch.branches.push_back(Temp);
       }
 
     } else if (lexed->front() == "dRCURLY") {
+      return {};
+    } else if (lexed->front() == "dLPAREN") {
+      compare Compare(current, "ds");
+      return &Compare;
+    } else if (lexed->front() == "dRPAREN") {
+      return {};
+    } else if (lexed->front() == "sRETURNSYM") {
+      returnNode ReturnNode(lexed);
       return {};
     }
   } else if (lexed->front().at(0) == 'c') {
@@ -51,9 +65,29 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
     std::cout << lexed->front();
     binop temp = binop(current, &lexed->front());
     lexed->erase(lexed->begin());
-    build(*lexed, current);
+    build(lexed, current);
   }
   return nullptr;
+}
+
+// builds rules for condital points eg if while etc.
+void condition(std::vector<std::string> *lexed, Node *current) {
+  bool running = true;
+  int i = 0;
+  while (running == true) {
+    if (lexed->at(i) == "dLParen") {
+      running = false;
+    }
+    if (lexed->size() == i) {
+      return;
+    }
+    if (lexed->at(i).at(0) == 'i' || lexed->at(i).at(0)) {
+    }
+
+    i++;
+  }
+
+  return;
 }
 
 branch::branch(Node *Parent, bool top) {
@@ -65,9 +99,21 @@ branch::branch(Node *Parent, bool top) {
   }
 }
 
+returnNode::returnNode(std::vector<std::string> *lexed) {
+  Node *temp = this;
+  temp = build(lexed, temp);
+}
+
 binop::binop(Node *Parent, std::string *Keyword) {
   if (Parent != nullptr) {
     parent = Parent;
   }
   data = *Keyword;
+}
+
+compare::compare(Node *Parent, std::string Keyword) {
+  if (Parent != nullptr) {
+    parent = Parent;
+  }
+  data = Keyword;
 }
