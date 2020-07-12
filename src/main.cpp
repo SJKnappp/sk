@@ -12,9 +12,11 @@ int main(int argc, char **argv) {
   text = fileInput(text, title);
 
   std::vector<std::string> lexed = lex(text);
-  branch start(nullptr, true);
-  //  sort(lexed);
-  build(&lexed, &start, true);
+  //
+  branch start(nullptr, &lexed, true);
+  if (start.failed == true) {
+    return 0;
+  }
 
   //  std::cout << text;
 

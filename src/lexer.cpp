@@ -9,6 +9,7 @@
 
 std::string tokens(std::string word) {
   std::string Token;
+  std::string returnVal = ""; // return varible for num and identifer
   if (word == "+") {
     return "sPLUS";
   } else if (word == "-") {
@@ -61,14 +62,14 @@ std::string tokens(std::string word) {
     return "sRETURNSYM";
   } else {
     bool isNum = false;    // number
-    std::string returnVal; // return varible
+
     if ((word.at(0) >= 59 && word.at(0) <= 90) ||
         (word.at(0) >= 97 && word.at(0) <= 122)) { // checks that a-zA-Z
-      returnVal += 'n';
+      returnVal += 'i';
       returnVal += word.at(0);
     } else if (word.at(0) >= 48 && word.at(0) <= 63) { // checks that 0-9
       isNum = true;
-      returnVal += 'i';
+      returnVal += 'n';
       returnVal += word.at(0);
     } else { // returns failed varible
       std::cout << "unkown character " << word.at(0);
@@ -88,7 +89,7 @@ std::string tokens(std::string word) {
       }
     }
   }
-  return word;
+  return returnVal;
 }
 
 std::vector<std::string> lex(std::string src) {

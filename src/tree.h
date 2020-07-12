@@ -5,7 +5,7 @@
 #ifndef COMPILER_TREE_H
 #define COMPILER_TREE_H
 
-#include <memory>
+//#include <memory>
 
 #include "main.h"
 class Node {
@@ -28,8 +28,10 @@ protected:
 
 class branch : public Node {
 public:
-  branch(Node *Parent, bool top = false);
+  branch(Node *Parent, std::vector<std::string> *lexed, bool top = false);
   std::vector<Node *> branches; // stores ordered list of nodes
+  bool failed;
+
 protected:
   std::string type() { return "branch"; }
 };
@@ -70,7 +72,15 @@ public:
   compare(Node *Parent, std::string Keyword);
 };
 
-class Num : public Node {
+class num : public Node {
+protected:
+  std::string type() { return "Num"; }
+};
+
+class identifier : public Node {
+public:
+  identifier(std::string flag);
+
 protected:
   std::string type() { return "Num"; }
 };

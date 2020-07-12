@@ -6,48 +6,19 @@
 
 // a recursive function to replace sort
 Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
-  if (!top) {
-    if (lexed->size() > 0) {
-      lexed->erase(lexed->begin());
-    } else {
-      return nullptr;
-    }
-  } else {
-    branch top = current;
-    Node *temp;
-    lexed->insert(lexed->begin(), "s");
-    while (lexed->size() > 0) {
-      temp = build(lexed, &top);
-      if (temp != nullptr) {
-        top.branches.push_back(temp);
-      } else {
-        std::cout << "parser failed at flag " << lexed->front();
-        return {};
-      }
-    }
-    return {};
-  }
 
   if (lexed->size() == 0) {
     return {};
   }
 
   if (lexed->at(0).at(0) == 'i') {
+    identifier Iden(lexed->front());
+    return &Iden;
   } else if (lexed->front().at(0) == 'n') {
+    identifier Iden();
   } else if (lexed->front().at(0) == 'd') {
     if (lexed->front() == "dLCURLY") {
-      branch Branch = branch(current);
-      bool closed = false;
-      while (closed == false) {
-
-        Node *Temp = build(lexed, &Branch);
-        if (Temp == nullptr) {
-          closed = true;
-          //          pass;
-        } else {
-          Branch.branches.push_back(Temp);
-        }
-      }
+      branch Branch = branch(current, lexed);
 
     } else if (lexed->front() == "dRCURLY") {
       empty Empty("{");
@@ -63,10 +34,8 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
     }
   } else if (lexed->front().at(0) == 'c') {
   } else if (lexed->front().at(0) == 's') {
-    std::cout << lexed->front();
     binop temp = binop(current, &lexed->front());
-    lexed->erase(lexed->begin());
-    build(lexed, current);
+    return &temp;
   }
   return nullptr;
 }
@@ -91,12 +60,26 @@ void condition(std::vector<std::string> *lexed, Node *current) {
   return;
 }
 
-branch::branch(Node *Parent, bool top) {
+branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
   if (!top) {
     parent = Parent;
   } else {
     parent = nullptr;
     data = "top";
+  }
+
+  Node *temp;
+
+  while (lexed->size() > 0) {
+    temp = build(lexed, this);
+    if (temp != nullptr) {
+      branches.push_back(temp);
+    } else {
+      std::cout << "parser failed at flag " << lexed->front();
+      failed = true;
+      lexed->clear();
+    }
+    lexed->erase(lexed->begin());
   }
 }
 
@@ -120,3 +103,5 @@ compare::compare(Node *Parent, std::string Keyword) {
 }
 
 empty::empty(std::string Result) { result = Result; }
+
+identifier::identifier(std::string flag) { data = flag; }
