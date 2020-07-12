@@ -53,5 +53,5 @@ protected:
 };
 
 void sort(std::vector<std::string> lexed);
-
+Node *build(std::vector<std::string> copy, Node *current, bool top = false);
 #endif // COMPILER_TREE_H

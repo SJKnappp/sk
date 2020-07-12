@@ -12,7 +12,10 @@ int main(int argc, char **argv) {
   text = fileInput(text, title);
 
   std::vector<std::string> lexed = lex(text);
-  sort(lexed);
+  branch start(nullptr, true);
+  //  sort(lexed);
+  build(lexed, &start, true);
+
   //  std::cout << text;
 
   return 0;
