@@ -12,9 +12,18 @@ class Node {
 public:
   Node *parent = nullptr;
   std::string data = "";
+  std::string result = "";
 
 protected:
   virtual std::string type() = 0;
+};
+
+class empty : public Node {
+public:
+  empty(std::string Result);
+
+protected:
+  virtual std::string type() { return "empty"; }
 };
 
 class branch : public Node {

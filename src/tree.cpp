@@ -50,7 +50,8 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
       }
 
     } else if (lexed->front() == "dRCURLY") {
-      return {};
+      empty Empty("{");
+      return &Empty;
     } else if (lexed->front() == "dLPAREN") {
       compare Compare(current, "ds");
       return &Compare;
@@ -117,3 +118,5 @@ compare::compare(Node *Parent, std::string Keyword) {
   }
   data = Keyword;
 }
+
+empty::empty(std::string Result) { result = Result; }
