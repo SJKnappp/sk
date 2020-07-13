@@ -5,14 +5,16 @@
 #include "tree.h"
 
 // a recursive function to replace sort
-Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
+Node *build(std::vector<std::string> *lexed, Node *current, Node &ret,
+            bool top) {
 
-  if (lexed->size() == 0) {
+  if (lexed->empty()) {
     return {};
   }
 
   if (lexed->at(0).at(0) == 'i') {
     identifier Iden(lexed->front());
+    ret = Iden;
     return &Iden;
   } else if (lexed->front().at(0) == 'n') {
     identifier Iden();
@@ -24,7 +26,8 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
       empty Empty("{");
       return &Empty;
     } else if (lexed->front() == "dLPAREN") {
-      compare Compare(current, "ds");
+      std::string store = "ds";
+      compare Compare(current, &store);
       return &Compare;
     } else if (lexed->front() == "dRPAREN") {
       return {};
@@ -35,6 +38,7 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
   } else if (lexed->front().at(0) == 'c') {
   } else if (lexed->front().at(0) == 's') {
     binop temp = binop(current, &lexed->front());
+    ret = temp;
     return &temp;
   }
   return nullptr;
@@ -44,7 +48,7 @@ Node *build(std::vector<std::string> *lexed, Node *current, bool top) {
 void condition(std::vector<std::string> *lexed, Node *current) {
   bool running = true;
   int i = 0;
-  while (running == true) {
+  while (running) {
     if (lexed->at(i) == "dLParen") {
       running = false;
     }
@@ -69,15 +73,19 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
   }
 
   Node *temp;
-
+  empty temp2("");
   while (lexed->size() > 0) {
-    temp = build(lexed, this);
-    if (temp != nullptr) {
-      branches.push_back(temp);
+
+    Node &ret = temp2;
+    temp = build(lexed, this, ret);
+    temp = &ret;
+    if (&ret != nullptr) {
+      branches.push_back(temp2);
     } else {
       std::cout << "parser failed at flag " << lexed->front();
       failed = true;
       lexed->clear();
+      break;
     }
     lexed->erase(lexed->begin());
   }
@@ -85,7 +93,7 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
 
 returnNode::returnNode(std::vector<std::string> *lexed) {
   Node *temp = this;
-  temp = build(lexed, temp);
+  // temp = build(lexed, temp, NULL, false);
 }
 
 binop::binop(Node *Parent, std::string *Keyword) {
@@ -95,11 +103,11 @@ binop::binop(Node *Parent, std::string *Keyword) {
   data = *Keyword;
 }
 
-compare::compare(Node *Parent, std::string Keyword) {
+compare::compare(Node *Parent, std::string *Keyword) {
   if (Parent != nullptr) {
     parent = Parent;
   }
-  data = Keyword;
+  data = *Keyword;
 }
 
 empty::empty(std::string Result) { result = Result; }

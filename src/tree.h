@@ -29,7 +29,7 @@ protected:
 class branch : public Node {
 public:
   branch(Node *Parent, std::vector<std::string> *lexed, bool top = false);
-  std::vector<Node *> branches; // stores ordered list of nodes
+  std::vector<empty> branches; // stores ordered list of nodes
   bool failed;
 
 protected:
@@ -69,7 +69,7 @@ protected:
 
 class compare : public binaryTree {
 public:
-  compare(Node *Parent, std::string Keyword);
+  compare(Node *Parent, std::string *Keyword);
 };
 
 class num : public Node {
@@ -86,5 +86,6 @@ protected:
 };
 
 void condition(std::vector<std::string> *lexed, Node *current);
-Node *build(std::vector<std::string> *lexed, Node *current, bool top = false);
+Node *build(std::vector<std::string> *lexed, Node *current, Node &ret,
+            bool top = false);
 #endif // COMPILER_TREE_H
