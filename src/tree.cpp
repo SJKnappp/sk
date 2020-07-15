@@ -4,46 +4,6 @@
 
 #include "tree.h"
 
-// a recursive function to replace sort
-Node *build(std::vector<std::string> *lexed, Node *current, Node &ret,
-            bool top) {
-
-  if (lexed->empty()) {
-    return {};
-  }
-
-  if (lexed->at(0).at(0) == 'i') {
-    identifier Iden(lexed->front());
-    ret = Iden;
-    return &Iden;
-  } else if (lexed->front().at(0) == 'n') {
-    identifier Iden();
-  } else if (lexed->front().at(0) == 'd') {
-    if (lexed->front() == "dLCURLY") {
-      branch Branch = branch(current, lexed);
-
-    } else if (lexed->front() == "dRCURLY") {
-      empty Empty("{");
-      return &Empty;
-    } else if (lexed->front() == "dLPAREN") {
-      std::string store = "ds";
-      compare Compare(current, &store);
-      return &Compare;
-    } else if (lexed->front() == "dRPAREN") {
-      return {};
-    } else if (lexed->front() == "sRETURNSYM") {
-      returnNode ReturnNode(lexed);
-      return {};
-    }
-  } else if (lexed->front().at(0) == 'c') {
-  } else if (lexed->front().at(0) == 's') {
-    binop temp = binop(current, &lexed->front());
-    ret = temp;
-    return &temp;
-  }
-  return nullptr;
-}
-
 // builds rules for condital points eg if while etc.
 void condition(std::vector<std::string> *lexed, Node *current) {
   bool running = true;
@@ -70,13 +30,17 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
   } else {
     parent = nullptr;
     data = "top";
+    lexed->insert(lexed->begin(), "first");
   }
 
   Node *temp;
   empty temp2("");
   while (lexed->size() > 0) {
-
-    Node &ret = temp2;
+    lexed->erase(lexed->begin());
+    if (lexed->empty()) {
+      break;
+    }
+    /*Node &ret = temp2;
     temp = build(lexed, this, ret);
     temp = &ret;
     if (&ret != nullptr) {
@@ -86,8 +50,30 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
       failed = true;
       lexed->clear();
       break;
+    }*/
+    Node *ret;
+    if (lexed->at(0).at(0) == 'i') {
+      identifier Iden(lexed->front());
+      ret = &Iden;
+      branches.push_back(Iden);
+    } else if (lexed->front().at(0) == 'n') {
+      identifier Iden();
+    } else if (lexed->front().at(0) == 'd') {
+      if (lexed->front() == "dLCURLY") {
+        branch Branch = branch(this, lexed);
+      } else if (lexed->front() == "dRCURLY") {
+        empty Empty("{");
+      } else if (lexed->front() == "dLPAREN") {
+        std::string store = "ds";
+        compare Compare(this, &store);
+      } else if (lexed->front() == "dRPAREN") {
+      } else if (lexed->front() == "sRETURNSYM") {
+        returnNode ReturnNode(lexed);
+      }
+    } else if (lexed->front().at(0) == 'c') {
+    } else if (lexed->front().at(0) == 's') {
+      binop temp = binop(this, &lexed->front());
     }
-    lexed->erase(lexed->begin());
   }
 }
 

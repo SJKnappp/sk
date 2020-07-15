@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
   //
   branch start(nullptr, &lexed, true);
   if (start.failed == true) {
-    return 0;
+    return -1;
   }
 
   //  std::cout << text;
