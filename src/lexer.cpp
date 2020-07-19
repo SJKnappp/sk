@@ -61,13 +61,17 @@ std::string tokens(std::string word) {
   } else if (word == "return") {
     return "sRETURNSYM";
   } else {
-    bool isNum = false;    // number
+    bool isNum = false; // number
 
-    if ((word.at(0) >= 59 && word.at(0) <= 90) ||
+    // 65-90 A-Z
+    // 97-122 a-z
+    // 48-57 0-9
+
+    if ((word.at(0) >= 65 && word.at(0) <= 90) ||
         (word.at(0) >= 97 && word.at(0) <= 122)) { // checks that a-zA-Z
       returnVal += 'i';
       returnVal += word.at(0);
-    } else if (word.at(0) >= 48 && word.at(0) <= 63) { // checks that 0-9
+    } else if (word.at(0) >= 48 && word.at(0) <= 57) { // checks that 0-9
       isNum = true;
       returnVal += 'n';
       returnVal += word.at(0);
@@ -77,10 +81,12 @@ std::string tokens(std::string word) {
     }
     if (word.length() > 0) { // checks that string is not empty
       for (int i = 1; i < word.length(); i++) {
-        if ((word.at(i) >= 59 && word.at(i) <= 90) ||
+        int a = word.at(i);
+        char b = word.at(i);
+        if ((word.at(i) >= 65 && word.at(i) <= 90) ||
             (word.at(i) >= 97 && word.at(i) <= 122) && isNum == false) {
           returnVal += word.at(i);
-        } else if (word.at(0) >= 48 && word.at(0) <= 63) {
+        } else if (word.at(0) >= 48 && word.at(0) <= 57) {
           returnVal += word.at(i);
         } else {
           std::cout << "unkown character " << word.at(i);
@@ -106,9 +112,9 @@ std::vector<std::string> lex(std::string src) {
         }
         word = "";
       }
-    } else if ((src.at(x) < 59 || src.at(x) > 90) &&
+    } else if ((src.at(x) < 65 || src.at(x) > 90) &&
                (src.at(x) < 97 || src.at(x) > 122) &&
-               (src.at(x) < 48 || src.at(x) > 63)) {
+               (src.at(x) < 48 || src.at(x) > 57)) {
       std::string temp;
       if (word.length() > 0) {
         temp = tokens(word);

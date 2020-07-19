@@ -40,35 +40,31 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     if (lexed->empty()) {
       break;
     }
-    /*Node &ret = temp2;
-    temp = build(lexed, this, ret);
-    temp = &ret;
-    if (&ret != nullptr) {
-      branches.push_back(temp2);
-    } else {
-      std::cout << "parser failed at flag " << lexed->front();
-      failed = true;
-      lexed->clear();
-      break;
-    }*/
+
     Node *ret;
     if (lexed->at(0).at(0) == 'i') {
       identifier Iden(lexed->front());
       ret = &Iden;
-      branches.push_back(Iden);
+
+      branches.push_back(&Iden);
     } else if (lexed->front().at(0) == 'n') {
-      identifier Iden();
+      identifier Iden(lexed->front());
+      Node *const temp = &Iden;
+      branches.push_back(temp);
     } else if (lexed->front().at(0) == 'd') {
       if (lexed->front() == "dLCURLY") {
         branch Branch = branch(this, lexed);
+        branches.push_back(&Branch);
+        std::cout << "test";
       } else if (lexed->front() == "dRCURLY") {
-        empty Empty("{");
+        empty Empty("{"); // returns end of branch
       } else if (lexed->front() == "dLPAREN") {
-        std::string store = "ds";
-        compare Compare(this, &store);
+        // needs implemting
+        // compare Compare(this, &store);
       } else if (lexed->front() == "dRPAREN") {
       } else if (lexed->front() == "sRETURNSYM") {
         returnNode ReturnNode(lexed);
+        branches.push_back(&ReturnNode);
       }
     } else if (lexed->front().at(0) == 'c') {
     } else if (lexed->front().at(0) == 's') {

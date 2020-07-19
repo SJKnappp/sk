@@ -12,6 +12,8 @@ int main(int argc, char **argv) {
   text = fileInput(text, title);
 
   std::vector<std::string> lexed = lex(text);
+  std::vector<std::string> lexcopy = lexed;
+
   //
   branch start(nullptr, &lexed, true);
   if (start.failed == true) {
