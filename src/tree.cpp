@@ -44,20 +44,19 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     Node *ret;
     if (lexed->at(0).at(0) == 'i') {
       identifier Iden(lexed->front());
-      std::unique_ptr<identifier> ret = std::make_unique<identifier>(Iden);
-      std::unique_ptr<Node> Ide = std::move(ret);
-      std::string test = Ide->data;
-      branches.push_back(std::move(Ide));
+      std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
+      branches.push_back(std::move(ret));
     } else if (lexed->front().at(0) == 'n') {
       identifier Iden(lexed->front());
       Node *const temp = &Iden;
-      //      branches.push_back(&Iden);
+      std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
+      branches.push_back(std::move(ret));
     } else if (lexed->front().at(0) == 'd') {
       if (lexed->front() == "dLCURLY") {
-        branch Branch = branch(this, lexed);
-        Branch.result = "dada";
-        //        branches.push_back(&Branch);
-        std::cout << "test";
+        std::unique_ptr<branch> Branch =
+            std::make_unique<branch>(branch(this, lexed));
+        Branch->result = "branch";
+        branches.push_back(std::move(Branch));
       } else if (lexed->front() == "dRCURLY") {
         empty Empty("{"); // returns end of branch
       } else if (lexed->front() == "dLPAREN") {
@@ -66,7 +65,8 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
       } else if (lexed->front() == "dRPAREN") {
       } else if (lexed->front() == "sRETURNSYM") {
         returnNode ReturnNode(lexed);
-        //        branches.push_back(&ReturnNode);
+        std::unique_ptr<Node> ret = std::make_unique<returnNode>(ReturnNode);
+        branches.push_back(std::move(ret));
       }
     } else if (lexed->front().at(0) == 'c') {
     } else if (lexed->front().at(0) == 's') {
