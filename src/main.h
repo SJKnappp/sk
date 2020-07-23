@@ -9,6 +9,6 @@
 // defined files
 #include "include.h"
 #include "lexer.h"
-#include "tree.h"
+#include "parser/tree.h"
 
 #endif // MAIN_H
