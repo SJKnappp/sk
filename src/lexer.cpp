@@ -28,12 +28,12 @@ std::string tokens(std::string word) {
     return "RCURLY";
   } else if (word == ";") {
     return "SEMICOLON";
-  } else if (word == ",") {
-    return "COMMA";
   } else if (word == ".") {
     return "PERIOD";
   } else if (word == "=") {
     return "EQL";
+  } else if (word == "==") {
+    return "COM";
   } else if (word == "!=") {
     return "NQL";
   } else if (word == "<") {
@@ -48,10 +48,6 @@ std::string tokens(std::string word) {
     return "CONSTSYM";
   } else if (word == "if") {
     return "IFSYM";
-  } else if (word == "then") {
-    return "THENSYM";
-  } else if (word == "var") {
-    return "VARSYM";
   } else if (word == "while") {
     return "WHILESYM";
   } else if (word == "int") {
