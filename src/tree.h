@@ -8,6 +8,7 @@
 //#include <memory>
 
 #include "main.h"
+#include <memory>
 #include <stack>
 
 class Node {
@@ -16,6 +17,7 @@ public:
   Node *parent = nullptr;
   std::string data = "";
   std::string result = "";
+  virtual std::string type() = 0;
 };
 
 class empty : public Node {
@@ -29,7 +31,7 @@ protected:
 class branch : public Node {
 public:
   branch(Node *Parent, std::vector<std::string> *lexed, bool top = false);
-  std::vector<Node *> branches; // stores ordered list of nodes
+  std::vector<std::unique_ptr<Node>> branches; // stores ordered list of nodes
   bool failed;
 
 protected:
