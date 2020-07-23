@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -10,5 +11,6 @@
 #include "include.h"
 #include "lexer.h"
 #include "parser/tree.h"
+#include "parser/visualizer.h"
 
 #endif // MAIN_H

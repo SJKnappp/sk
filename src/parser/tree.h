@@ -19,12 +19,14 @@ public:
   std::string data = "";
   std::string result = "";
   virtual std::string type() = 0;
+  virtual void display() = 0;
 };
 
 // used to be able to store most basic type of node
 class empty : public Node {
 public:
   empty(std::string Result);
+  void display() {}
 
 protected:
   virtual std::string type() { return "empty"; }
@@ -36,6 +38,7 @@ public:
   branch(Node *Parent, std::vector<std::string> *lexed, bool top = false);
   std::vector<std::unique_ptr<Node>> branches; // stores ordered list of nodes
   bool failed;
+  void display();
 
 protected:
   std::string type() { return "branch"; }
@@ -46,6 +49,7 @@ class returnNode : public Node {
 public:
   returnNode(std::vector<std::string> *lexed);
   Node *val;
+  void display() {}
 
 protected:
   std::string type() { return "returnNode"; }
@@ -57,6 +61,7 @@ class binaryTree : public Node {
 public:
   Node *left;
   Node *right;
+  void display() {}
 
 protected:
   std::string type() { return "binaryTree"; }
@@ -65,6 +70,9 @@ protected:
 // creates assignment of varibles
 // might combine with identifier as program fleshed out
 class assign : public binaryTree {
+public:
+  void display() {}
+
 protected:
   std::string type() { return "assign"; }
 };
@@ -73,6 +81,7 @@ protected:
 class binop : public binaryTree {
 public:
   binop(Node *Parent, std::string *Keyword);
+  void display() {}
 
 protected:
   std::string type() { return "binop"; }
@@ -82,10 +91,14 @@ protected:
 class compare : public binaryTree {
 public:
   compare(Node *Parent, std::string *Keyword);
+  void display() {}
 };
 
 // stores information about numbers
 class num : public Node {
+public:
+  void display() {}
+
 protected:
   std::string type() { return "Num"; }
 };
@@ -97,6 +110,7 @@ public:
 
 protected:
   std::string type() { return "Num"; }
+  void display() {}
 };
 
 void condition(std::vector<std::string> *lexed, Node *current);
