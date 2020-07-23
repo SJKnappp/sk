@@ -11,55 +11,55 @@ std::string tokens(std::string word) {
   std::string Token;
   std::string returnVal = ""; // return varible for num and identifer
   if (word == "+") {
-    return "sPLUS";
+    return "PLUS";
   } else if (word == "-") {
-    return "sMINUS";
+    return "MINUS";
   } else if (word == "*") {
-    return "sTIMES";
+    return "TIMES";
   } else if (word == "/") {
-    return "sSLASH";
+    return "SLASH";
   } else if (word == "(") {
-    return "dLPAREN";
+    return "LPAREN";
   } else if (word == ")") {
-    return "dRPAREN";
+    return "RPAREN";
   } else if (word == "{") {
-    return "dLCURLY";
+    return "LCURLY";
   } else if (word == "}") {
-    return "dRCURLY";
+    return "RCURLY";
   } else if (word == ";") {
-    return "dSEMICOLON";
+    return "SEMICOLON";
   } else if (word == ",") {
-    return "dCOMMA";
+    return "COMMA";
   } else if (word == ".") {
-    return "sPERIOD";
+    return "PERIOD";
   } else if (word == "=") {
-    return "cEQL";
+    return "EQL";
   } else if (word == "!=") {
-    return "cNQL";
+    return "NQL";
   } else if (word == "<") {
-    return "cLSS";
+    return "LSS";
   } else if (word == ">") {
-    return "cGTR";
+    return "GTR";
   } else if (word == "<=") {
-    return "cLEQ";
+    return "LEQ";
   } else if (word == ">=") {
-    return "cGEQ";
+    return "GEQ";
   } else if (word == "const") {
-    return "sCONSTSYM";
+    return "CONSTSYM";
   } else if (word == "if") {
-    return "sIFSYM";
+    return "IFSYM";
   } else if (word == "then") {
-    return "sTHENSYM";
+    return "THENSYM";
   } else if (word == "var") {
-    return "sVARSYM";
+    return "VARSYM";
   } else if (word == "while") {
-    return "sWHILESYM";
+    return "WHILESYM";
   } else if (word == "int") {
-    return "sINTSYM";
+    return "INTSYM";
   } else if (word == "void") {
-    return "sVOIDSYM";
+    return "VOIDSYM";
   } else if (word == "return") {
-    return "sRETURNSYM";
+    return "RETURNSYM";
   } else {
     bool isNum = false; // number
 
