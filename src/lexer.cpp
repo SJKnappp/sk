@@ -1,12 +1,5 @@
 #include "lexer.h"
 
-// prefix s for math symbol
-// i identifier
-// n number
-// d droped ie (){} which ast dose not need
-// c condition
-// s symbol
-
 std::string tokens(std::string word) {
   std::string Token;
   std::string returnVal = ""; // return varible for num and identifer

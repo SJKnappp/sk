@@ -67,8 +67,9 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     } else if (lexed->front() == "INTSYM") {
     } else if (lexed->front() == "VOIDSYM") {
     } else if (lexed->front() == "RETURNSYM") {
-      returnNode ReturnNode(lexed);
-      std::unique_ptr<Node> ret = std::make_unique<returnNode>(ReturnNode);
+      // returnNode ReturnNode(lexed);
+      std::unique_ptr<Node> ret =
+          std::make_unique<returnNode>(returnNode(lexed));
       branches.push_back(std::move(ret));
     } else if (lexed->at(0).at(0) == 'i') { // identifer
       identifier Iden(lexed->front());
@@ -100,7 +101,5 @@ compare::compare(Node *Parent, std::string *Keyword) {
   }
   data = *Keyword;
 }
-
-empty::empty(std::string Result) { result = Result; }
 
 identifier::identifier(std::string flag) { data = flag; }

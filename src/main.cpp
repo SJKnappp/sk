@@ -16,7 +16,12 @@ int main(int argc, char **argv) {
 
   //
   branch start(nullptr, &lexed, true);
-  start.display();
+  bool isDisplay = true;
+
+  if (isDisplay == true) {
+    std::string text;
+    start.display(&text, std::string(), true);
+  }
   //  std::unique_ptr<Node> ret = std::make_unique<branch>(start);
   //  std::string test = start.branches()[0]->data;
   if (start.failed == true) {

@@ -11,6 +11,5 @@
 #include "include.h"
 #include "lexer.h"
 #include "parser/tree.h"
-#include "parser/visualizer.h"
 
 #endif // MAIN_H
