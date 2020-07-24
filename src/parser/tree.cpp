@@ -85,6 +85,22 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
 
 returnNode::returnNode(std::vector<std::string> *lexed) {
   Node *temp = this;
+  lexed->erase(lexed->begin());
+  if (lexed->size() > 0) {
+    if (lexed->front().at(0) == 'i') {
+      identifier Iden(lexed->front());
+      std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
+      val = std::move(ret);
+    } else if (lexed->front().at(0) == 'n') {
+      identifier Iden(lexed->front());
+      std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
+      val = std::move(ret);
+    } else if (lexed->front() == "SEMICOLON") {
+    } else {
+      lexed = {};
+      std::cout << "failed";
+    }
+  }
   // temp = build(lexed, temp, NULL, false);
 }
 
