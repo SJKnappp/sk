@@ -6,44 +6,68 @@
 
 void branch::display(std::string *text, std::string tab, bool top) {
 
-  std::string store = "";
+  if (top == false) {
+    tab += "\t";
+    text->append("\n");
+  }
 
+  std::string store = "";
+  text->append(tab);
+  text->append(this->type());
   for (int x = 0; x < this->branches.size(); x++) {
     this->branches.at(x)->display(text, tab);
-    store += "\n";
   }
 
   if (top == true) {
     std::ofstream file;
     file.open("ast.txt");
-    file << store;
+    file << *text;
     file.close();
   }
 }
 
 void returnNode::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
-  std::string temp = *text;
-  temp += "\n";
-  temp += this->data;
-  text = &temp;
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
   if (this->val != nullptr) {
     this->val->display(text, tab);
   }
 }
 void binaryTree::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
 }
 void assign::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
 }
 void binop::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
 }
 void compare::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
 }
-void num::display(std::string *text, std::string tab, bool top) { tab += "\t"; }
+void num::display(std::string *text, std::string tab, bool top) {
+  tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
+}
 void identifier::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
 }
