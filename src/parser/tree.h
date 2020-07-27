@@ -50,8 +50,8 @@ protected:
 // should not be used in base state
 class binaryTree : public Node {
 public:
-  Node *left;
-  Node *right;
+  std::unique_ptr<Node> left = nullptr;
+  std::unique_ptr<Node> right = nullptr;
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:
@@ -62,6 +62,7 @@ protected:
 // might combine with identifier as program fleshed out
 class assign : public binaryTree {
 public:
+  assign(std::vector<std::string> *lexed);
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:
@@ -71,7 +72,7 @@ protected:
 // stores information about cacluations ie a - b
 class binop : public binaryTree {
 public:
-  binop(Node *Parent, std::string *Keyword);
+  binop(std::vector<std::string> *lexed);
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:

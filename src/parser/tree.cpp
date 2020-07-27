@@ -63,8 +63,11 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     } else if (lexed->front() == "GEQ") { //
     } else if (lexed->front() == "CONSTSYM") {
     } else if (lexed->front() == "IFSYM") {
+
     } else if (lexed->front() == "WHILESYM") {
     } else if (lexed->front() == "INTSYM") {
+      std::unique_ptr<assign> ret = std::make_unique<assign>(assign(lexed));
+      branches.push_back(std::move(ret));
     } else if (lexed->front() == "VOIDSYM") {
     } else if (lexed->front() == "RETURNSYM") {
       // returnNode ReturnNode(lexed);
@@ -104,12 +107,7 @@ returnNode::returnNode(std::vector<std::string> *lexed) {
   // temp = build(lexed, temp, NULL, false);
 }
 
-binop::binop(Node *Parent, std::string *Keyword) {
-  if (Parent != nullptr) {
-    parent = Parent;
-  }
-  data = *Keyword;
-}
+binop::binop(std::vector<std::string> *lexed) {}
 
 compare::compare(Node *Parent, std::string *Keyword) {
   if (Parent != nullptr) {
@@ -119,3 +117,56 @@ compare::compare(Node *Parent, std::string *Keyword) {
 }
 
 identifier::identifier(std::string flag) { data = flag; }
+
+assign::assign(std::vector<std::string> *lexed) {
+  std::vector<std::string> generated;
+
+  std::string type = lexed->front();
+  lexed->erase(lexed->begin());
+
+  std::string Name = lexed->front();
+  lexed->erase(lexed->begin());
+
+  if (lexed->front() == "SEMICOLON") {
+    return;
+  } else if (lexed->front() != "EQL") {
+    std::cout << "found unexpected symbole";
+    lexed = {};
+    return;
+  }
+
+  bool running = true;
+  int i = 0;
+  while (running) {
+    if (lexed->at(i) == "SEMICOLON") {
+      running = false;
+    } else {
+      generated.push_back(lexed->at(i));
+    }
+    lexed->erase(lexed->begin());
+  }
+
+  if (generated.size() == 1) {
+    std::cout << "expected an identifier";
+    return;
+  }
+
+  if (Name.at(0) == 'i') {
+    std::unique_ptr<identifier> var =
+        std::make_unique<identifier>(identifier(Name));
+    left = std::move(var);
+  }
+
+  std::unique_ptr<identifier> var;
+  switch (generated.size() == 0) {
+  case 0:
+    std::cout << "expected statment after equals sign";
+    break;
+  case 1:
+    var = std::make_unique<identifier>(identifier(generated.at(0)));
+    break;
+  default:
+    binop(*generated);
+    break;
+  }
+}
