@@ -8,6 +8,7 @@
 #include <vector>
 
 // defined files
+#include "Assembly.h"
 #include "include.h"
 #include "lexer.h"
 #include "parser/tree.h"
