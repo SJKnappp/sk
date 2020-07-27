@@ -107,7 +107,23 @@ returnNode::returnNode(std::vector<std::string> *lexed) {
   // temp = build(lexed, temp, NULL, false);
 }
 
-binop::binop(std::vector<std::string> *lexed) {}
+binop::binop(std::vector<std::string> *lexed) {
+  //
+  std::vector<std::string> list;
+  for (int i = 0; i < lexed->size(); i++) {
+    if (lexed->at(i).at(0) == 'n') {
+
+    } else if (lexed->at(i).at(0) == 'i') {
+
+    } else if (lexed->at(i) == "PLUS") {
+    } else if (lexed->at(i) == "MINUS") {
+    } else if (lexed->at(i) == "TIMES") {
+    } else if (lexed->at(i) == "SLASH") {
+    } else if (lexed->at(i) == "LPAREN") {
+    } else if (lexed->at(i) == "RPAREN") {
+    }
+  }
+}
 
 compare::compare(Node *Parent, std::string *Keyword) {
   if (Parent != nullptr) {
