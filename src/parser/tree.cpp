@@ -156,7 +156,16 @@ binop::binop(std::vector<std::string> *lexed) {
         if (firstExpresion) {
           firstExpresion = false;
           data = lexed->at(i);
+        } else {
+          listRight.push_back(lexed->at(i));
         }
+      }
+      if (i == lexed->size()) {
+        std::cout << "found unexpected symbol at end of expression";
+        return;
+      } else if (i == 0) {
+        std::cout << "found unexpected symbol at start of expression";
+        return;
       }
     }
   }
@@ -183,7 +192,14 @@ assign::assign(std::vector<std::string> *lexed) {
   std::string Name = lexed->front();
   lexed->erase(lexed->begin());
 
+  if (Name.at(0) == 'i') {
+    std::unique_ptr<identifier> var =
+        std::make_unique<identifier>(identifier(Name));
+    left = std::move(var);
+  }
+
   if (lexed->front() == "SEMICOLON") {
+
     return;
   } else if (lexed->front() != "EQL" && lexed->front() != "LPAREN") {
     std::cout << "found unexpected symbole";
@@ -212,12 +228,6 @@ assign::assign(std::vector<std::string> *lexed) {
   if (generated.size() == 0 && caseState == 1) {
     std::cout << "expected an identifier";
     return;
-  }
-
-  if (Name.at(0) == 'i') {
-    std::unique_ptr<identifier> var =
-        std::make_unique<identifier>(identifier(Name));
-    left = std::move(var);
   }
 
   std::unique_ptr<identifier> var;
