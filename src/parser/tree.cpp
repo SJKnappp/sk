@@ -110,72 +110,76 @@ returnNode::returnNode(std::vector<std::string> *lexed) {
 binop::binop(std::vector<std::string> *lexed) {
   //
   bool numExpected = true;
-  bool firstNum = false;
-  bool firstExpresion = false;
+  bool firstNum = true;
+  bool firstExpresion = true;
 
   std::vector<std::string> listLeft;
   std::vector<std::string> listRight;
   for (int i = 0; i < lexed->size(); i++) {
     if (lexed->at(i).at(0) == 'n') {
       if (numExpected == true) {
-        numExpected == false;
-        if (firstNum == false) {
+        numExpected = false;
+        if (firstNum == true) {
           firstNum = false;
+        } else {
+          listRight.push_back(lexed->at(i));
         }
       }
     } else if (lexed->at(i).at(0) == 'i') {
       if (numExpected == true) {
-        numExpected == false;
-        if (firstNum == false) {
-          firstNum = true;
+        numExpected = false;
+        if (firstNum == true) {
+          firstNum = false;
+        } else {
+          listRight.push_back(lexed->at(i));
         }
       }
     } else if (lexed->at(i) == "PLUS") {
       if (numExpected == false) {
-        numExpected == false;
-        if (firstExpresion == false) {
-          firstExpresion == true;
+        numExpected = true;
+        if (firstExpresion) {
+          firstExpresion = false;
           data = lexed->at(i);
         }
       }
     } else if (lexed->at(i) == "MINUS") {
       if (numExpected == false) {
-        numExpected == false;
-        if (firstExpresion == false) {
-          firstExpresion == true;
+        numExpected = true;
+        if (firstExpresion) {
+          firstExpresion = false;
           data = lexed->at(i);
         }
       }
 
     } else if (lexed->at(i) == "TIMES") {
       if (numExpected == false) {
-        numExpected == false;
-        if (firstExpresion == false) {
-          firstExpresion == true;
+        numExpected = true;
+        if (firstExpresion) {
+          firstExpresion = false;
           data = lexed->at(i);
         }
       }
     } else if (lexed->at(i) == "SLASH") {
       if (numExpected == false) {
-        numExpected == false;
-        if (firstExpresion == false) {
-          firstExpresion == true;
+        numExpected = true;
+        if (firstExpresion) {
+          firstExpresion = false;
           data = lexed->at(i);
         }
       }
     } else if (lexed->at(i) == "LPAREN") {
       if (numExpected == false) {
-        numExpected == false;
-        if (firstExpresion == false) {
-          firstExpresion == true;
+        numExpected = true;
+        if (firstExpresion) {
+          firstExpresion = false;
           data = lexed->at(i);
         }
       }
     } else if (lexed->at(i) == "RPAREN") {
       if (numExpected == false) {
-        numExpected == false;
-        if (firstExpresion == false) {
-          firstExpresion == true;
+        numExpected = true;
+        if (firstExpresion) {
+          firstExpresion = false;
           data = lexed->at(i);
         }
       }
