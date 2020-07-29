@@ -109,18 +109,76 @@ returnNode::returnNode(std::vector<std::string> *lexed) {
 
 binop::binop(std::vector<std::string> *lexed) {
   //
-  std::vector<std::string> list;
+  bool numExpected = true;
+  bool firstNum = false;
+  bool firstExpresion = false;
+
+  std::vector<std::string> listLeft;
+  std::vector<std::string> listRight;
   for (int i = 0; i < lexed->size(); i++) {
     if (lexed->at(i).at(0) == 'n') {
-
+      if (numExpected == true) {
+        numExpected == false;
+        if (firstNum == false) {
+          firstNum = false;
+        }
+      }
     } else if (lexed->at(i).at(0) == 'i') {
-
+      if (numExpected == true) {
+        numExpected == false;
+        if (firstNum == false) {
+          firstNum = true;
+        }
+      }
     } else if (lexed->at(i) == "PLUS") {
+      if (numExpected == false) {
+        numExpected == false;
+        if (firstExpresion == false) {
+          firstExpresion == true;
+          data = lexed->at(i);
+        }
+      }
     } else if (lexed->at(i) == "MINUS") {
+      if (numExpected == false) {
+        numExpected == false;
+        if (firstExpresion == false) {
+          firstExpresion == true;
+          data = lexed->at(i);
+        }
+      }
+
     } else if (lexed->at(i) == "TIMES") {
+      if (numExpected == false) {
+        numExpected == false;
+        if (firstExpresion == false) {
+          firstExpresion == true;
+          data = lexed->at(i);
+        }
+      }
     } else if (lexed->at(i) == "SLASH") {
+      if (numExpected == false) {
+        numExpected == false;
+        if (firstExpresion == false) {
+          firstExpresion == true;
+          data = lexed->at(i);
+        }
+      }
     } else if (lexed->at(i) == "LPAREN") {
+      if (numExpected == false) {
+        numExpected == false;
+        if (firstExpresion == false) {
+          firstExpresion == true;
+          data = lexed->at(i);
+        }
+      }
     } else if (lexed->at(i) == "RPAREN") {
+      if (numExpected == false) {
+        numExpected == false;
+        if (firstExpresion == false) {
+          firstExpresion == true;
+          data = lexed->at(i);
+        }
+      }
     }
   }
 }
@@ -135,6 +193,7 @@ compare::compare(Node *Parent, std::string *Keyword) {
 identifier::identifier(std::string flag) { data = flag; }
 
 assign::assign(std::vector<std::string> *lexed) {
+
   std::vector<std::string> generated;
 
   std::string type = lexed->front();
@@ -145,24 +204,31 @@ assign::assign(std::vector<std::string> *lexed) {
 
   if (lexed->front() == "SEMICOLON") {
     return;
-  } else if (lexed->front() != "EQL") {
+  } else if (lexed->front() != "EQL" && lexed->front() != "LPAREN") {
     std::cout << "found unexpected symbole";
     lexed = {};
     return;
   }
 
+  lexed->erase(lexed->begin());
+
+  int caseState = 0; // 0-failed 1-varible 2-function
   bool running = true;
   int i = 0;
   while (running) {
     if (lexed->at(i) == "SEMICOLON") {
       running = false;
+      caseState = 1;
+    } else if (lexed->at(i) == "RPAREN") {
+      running = false;
+      caseState = 2;
     } else {
       generated.push_back(lexed->at(i));
     }
     lexed->erase(lexed->begin());
   }
 
-  if (generated.size() == 1) {
+  if (generated.size() == 0 && caseState == 1) {
     std::cout << "expected an identifier";
     return;
   }
@@ -174,7 +240,7 @@ assign::assign(std::vector<std::string> *lexed) {
   }
 
   std::unique_ptr<identifier> var;
-  switch (generated.size() == 0) {
+  switch (generated.size()) {
   case 0:
     std::cout << "expected statment after equals sign";
     break;
