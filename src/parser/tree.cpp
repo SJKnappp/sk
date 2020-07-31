@@ -237,6 +237,7 @@ assign::assign(std::vector<std::string> *lexed) {
     break;
   case 1:
     var = std::make_unique<identifier>(identifier(generated.at(0)));
+    right = std::move(var);
     break;
   default:
     binop(*generated);
