@@ -182,6 +182,8 @@ compare::compare(Node *Parent, std::string *Keyword) {
 
 identifier::identifier(std::string flag) { data = flag; }
 
+num::num(std::string flag) { data = flag; }
+
 assign::assign(std::vector<std::string> *lexed) {
 
   std::vector<std::string> generated;
@@ -230,14 +232,20 @@ assign::assign(std::vector<std::string> *lexed) {
     return;
   }
 
-  std::unique_ptr<identifier> var;
   switch (generated.size()) {
   case 0:
     std::cout << "expected statment after equals sign";
     break;
   case 1:
-    var = std::make_unique<identifier>(identifier(generated.at(0)));
-    right = std::move(var);
+    if (generated.at(0).at(0) == 'i') {
+      std::unique_ptr<identifier> var;
+      var = std::make_unique<identifier>(identifier(generated.at(0)));
+      right = std::move(var);
+    } else if (generated.at(0).at(0) == 'n') {
+      std::unique_ptr<num> var;
+      var = std::make_unique<num>(num(generated.at(0)));
+      right = std::move(var);
+    }
     break;
   default:
     binop(*generated);

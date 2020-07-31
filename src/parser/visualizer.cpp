@@ -58,6 +58,12 @@ void binop::display(std::string *text, std::string tab, bool top) {
   text->append("\n");
   text->append(tab);
   text->append(this->type());
+  if (this->left != nullptr) {
+    this->left->display(text, tab);
+  }
+  if (this->right != nullptr) {
+    this->right->display(text, tab);
+  }
 }
 void compare::display(std::string *text, std::string tab, bool top) {
   tab += "\t";

@@ -89,6 +89,7 @@ public:
 // stores information about numbers
 class num : public Node {
 public:
+  num(std::string flag);
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:
@@ -101,7 +102,7 @@ public:
   identifier(std::string flag);
 
 protected:
-  std::string type() { return "Num"; }
+  std::string type() { return "Identifier"; }
   void display(std::string *text, std::string tab, bool top = false);
 };
 
