@@ -13,6 +13,7 @@ int main(int argc, char **argv) {
 
   std::vector<std::string> lexed = lex(text);
   std::vector<std::string> lexcopy = lexed;
+  std::vector<symbolTable> symbol;
 
   //
   branch start(nullptr, &lexed, true);

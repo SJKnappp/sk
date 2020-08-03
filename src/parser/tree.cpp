@@ -30,14 +30,14 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     data = "top";
     lexed->insert(lexed->begin(), "first");
   }
-
+  lexed->erase(lexed->begin());
   while (lexed->size() > 0) {
-    lexed->erase(lexed->begin());
+    //    lexed->erase(lexed->begin());
     if (lexed->empty()) {
       break;
     }
 
-    // for tokents not useable from branch trow an error
+    // for tokens not usable from branch trow an error
 
     if (lexed->front() == "PLUS") {
     } else if (lexed->front() == "MINUS") {  // can only be seen after identifer
@@ -53,6 +53,7 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     } else if (lexed->front() == "RCURLY") { // will be used to end the branch
       break; // exits while loop to end the branch
     } else if (lexed->front() == "SEMICOLON") { // ends a line
+      lexed->erase(lexed->begin());
     } else if (lexed->front() == "PERIOD") {
     } else if (lexed->front() == "EQL") {
     } else if (lexed->front() == "COM") { // these are not asseble from a
