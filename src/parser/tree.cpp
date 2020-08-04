@@ -22,7 +22,8 @@ void condition(std::vector<std::string> *lexed, Node *current) {
   }
 }
 
-branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
+branch::branch(Node *Parent, std::vector<symbolTable> *symbol,
+               std::vector<std::string> *lexed, bool top) {
   if (!top) {
     parent = Parent;
   } else {
@@ -46,8 +47,9 @@ branch::branch(Node *Parent, std::vector<std::string> *lexed, bool top) {
     } else if (lexed->front() == "LPAREN") { // will be delt with identifer
     } else if (lexed->front() == "RPAREN") { //
     } else if (lexed->front() == "LCURLY") { // creates a new branch node
+      std::vector<symbolTable> temp = {};
       std::unique_ptr<branch> Branch =
-          std::make_unique<branch>(branch(this, lexed));
+          std::make_unique<branch>(branch(this, &temp, lexed));
       Branch->result = "branch";
       branches.push_back(std::move(Branch));
     } else if (lexed->front() == "RCURLY") { // will be used to end the branch

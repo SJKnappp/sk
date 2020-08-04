@@ -8,6 +8,7 @@
 //#include <memory>
 
 #include "../main.h"
+#include "symbol.h"
 #include <memory>
 #include <stack>
 
@@ -26,7 +27,8 @@ public:
 // stores structrial information
 class branch : public Node {
 public:
-  branch(Node *Parent, std::vector<std::string> *lexed, bool top = false);
+  branch(Node *Parent, std::vector<symbolTable> *symbol,
+         std::vector<std::string> *lexed, bool top = false);
   std::vector<std::unique_ptr<Node>> branches; // stores ordered list of nodes
   bool failed;
   void display(std::string *text, std::string tab, bool top = false);

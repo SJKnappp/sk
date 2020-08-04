@@ -11,6 +11,7 @@
 #include "Assembly.h"
 #include "include.h"
 #include "lexer.h"
+#include "parser/symbol.h"
 #include "parser/tree.h"
 
 #endif // MAIN_H

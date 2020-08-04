@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
   std::vector<symbolTable> symbol;
 
   //
-  branch start(nullptr, &lexed, true);
+  branch start(nullptr, &symbol, &lexed, true);
   bool isDisplay = true;
 
   if (isDisplay == true) {
