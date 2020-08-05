@@ -9,6 +9,7 @@
 
 // defined files
 #include "Assembly.h"
+#include "assembly/ass.h"
 #include "include.h"
 #include "lexer.h"
 #include "parser/symbol.h"

@@ -66,7 +66,7 @@ branch::branch(Node *Parent, std::vector<symbolTable> *symbol,
     } else if (lexed->front() == "GEQ") { //
     } else if (lexed->front() == "CONSTSYM") {
     } else if (lexed->front() == "IFSYM") {
-
+      lexed->erase(lexed->begin()); // temp
     } else if (lexed->front() == "WHILESYM") {
     } else if (lexed->front() == "INTSYM") {
       std::unique_ptr<assign> ret = std::make_unique<assign>(assign(lexed));

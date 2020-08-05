@@ -1,3 +1,9 @@
+add_subdirectory(assembly)
+add_subdirectory(parser)
+
 add_executable(main
-        main.cpp parser/tree.cpp include.cpp lexer.cpp parser/visualizer.cpp Assembly.cpp
-        parser/symbol.cpp)
+        main.cpp include.cpp lexer.cpp Assembly.cpp)
+
+
+target_link_libraries(main assembly)
+target_link_libraries(main parser)
