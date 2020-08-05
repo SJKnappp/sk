@@ -97,11 +97,14 @@ returnNode::returnNode(std::vector<std::string> *lexed) {
       identifier Iden(lexed->front());
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       val = std::move(ret);
+      lexed->erase(lexed->begin());
     } else if (lexed->front().at(0) == 'n') {
       identifier Iden(lexed->front());
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       val = std::move(ret);
+      lexed->erase(lexed->begin());
     } else if (lexed->front() == "SEMICOLON") {
+      lexed->erase(lexed->begin());
     } else {
       lexed = {};
       std::cout << "failed";

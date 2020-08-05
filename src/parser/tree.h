@@ -7,10 +7,12 @@
 
 //#include <memory>
 
-#include "../main.h"
-#include "symbol.h"
 #include <memory>
 #include <stack>
+
+// usr defined
+#include "../main.h"
+#include "symbol.h"
 
 // Base node
 class Node {
