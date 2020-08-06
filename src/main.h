@@ -9,8 +9,8 @@
 
 // defined files
 #include "assembly/ass.h"
-#include "include.h"
-#include "lexer.h"
+#include "include/include.h"
+#include "lexer/lexer.h"
 #include "parser/symbol.h"
 #include "parser/tree.h"
 
