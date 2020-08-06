@@ -41,6 +41,8 @@ std::string finial(std::string *text, std::vector<std::string> *function,
   file.open("asm.asm");
   file << result;
   file.close();
+
+  return result;
 }
 } // namespace ass
 
