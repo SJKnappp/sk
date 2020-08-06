@@ -5,7 +5,7 @@
 #include "ass.h"
 
 namespace ass {
-std::string gen() {
+std::string gen(branch *base) {
 
   // holds each section of data
   std::string text;
@@ -29,13 +29,18 @@ void init(std::string *text, std::vector<std::string> *body,
 
 std::string finial(std::string *text, std::vector<std::string> *function,
                    std::string *data) {
-  function->at(0).append("\nmov eax, 1\n\t int0x80");
+  function->at(0).append("\n\tmov eax, 1\n\tint 0x80");
 
   std::string body;
   for (int i = 0; i < function->size(); i++)
     body += function->at(i);
 
   std::string result = *text + body + *data;
+
+  std::ofstream file;
+  file.open("asm.asm");
+  file << result;
+  file.close();
 }
 } // namespace ass
 

@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::string ass = ass::gen();
+  std::string ass = ass::gen(&start);
 
   //  outputAST(start);
 

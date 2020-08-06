@@ -9,9 +9,9 @@
 
 // namespace contains all assembly file building commands
 namespace ass {
-std::string gen();
+std::string gen(branch *base);
 void init(std::string *text, std::vector<std::string> *boby, std::string *data);
-std::string finial(std::string *text, std::vector<string> *body,
+std::string finial(std::string *text, std::vector<std::string> *body,
                    std::string *data);
 } // namespace ass
 
