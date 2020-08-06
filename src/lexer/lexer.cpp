@@ -3,7 +3,9 @@
 std::string tokens(std::string word) {
   std::string Token;
   std::string returnVal = ""; // return varible for num and identifer
-  if (word == "+") {
+  if (word.size() == 0) {
+    return "EMPTYFLAG";
+  } else if (word == "+") {
     return "PLUS";
   } else if (word == "-") {
     return "MINUS";
