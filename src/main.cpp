@@ -32,6 +32,11 @@ int main(int argc, char **argv) {
 
   std::string ass = ass::gen(&start);
 
+  std::ofstream file;
+  file.open("asm.asm");
+  file << ass;
+  file.close();
+
   //  outputAST(start);
 
   //  std::cout << text;
