@@ -7,11 +7,13 @@
 
 //#include <memory>
 
+#include <fstream>
+#include <iostream>
 #include <memory>
 #include <stack>
+#include <vector>
 
 // usr defined
-#include "../main.h"
 #include "symbol.h"
 
 // Base node

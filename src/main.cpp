@@ -1,6 +1,7 @@
 #include "main.h"
 
 int main(int argc, char **argv) {
+
   std::string title;
   if (argc == 1) {
     title = "main.k";
@@ -28,6 +29,8 @@ int main(int argc, char **argv) {
   if (start.failed == true) {
     return 1;
   }
+
+  std::string ass = ass::gen();
 
   //  outputAST(start);
 
