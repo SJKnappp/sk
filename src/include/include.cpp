@@ -1,7 +1,42 @@
 #include "include.h"
 
+// takes an item off the path
+std::string removePath(std::string location) {
+  std::string result;
+  if (location == "")
+    return "../";
+
+  for (int i = 0; i < location.size(); i++) {
+    if (location.at(i)) {
+    }
+  }
+  return result
+}
+
 // recursive function text used to store the text
-std::string fileInput(std::string text, const std::string &file) {
+std::string fileInput(std::string text, const std::string &file,
+                      std::string location) {
+
+  std::string relativeLocation = "";
+  for (int i = 0; i < text.size(); i++) {
+    std::string localPath;
+    std::string tempPath;
+    switch (text.at(i)) {
+    case '/':
+      localPath += tempPath;
+      tempPath = "";
+      break;
+    case '.':
+      if (text.at(i + 1) == '.' && text.at(i + 2) == '/') {
+        if (localPath == "") {
+          location = removePath(location);
+        }
+      }
+      break;
+    default:
+      break;
+    };
+  }
 
   std::string line;
 
@@ -57,7 +92,7 @@ std::string fileInput(std::string text, const std::string &file) {
         }
 
         if (Command == "include") {
-          std::string temp = fileInput(text, Flag);
+          std::string temp = fileInput(text, Flag, "");
           text += temp;
         } else {
           std::cout << "Compiler flag not recognise";

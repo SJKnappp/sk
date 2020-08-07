@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
   }
 
   std::string text;
-  text = fileInput(text, title);
+  text = fileInput(text, title, "");
 
   std::vector<std::string> lexed = lex(text);
   std::vector<std::string> lexcopy = lexed;
