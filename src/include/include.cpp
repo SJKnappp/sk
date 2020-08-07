@@ -63,8 +63,7 @@ Result path(std::string text, std::string location) {
 }
 
 // recursive function text used to store the text
-Result fileInput(std::string text, const std::string &file,
-                 std::string location) {
+Result fileInput(std::string text, std::string &file, std::string location) {
 
   Result result;
   Result collect;

@@ -9,10 +9,11 @@ int main(int argc, char **argv) {
     title = argv[1];
   }
 
-  std::string text;
-  text = fileInput(text, title, "");
+  // TODO implement checks on the returned text values
+  Result text;
+  text = fileInput(text.text, title, "");
 
-  std::vector<std::string> lexed = lex(text);
+  std::vector<std::string> lexed = lex(text.text);
   std::vector<std::string> lexcopy = lexed;
   std::vector<symbolTable> symbol;
 

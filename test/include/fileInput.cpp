@@ -9,55 +9,52 @@
 TEST_CASE("include: check that empty string breaks correctly") {
   std::string a = "";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "2");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.state == 2);
 }
 
 TEST_CASE("include: checks that non existent file reported correctly") {
   std::string a = "noExist.k";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "2 noExists.k");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.state == 2);
 }
 
 TEST_CASE("include: loads an empty file") {
   std::string a = "test/include/empty.k";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.text == "");
+  REQUIRE(result.state == 0);
 }
 
 TEST_CASE("include: loads a valid file with a bad include") {
   std::string a = "test/include/badInclude.k";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "2 badInclude.k");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.state == 2);
 }
 
 TEST_CASE("include: check that a simple file is correctly included") {
   std::string a = "test/include/simple.k";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "\nint main(){\nreturn 0;\n}");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.text == "\nint main(){\nreturn 0;\n}");
+  REQUIRE(result.state == 0);
 }
 
 TEST_CASE("include: check that a include file from a directory to another") {
   std::string a = "test/include/includeFow.k";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.text == "");
+  REQUIRE(result.state == 0);
 }
 
 TEST_CASE("include: check that a include file from a previous directory") {
   std::string a = "test/include/testhold/includeBack.k";
   std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "");
-}
-
-TEST_CASE("include: a simple ") {
-  std::string a = "test/include/include/simple.k";
-  std::string text = "";
-  std::string result = fileInput(text, a, "");
-  REQUIRE(result == "");
+  Result result = fileInput(text, a, "");
+  REQUIRE(result.text == "");
+  REQUIRE(result.state == 0);
 }
