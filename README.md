@@ -11,8 +11,14 @@ Tasks to be completed
 <li>add more tests in: 
 <ul>
 <li>parser</li>
-<li>lexer</li>
+<li><s>lexer</s></li>
 <li>assembler</li>
+<li>include</li>
 </ul>
 </li>
-</ul>
+<li>Fix the test cases
+<ul><li>parser</li>
+<li>lexer</li>
+<li>assembler</li>
+<li>include</li>
+</ul> </li> </ul>
