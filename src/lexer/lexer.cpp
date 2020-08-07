@@ -2,7 +2,7 @@
 
 std::string tokens(std::string word) {
   std::string Token;
-  std::string returnVal = ""; // return varible for num and identifer
+  std::string returnVal = ""; // return variable for num and identifier
   if (word.size() == 0) {
     return "EMPTYFLAG";
   } else if (word == "+") {
@@ -17,6 +17,10 @@ std::string tokens(std::string word) {
     return "LPAREN";
   } else if (word == ")") {
     return "RPAREN";
+  } else if (word == "++") {
+    return "INC";
+  } else if (word == "--") {
+    return "DEC";
   } else if (word == "{") {
     return "LCURLY";
   } else if (word == "}") {

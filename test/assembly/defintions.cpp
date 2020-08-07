@@ -4,14 +4,14 @@
 
 #include "assembly.h"
 
-TEST_CASE("Empty ast generation corectly builds the minium assembly",
+TEST_CASE("Empty ast generation correctly builds the minimum assembly",
           "[multi-file:2]") {
   std::string t = ass::gen(nullptr);
   REQUIRE(t == "Section .text\n\tglobal _start\n_start\n\tmov eax, 1\n\tint "
                "0x80\nSection .data");
 }
 
-TEST_CASE("assembly file is correctly intiated", "[multi-file:2]") {
+TEST_CASE("assembly file is correctly initiated", "[multi-file:2]") {
   std::string text, data;
   std::vector<std::string> body;
   ass::init(&text, &body, &data);

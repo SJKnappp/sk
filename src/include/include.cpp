@@ -1,5 +1,6 @@
 #include "include.h"
 
+// recursive function text used to store the text
 std::string fileInput(std::string text, const std::string &file) {
 
   std::string line;
@@ -56,7 +57,8 @@ std::string fileInput(std::string text, const std::string &file) {
         }
 
         if (Command == "include") {
-          text = fileInput(text, Flag);
+          std::string temp = fileInput(text, Flag);
+          text += temp;
         } else {
           std::cout << "Compiler flag not recognise";
         }
