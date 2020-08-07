@@ -6,11 +6,21 @@ std::string removePath(std::string location) {
   if (location == "")
     return "../";
 
+  std::string hold;
   for (int i = 0; i < location.size(); i++) {
-    if (location.at(i)) {
+    if (location.at(i) == '/') {
+      if (i == location.size() - 1) {
+        break;
+      } else {
+        hold += "/";
+        result += hold;
+        hold = "";
+      }
+    } else {
+      hold += location.at(i);
     }
   }
-  return result
+  return result;
 }
 
 // recursive function text used to store the text
