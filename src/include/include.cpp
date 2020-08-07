@@ -1,10 +1,13 @@
 #include "include.h"
 
 // takes an item off the path
-std::string removePath(std::string location) {
-  std::string result;
-  if (location == "")
-    return "../";
+Result removePath(std::string location) {
+  Result result;
+  if (location == "") {
+    result.text = "../";
+    result.state = 0;
+    return result;
+  }
 
   std::string hold;
   for (int i = 0; i < location.size(); i++) {
@@ -13,9 +16,12 @@ std::string removePath(std::string location) {
         break;
       } else {
         hold += "/";
-        result += hold;
+        result.text += hold;
         hold = "";
       }
+    } else if (i == location.size() - 1) {
+      result.state = 1;
+      return result; // not termated by /
     } else {
       hold += location.at(i);
     }
@@ -23,11 +29,9 @@ std::string removePath(std::string location) {
   return result;
 }
 
-// recursive function text used to store the text
-std::string fileInput(std::string text, const std::string &file,
-                      std::string location) {
+Result path(std::string text, std::string location) {
+  Result result;
 
-  std::string relativeLocation = "";
   for (int i = 0; i < text.size(); i++) {
     std::string localPath;
     std::string tempPath;
@@ -39,7 +43,14 @@ std::string fileInput(std::string text, const std::string &file,
     case '.':
       if (text.at(i + 1) == '.' && text.at(i + 2) == '/') {
         if (localPath == "") {
-          location = removePath(location);
+          result = removePath(location);
+          if (result.state == 0) {
+            location = result.text;
+          } else {
+            result.text = location;
+            result.state = 10; // error code for failed removePath function
+            return result;
+          }
         }
       }
       break;
@@ -47,6 +58,19 @@ std::string fileInput(std::string text, const std::string &file,
       break;
     };
   }
+
+  return result;
+}
+
+// recursive function text used to store the text
+Result fileInput(std::string text, const std::string &file,
+                 std::string location) {
+
+  Result result;
+  Result collect;
+  std::string relativeLocation = "";
+
+  collect = path(text, location);
 
   std::string line;
 
@@ -87,7 +111,10 @@ std::string fileInput(std::string text, const std::string &file,
               } else if (Flag == "") {
                 Flag = store;
               } else {
-                return "1"; // error value too many complier flag input
+
+                result.text = location;
+                result.state = 1; // error value too many complier flag input
+                return result;
               }
             } else {
               if (line.at(x) != ' ' && line.at(x) != '"') {
@@ -102,8 +129,12 @@ std::string fileInput(std::string text, const std::string &file,
         }
 
         if (Command == "include") {
-          std::string temp = fileInput(text, Flag, "");
-          text += temp;
+          Result collect = fileInput(text, Flag, "");
+          if (collect.state == 0) {
+            text += collect.text;
+          } else {
+            return collect;
+          }
         } else {
           std::cout << "Compiler flag not recognise";
         }
@@ -115,8 +146,8 @@ std::string fileInput(std::string text, const std::string &file,
     src.close();
   } else {
     std::cout << "Unable to open file";
-    return "2"; // error cannot open the file
+    return result; // error cannot open the file
   }
-  src.close();
-  return text;
+
+  return result;
 }

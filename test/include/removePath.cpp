@@ -17,3 +17,9 @@ TEST_CASE(
   std::string test = removePath(a);
   REQUIRE(test == "../");
 }
+
+TEST_CASE("include: no termating path with a /") {
+  std::string a = "test/best";
+  std::string test = removePath(a);
+  REQUIRE(test == "1 FAILED");
+}
