@@ -4,17 +4,19 @@
 
 #include "tree.h"
 
-returnNode::returnNode(std::vector<std::string> *lexed) {
+returnNode::returnNode(std::vector<std::string> *lexed,
+                       std::vector<std::vector<symbolTable>> &symbol,
+                       int location) {
   Node *temp = this;
   lexed->erase(lexed->begin());
   if (lexed->size() > 0) {
     if (lexed->front().at(0) == 'i') {
-      identifier Iden(lexed->front());
+      identifier Iden(lexed->front(), symbol, location);
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       val = std::move(ret);
       lexed->erase(lexed->begin());
     } else if (lexed->front().at(0) == 'n') {
-      identifier Iden(lexed->front());
+      identifier Iden(lexed->front(), symbol, location);
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       val = std::move(ret);
       lexed->erase(lexed->begin());

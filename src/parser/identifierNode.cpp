@@ -4,7 +4,9 @@
 
 #include "tree.h"
 
-identifier::identifier(std::string flag) {
+identifier::identifier(std::string flag,
+                       std::vector<std::vector<symbolTable>> &symbol,
+                       int location) {
   try {
     if (flag.at(0) != 'i' || flag.size() <= 1) {
       state = 21;

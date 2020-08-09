@@ -73,15 +73,15 @@ branch::branch(std::vector<std::string> *lexed,
     } else if (lexed->front() == "RETURNSYM") {
       // returnNode ReturnNode(lexed);
       std::unique_ptr<Node> ret =
-          std::make_unique<returnNode>(returnNode(lexed));
+          std::make_unique<returnNode>(returnNode(lexed, symbol, location));
       branches.push_back(std::move(ret));
     } else if (lexed->at(0).at(0) == 'i') { // identifer
-      identifier Iden(lexed->front());
+      identifier Iden(lexed->front(), symbol, location);
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       branches.push_back(std::move(ret));
       lexed->erase(lexed->begin());
     } else if (lexed->front().at(0) == 'n') { // number
-      identifier Iden(lexed->front());
+      identifier Iden(lexed->front(), symbol, location);
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       lexed->erase(lexed->begin());
       branches.push_back(std::move(ret));

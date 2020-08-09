@@ -4,7 +4,8 @@
 
 #include "tree.h"
 
-binop::binop(std::vector<std::string> *lexed) {
+binop::binop(std::vector<std::string> *lexed,
+             std::vector<std::vector<symbolTable>> &symbol, int location) {
   //
   bool numExpected = true;
   bool firstNum = true;
@@ -15,8 +16,8 @@ binop::binop(std::vector<std::string> *lexed) {
 
   if (lexed->size() == 3) {
     if (lexed->at(0).at(0) == 'i' || lexed->at(0).at(0) == 'n') {
-      std::unique_ptr<identifier> var =
-          std::make_unique<identifier>(identifier(lexed->at(0)));
+      std::unique_ptr<identifier> var = std::make_unique<identifier>(
+          identifier(lexed->at(0), symbol, location));
       left = std::move(var);
     } else {
     }
@@ -27,8 +28,8 @@ binop::binop(std::vector<std::string> *lexed) {
     } else {
     }
     if (lexed->at(2).at(0) == 'i' || lexed->at(2).at(0) == 'n') {
-      std::unique_ptr<identifier> var =
-          std::make_unique<identifier>(identifier(lexed->at(2)));
+      std::unique_ptr<identifier> var = std::make_unique<identifier>(
+          identifier(lexed->at(2), symbol, location));
       right = std::move(var);
     } else {
     }
@@ -68,7 +69,8 @@ binop::binop(std::vector<std::string> *lexed) {
       }
     }
   }
-  std::unique_ptr<binop> var = std::make_unique<binop>(binop(&listLeft));
+  std::unique_ptr<binop> var =
+      std::make_unique<binop>(binop(&listLeft, symbol, location));
   right = std::move(var);
 }
 void binop::display(std::string *text, std::string tab, bool top) {

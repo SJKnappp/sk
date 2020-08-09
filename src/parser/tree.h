@@ -45,7 +45,8 @@ protected:
 // stores information relating to return values
 class returnNode : public Node {
 public:
-  returnNode(std::vector<std::string> *lexed);
+  returnNode(std::vector<std::string> *lexed,
+             std::vector<std::vector<symbolTable>> &symbol, int location);
   std::unique_ptr<Node> val = nullptr; // hold identifier or number
   void display(std::string *text, std::string tab, bool top = false);
 
@@ -80,7 +81,8 @@ protected:
 // stores information about cacluations ie a - b
 class binop : public binaryTree {
 public:
-  binop(std::vector<std::string> *lexed);
+  binop(std::vector<std::string> *lexed,
+        std::vector<std::vector<symbolTable>> &symbol, int location);
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:
@@ -108,7 +110,8 @@ protected:
 // sotres information about identifier
 class identifier : public Node {
 public:
-  identifier(std::string flag);
+  identifier(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
+             int location);
 
 protected:
   std::string type() { return "Identifier"; }

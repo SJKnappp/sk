@@ -4,14 +4,14 @@
 
 #include "parser.h"
 
-TEST_CASE("number: empty intialier", "[number]") {
+TEST_CASE("number: empty initialiser", "[number]") {
   std::vector<std::vector<symbolTable>> a;
   num test("", a, 0);
   REQUIRE(test.data == "");
   REQUIRE(test.state == 23);
 }
 
-TEST_CASE("number: vailid idenfier", "[number]") {
+TEST_CASE("number: valid identifier", "[number]") {
   std::vector<std::vector<symbolTable>> a;
   num test("iTEST", a, 0);
   REQUIRE(test.data == "");
@@ -25,7 +25,7 @@ TEST_CASE("number: pass number", "[number]") {
   REQUIRE(test.state == 0);
 }
 
-TEST_CASE("number: empty idenfier", "[number]") {
+TEST_CASE("number: empty identifier", "[number]") {
   std::vector<std::vector<symbolTable>> a;
   num test("n", a, 0);
   REQUIRE(test.data == "");

@@ -22,7 +22,7 @@ assign::assign(std::vector<std::string> *lexed,
 
   if (Name.at(0) == 'i') {
     std::unique_ptr<identifier> var =
-        std::make_unique<identifier>(identifier(Name));
+        std::make_unique<identifier>(identifier(Name, symbol, location));
     left = std::move(var);
   }
 
@@ -66,7 +66,8 @@ assign::assign(std::vector<std::string> *lexed,
   case 1:
     if (generated.at(0).at(0) == 'i') {
       std::unique_ptr<identifier> var;
-      var = std::make_unique<identifier>(identifier(generated.at(0)));
+      var = std::make_unique<identifier>(
+          identifier(generated.at(0), symbol, location));
       right = std::move(var);
     } else if (generated.at(0).at(0) == 'n') {
       std::unique_ptr<num> var;
