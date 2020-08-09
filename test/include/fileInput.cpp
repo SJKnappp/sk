@@ -37,7 +37,7 @@ TEST_CASE("include: check that a simple file is correctly included") {
   std::string a = "test/include/simple.k";
   std::string text = "";
   Result result = fileInput(text, a, "");
-  REQUIRE(result.text == "int main(){\nreturn 0;\n}");
+  REQUIRE(result.text == "int main(){\n    return 0;\n}");
   REQUIRE(result.state == 0);
 }
 

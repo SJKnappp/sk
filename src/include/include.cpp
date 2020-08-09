@@ -74,6 +74,8 @@ int path(std::string &file, std::string &location) {
   return state;
 }
 
+Result compilerFlag() {}
+
 // recursive function text used to store the text
 Result fileInput(std::string text, std::string file, std::string location) {
 
@@ -110,6 +112,7 @@ Result fileInput(std::string text, std::string file, std::string location) {
       std::string Flag;
       if (line.at(0) == '#') {
         // ignore = true;
+        // todo move into compiler flag function
         int x = 1;
 
         std::string Command;
@@ -133,7 +136,8 @@ Result fileInput(std::string text, std::string file, std::string location) {
                 return result;
               }
             } else {
-              if (line.at(x) != ' ' && line.at(x) != '"') {
+              if (line.at(x) != ' ' && line.at(x) != '"' &&
+                  line.at(x) != '\t') {
                 store += line.at(x);
               }
             }

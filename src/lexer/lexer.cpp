@@ -81,7 +81,7 @@ std::string tokens(std::string word) {
         if ((word.at(i) >= 65 && word.at(i) <= 90) ||
             (word.at(i) >= 97 && word.at(i) <= 122) && isNum == false) {
           returnVal += word.at(i);
-        } else if (word.at(0) >= 48 && word.at(0) <= 57) {
+        } else if (word.at(i) >= 48 && word.at(i) <= 57) {
           returnVal += word.at(i);
         } else {
           std::cout << "unkown character " << word.at(i);
