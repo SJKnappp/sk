@@ -132,3 +132,78 @@ std::vector<std::string> lex(std::string src) {
   }
   return lexed;
 }
+*/
+
+std::vector<std::string> lex(std::string src) {
+  std::string temp;
+  bool isIdent = false;
+  std::vector<std::string> lexed;
+
+  for (int i = 0; i < src.size(); i++) {
+
+    if ((src.at(i) < 65 || src.at(i) > 90) &&
+        (src.at(i) < 97 || src.at(i) > 122) &&
+        (src.at(i) < 48 || src.at(i) > 57)) {
+      if (src.at(i) == ' ' || src.at(i) == '\n' || src.at(i) == '\t') {
+
+        if (temp != "") {
+          std::string result = tokens(temp);
+          if (temp != "UNKNOWN") {
+            lexed.push_back(result);
+            temp = "";
+          } else {
+            return {};
+          }
+          temp = "";
+
+          isIdent = false;
+        }
+        continue;
+      }
+
+      if (isIdent == true) {
+        isIdent = false;
+
+        std::string result = tokens(temp);
+        if (temp != "UNKNOWN") {
+          lexed.push_back(result);
+          temp = "";
+        } else {
+          return {};
+        }
+      }
+
+      temp += src.at(i);
+
+      if (src.at(i) == '=' || src.at(i) == '!' || src.at(i) == '<' ||
+          src.at(i) == '>') {
+        if (src.at(i + 1) == '=') {
+          i += 1;
+          temp += src.at(i);
+        }
+      }
+
+      std::string result = tokens(temp);
+      lexed.push_back(result);
+      if (result != "UNKOWN") {
+        temp = "";
+      } else {
+        return lexed;
+      }
+    } else {
+      isIdent = true;
+      temp += src.at(i);
+
+      if (i == src.size() - 1) {
+        std::string result = tokens(temp);
+        lexed.push_back(result);
+        if (result != "UNKOWN") {
+          temp = "";
+        } else {
+          return lexed;
+        }
+      }
+    }
+  }
+  return lexed;
+}
