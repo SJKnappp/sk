@@ -3,7 +3,10 @@
 //
 
 #include "tree.h"
-num::num(std::string flag) { data = flag; }
+num::num(std::string flag) {
+  data = flag;
+  state = 0;
+}
 
 void num::display(std::string *text, std::string tab, bool top) {
   tab += "\t";

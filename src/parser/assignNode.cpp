@@ -24,6 +24,7 @@ assign::assign(std::vector<std::string> *lexed) {
 
     return;
   } else if (lexed->front() != "EQL" && lexed->front() != "LPAREN") {
+
     std::cout << "found unexpected symbole";
     lexed = {};
     return;

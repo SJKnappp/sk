@@ -19,13 +19,16 @@ branch::branch(std::vector<symbolTable> *symbol,
     }
 
     // for tokens not usable from branch trow an error
-
-    if (lexed->front() == "PLUS") {
-    } else if (lexed->front() == "MINUS") {  // can only be seen after identifer
-    } else if (lexed->front() == "TIMES") {  // or equal as cannot start line
-    } else if (lexed->front() == "SLASH") {  //
-    } else if (lexed->front() == "LPAREN") { // will be delt with identifer
-    } else if (lexed->front() == "RPAREN") { //
+    if (lexed->front() == "PLUS" || lexed->front() == "MINUS" ||
+        lexed->front() == "TIMES" || lexed->front() == "SLASH" ||
+        lexed->front() == "LPAREN" || lexed->front() == "RPAREN" ||
+        lexed->front() == "PERIOD" || lexed->front() == "EQL" ||
+        lexed->front() == "COM" || lexed->front() == "NQL" ||
+        lexed->front() == "LSS" || lexed->front() == "GTR" ||
+        lexed->front() == "LEQ" || lexed->front() == "GEQ") {
+      state = 21;
+      std::cout << lexed->front() << " token not reconised";
+      return;
     } else if (lexed->front() == "LCURLY") { // creates a new branch node
       std::vector<symbolTable> temp = {};
       std::unique_ptr<branch> Branch =
@@ -36,22 +39,18 @@ branch::branch(std::vector<symbolTable> *symbol,
       break; // exits while loop to end the branch
     } else if (lexed->front() == "SEMICOLON") { // ends a line
       lexed->erase(lexed->begin());
-    } else if (lexed->front() == "PERIOD") {
-    } else if (lexed->front() == "EQL") {
-    } else if (lexed->front() == "COM") { // these are not asseble from a
-    } else if (lexed->front() == "NQL") { // branch node
-    } else if (lexed->front() == "LSS") { // as there are comparsions
-    } else if (lexed->front() == "GTR") { //
-    } else if (lexed->front() == "LEQ") { //
-    } else if (lexed->front() == "GEQ") { //
+    } else if () { //
     } else if (lexed->front() == "CONSTSYM") {
+      // todo
     } else if (lexed->front() == "IFSYM") {
       lexed->erase(lexed->begin()); // temp
     } else if (lexed->front() == "WHILESYM") {
+      // todo
     } else if (lexed->front() == "INTSYM") {
       std::unique_ptr<assign> ret = std::make_unique<assign>(assign(lexed));
       branches.push_back(std::move(ret));
     } else if (lexed->front() == "VOIDSYM") {
+      // todo
     } else if (lexed->front() == "RETURNSYM") {
       // returnNode ReturnNode(lexed);
       std::unique_ptr<Node> ret =

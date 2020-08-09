@@ -59,9 +59,11 @@ binop::binop(std::vector<std::string> *lexed) {
       }
       if (i == lexed->size()) {
         std::cout << "found unexpected symbol at end of expression";
+        state = 20;
         return;
       } else if (i == 0) {
         std::cout << "found unexpected symbol at start of expression";
+        state = 20;
         return;
       }
     }
