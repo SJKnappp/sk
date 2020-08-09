@@ -30,6 +30,10 @@ bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
 bool searchArross(std::vector<std::vector<symbolTable>> table,
                   std::string search) {
 
+  if (table.size() == 0) {
+    return false;
+  }
+
   for (int i = 0; i < table.size(); i++) {
     if (table.at(i).at(0).symbol == search) {
       return true;

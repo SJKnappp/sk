@@ -6,4 +6,5 @@ error codes:
 <li>21 Invalid token</li>
 <li>22 unimplemented token</li>
 <li>23 insufficient arguments</li>
+<li>24 identifier already exists</li>
 </ul>

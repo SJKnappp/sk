@@ -111,7 +111,7 @@ protected:
 class identifier : public Node {
 public:
   identifier(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
-             int location);
+             int location, bool def = false, bool function = false);
 
 protected:
   std::string type() { return "Identifier"; }
