@@ -8,5 +8,5 @@ symbolTable::symbolTable(std::string Symbol, std::string Type,
                          std::string Scope) {
   symbol = Symbol;
   type = Type;
-  scope = Symbol;
+  scope = Scope;
 }
