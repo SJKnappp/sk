@@ -22,3 +22,23 @@ TEST_CASE("include: path empty location and ../ file location") {
   REQUIRE(location == "../");
   REQUIRE(result == 0);
 }
+
+TEST_CASE("include: path nonempty location and ../ file location") {
+  std::string file = "../noExist.k";
+  std::string location = "";
+
+  int result = path(file, location);
+  REQUIRE(file == "noExist.k");
+  REQUIRE(location == "../");
+  REQUIRE(result == 0);
+}
+
+TEST_CASE("include: path nonempty location and file location") {
+  std::string file = "noExist.k";
+  std::string location = "test/";
+
+  int result = path(file, location);
+  REQUIRE(file == "noExist.k");
+  REQUIRE(location == "test/");
+  REQUIRE(result == 0);
+}

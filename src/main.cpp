@@ -14,7 +14,12 @@ int main(int argc, char **argv) {
   text = fileInput(text.text, title, "");
 
   std::vector<std::string> lexed = lex(text.text);
-  std::vector<std::string> lexcopy = lexed;
+  if (lexed.size() == 0) {
+    std::cout << "produced empty lexed file";
+    return 100;
+  } else {
+    std::vector<std::string> lexcopy = lexed;
+  }
   std::vector<symbolTable> symbol;
 
   //

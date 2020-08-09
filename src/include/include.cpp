@@ -50,6 +50,7 @@ int path(std::string &file, std::string &location) {
       break;
     case '.':
       if (file.at(i + 1) == '.' && file.at(i + 2) == '/') {
+        i += 3;
         if (localPath == "") {
           result = removePath(location);
           if (result.state == 0) {
@@ -63,6 +64,7 @@ int path(std::string &file, std::string &location) {
       tempPath += file.at(i);
       if (i == file.size() - 1) {
         file = tempPath;
+        location += localPath;
       }
       break;
     };
@@ -89,6 +91,7 @@ Result fileInput(std::string text, std::string file, std::string location) {
   std::ifstream src(file);
 
   if (src.is_open()) {
+    result.state = 0;
     while (getline(src, line)) {
       // only puts new line if last line is not empty
       if ('\n' != text.back()) {
@@ -140,7 +143,7 @@ Result fileInput(std::string text, std::string file, std::string location) {
         }
 
         if (Command == "include") {
-          Result collect = fileInput(text, Flag, "");
+          Result collect = fileInput(text, Flag, location);
           if (collect.state == 0) {
             text += collect.text;
           } else {
@@ -156,6 +159,7 @@ Result fileInput(std::string text, std::string file, std::string location) {
     }
     src.close();
   } else {
+    result.state = 10; // unable to open file
     std::cout << "Unable to open file";
     return result; // error cannot open the file
   }

@@ -44,7 +44,7 @@ TEST_CASE("include: check that a simple file is correctly included") {
 }
 
 TEST_CASE("include: check that a include file from a directory to another") {
-  std::string a = "test/include/includeFow.k";
+  std::string a = "test/include/includeFoward.k";
   std::string text = "";
   Result result = fileInput(text, a, "");
   REQUIRE(result.text == "");
