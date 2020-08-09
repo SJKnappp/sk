@@ -60,6 +60,10 @@ branch::branch(std::vector<symbolTable> *symbol,
     } else if (lexed->front() == "INTSYM") {
       std::unique_ptr<assign> ret = std::make_unique<assign>(assign(lexed));
       branches.push_back(std::move(ret));
+      if (branches.back()->state != 0) {
+        state = branches.back()->state;
+        return;
+      }
     } else if (lexed->front() == "VOIDSYM") {
       // todo
       state = 22;
@@ -73,9 +77,11 @@ branch::branch(std::vector<symbolTable> *symbol,
       identifier Iden(lexed->front());
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       branches.push_back(std::move(ret));
+      lexed->erase(lexed->begin());
     } else if (lexed->front().at(0) == 'n') { // number
       identifier Iden(lexed->front());
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
+      lexed->erase(lexed->begin());
       branches.push_back(std::move(ret));
     } else {
       state = 22;

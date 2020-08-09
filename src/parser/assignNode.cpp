@@ -11,6 +11,11 @@ assign::assign(std::vector<std::string> *lexed) {
   std::string type = lexed->front();
   lexed->erase(lexed->begin());
 
+  if (lexed->empty()) {
+    state = 23;
+    return;
+  }
+
   std::string Name = lexed->front();
   lexed->erase(lexed->begin());
 

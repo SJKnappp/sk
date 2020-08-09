@@ -95,7 +95,7 @@ TEST_CASE("branch: legal token identifier", "[branch]") {
   lexed.push_back("");
   lexed.push_back("identifier");
   branch test(&symbol, &lexed);
-  REQUIRE(test.state == 0);
+  REQUIRE(test.state == 23);
 }
 TEST_CASE("branch: legal token number", "[branch]") {
   std::vector<symbolTable> symbol;
