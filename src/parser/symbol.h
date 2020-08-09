@@ -6,6 +6,7 @@
 #define COMPILER_SYMBOL_H
 
 #include <string>
+#include "vector"
 
 class symbolTable {
 public:
@@ -14,5 +15,12 @@ public:
   std::string type;
   std::string scope;
 };
+
+bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
+                std::string search);
+bool searchArross(std::vector<std::vector<symbolTable>> table,
+                  std::string search);
+bool searchAll(std::vector<std::vector<symbolTable>> table,
+               std::string search);
 
 #endif // COMPILER_SYMBOL_H
