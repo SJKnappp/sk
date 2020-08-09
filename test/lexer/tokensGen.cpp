@@ -105,7 +105,7 @@ TEST_CASE("Token case identifier") {
   REQUIRE(a == "itest");
   REQUIRE(b == "ia1t");
   REQUIRE(c == "iz11");
-  REQUIRE(d == "UNKOWN");
+  REQUIRE(d == "UNKNOWN");
 }
 TEST_CASE("Token case number") {
   std::string t = tokens("123");
