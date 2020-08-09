@@ -112,8 +112,8 @@ TEST_CASE("Token case number") {
   std::string a = tokens("1a");
   std::string b = tokens("1+");
   REQUIRE(t == "n123");
-  REQUIRE(a == "FAILED");
-  REQUIRE(b == "FAILED");
+  REQUIRE(a == "UNKNOWN");
+  REQUIRE(b == "UNKNOWN");
 }
 TEST_CASE("Token case empty") {
   std::string t = tokens("");
