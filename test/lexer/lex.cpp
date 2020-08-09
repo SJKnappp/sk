@@ -34,7 +34,7 @@ TEST_CASE("lex past list of equals types") {
   std::string store;
   for (int i = 0; i < a.size(); i++)
     store += a.at(i) + " ";
-  REQUIRE(store == "EQL COM NQL LSS GTR LEQ GEQ ");
+  REQUIRE(store == "EQL COM NQL LEQ GEQ LSS GTR ");
 }
 
 TEST_CASE("lex pass list of strings containing all symbols") {
@@ -45,7 +45,7 @@ TEST_CASE("lex pass list of strings containing all symbols") {
     store += a.at(i) + " ";
   REQUIRE(store == "PLUS MINUS TIMES SLASH LPAREN RPAREN LCURLY RCURLY "
                    "SEMICOLON PERIOD EQL COM NQL LSS GTR LEQ GEQ CONSTSYM "
-                   "IFSYM WHILE SYM INTSYM VOIDSYM RETURNSYM");
+                   "IFSYM WHILESYM INTSYM VOIDSYM RETURNSYM ");
 }
 
 TEST_CASE("lex pass list of strings containing all symbols without spaces") {
