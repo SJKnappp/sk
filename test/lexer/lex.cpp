@@ -44,7 +44,8 @@ TEST_CASE("lex pass list of strings containing all symbols") {
   for (int i = 0; i < a.size(); i++)
     store += a.at(i) + " ";
   REQUIRE(store == "PLUS MINUS TIMES SLASH LPAREN RPAREN LCURLY RCURLY "
-                   "SEMICOLON PERIOD EQL COM NQL LSS GTR LEQ GEQ CONSTSYM ");
+                   "SEMICOLON PERIOD EQL COM NQL LSS GTR LEQ GEQ CONSTSYM "
+                   "IFSYM WHILE SYM INTSYM VOIDSYM RETURNSYM");
 }
 
 TEST_CASE("lex pass list of strings containing all symbols without spaces") {
@@ -53,6 +54,8 @@ TEST_CASE("lex pass list of strings containing all symbols without spaces") {
   std::string store;
   for (int i = 0; i < a.size(); i++)
     store += a.at(i) + " ";
-  REQUIRE(store == "PLUS MINUS TIMES SLASH LPAREN RPAREN LCURLY RCURLY RCURLY "
-                   "SEMICOLON PERIOD EQL COM NQL LSS GTR LEQ GEQ CONSTSYM ");
+  REQUIRE(store ==
+          "PLUS MINUS TIMES SLASH LPAREN RPAREN LCURLY RCURLY "
+          "SEMICOLON PERIOD EQL n1 COM n1 NQL n1 LSS n1 GTR n1 "
+          "LEQ n1 GEQ n1 CONSTSYM IFSYM WHILESYM INTSYM VOIDSYM RETURNSYM ");
 }
