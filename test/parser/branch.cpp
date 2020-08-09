@@ -16,7 +16,7 @@ TEST_CASE("branch: pass an empty array into constructor", "[branch]") {
   REQUIRE(test.state == 0);
 }
 
-TEST_CASE("branch: illegal token passed into function") {
+TEST_CASE("branch: illegal token passed into function", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -25,7 +25,7 @@ TEST_CASE("branch: illegal token passed into function") {
   REQUIRE(test.state == 21);
 }
 
-TEST_CASE("branch: legal token LCURLY") {
+TEST_CASE("branch: legal token LCURLY", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -33,7 +33,7 @@ TEST_CASE("branch: legal token LCURLY") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token RCURLY") {
+TEST_CASE("branch: legal token RCURLY", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -41,7 +41,7 @@ TEST_CASE("branch: legal token RCURLY") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token SEMICOLON") {
+TEST_CASE("branch: legal token SEMICOLON", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -49,7 +49,7 @@ TEST_CASE("branch: legal token SEMICOLON") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: llegal token IFSYM") {
+TEST_CASE("branch: llegal token IFSYM", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -57,7 +57,7 @@ TEST_CASE("branch: llegal token IFSYM") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: llegal token WHILESYM") {
+TEST_CASE("branch: llegal token WHILESYM", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -65,7 +65,7 @@ TEST_CASE("branch: llegal token WHILESYM") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token INTSYM") {
+TEST_CASE("branch: legal token INTSYM", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -73,7 +73,7 @@ TEST_CASE("branch: legal token INTSYM") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token VOIDSYM") {
+TEST_CASE("branch: legal token VOIDSYM", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -81,7 +81,7 @@ TEST_CASE("branch: legal token VOIDSYM") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token RETURNSYM") {
+TEST_CASE("branch: legal token RETURNSYM", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -89,7 +89,7 @@ TEST_CASE("branch: legal token RETURNSYM") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token identifier") {
+TEST_CASE("branch: legal token identifier", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
@@ -97,7 +97,7 @@ TEST_CASE("branch: legal token identifier") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: legal token number") {
+TEST_CASE("branch: legal token number", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
