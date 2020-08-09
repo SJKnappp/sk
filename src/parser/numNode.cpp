@@ -3,7 +3,8 @@
 //
 
 #include "tree.h"
-num::num(std::string flag) {
+num::num(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
+         int location) {
   try {
     if (flag.at(0) != 'n' || flag.size() <= 1) {
       state = 21;

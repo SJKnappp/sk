@@ -20,10 +20,10 @@ int main(int argc, char **argv) {
   } else {
     std::vector<std::string> lexcopy = lexed;
   }
-  std::vector<symbolTable> symbol;
+  std::vector<std::vector<symbolTable>> symbol;
 
-  //
-  branch start(&symbol, &lexed, true);
+  // start ast tree
+  branch start(&lexed, symbol, 0, true);
   bool isDisplay = true;
 
   if (isDisplay == true) {

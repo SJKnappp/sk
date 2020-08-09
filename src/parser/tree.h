@@ -31,7 +31,8 @@ public:
 // stores structrial information
 class branch : public Node {
 public:
-  branch(std::vector<symbolTable> *symbol, std::vector<std::string> *lexed,
+  branch(std::vector<std::string> *lexed,
+         std::vector<std::vector<symbolTable>> &symbol, int location,
          bool top = false);
   std::vector<std::unique_ptr<Node>> branches; // stores ordered list of nodes
   bool failed;
@@ -68,7 +69,8 @@ protected:
 // might combine with identifier as program fleshed out
 class assign : public binaryTree {
 public:
-  assign(std::vector<std::string> *lexed);
+  assign(std::vector<std::string> *lexed,
+         std::vector<std::vector<symbolTable>> &symbol, int location);
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:
@@ -95,7 +97,8 @@ public:
 // stores information about numbers
 class num : public Node {
 public:
-  num(std::string flag);
+  num(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
+      int location);
   void display(std::string *text, std::string tab, bool top = false);
 
 protected:

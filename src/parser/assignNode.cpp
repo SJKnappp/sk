@@ -4,7 +4,8 @@
 
 #include "tree.h"
 
-assign::assign(std::vector<std::string> *lexed) {
+assign::assign(std::vector<std::string> *lexed,
+               std::vector<std::vector<symbolTable>> &symbol, int location) {
 
   std::vector<std::string> generated;
 
@@ -69,7 +70,7 @@ assign::assign(std::vector<std::string> *lexed) {
       right = std::move(var);
     } else if (generated.at(0).at(0) == 'n') {
       std::unique_ptr<num> var;
-      var = std::make_unique<num>(num(generated.at(0)));
+      var = std::make_unique<num>(num(generated.at(0), symbol, location));
       right = std::move(var);
     }
     break;

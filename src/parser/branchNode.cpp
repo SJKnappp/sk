@@ -4,8 +4,9 @@
 
 #include "tree.h"
 
-branch::branch(std::vector<symbolTable> *symbol,
-               std::vector<std::string> *lexed, bool top) {
+branch::branch(std::vector<std::string> *lexed,
+               std::vector<std::vector<symbolTable>> &symbol, int location,
+               bool top) {
   state = 0;
   if (!top) {
   } else {
@@ -38,7 +39,7 @@ branch::branch(std::vector<symbolTable> *symbol,
     } else if (lexed->front() == "LCURLY") { // creates a new branch node
       std::vector<symbolTable> temp = {};
       std::unique_ptr<branch> Branch =
-          std::make_unique<branch>(branch(&temp, lexed));
+          std::make_unique<branch>(branch(lexed, symbol, 0));
       Branch->result = "branch";
       branches.push_back(std::move(Branch));
     } else if (lexed->front() == "RCURLY") { // will be used to end the branch
@@ -58,7 +59,8 @@ branch::branch(std::vector<symbolTable> *symbol,
       state = 22;
       return;
     } else if (lexed->front() == "INTSYM") {
-      std::unique_ptr<assign> ret = std::make_unique<assign>(assign(lexed));
+      std::unique_ptr<assign> ret =
+          std::make_unique<assign>(assign(lexed, symbol, location));
       branches.push_back(std::move(ret));
       if (branches.back()->state != 0) {
         state = branches.back()->state;
