@@ -2,22 +2,20 @@
 // Created by knapp on 07/08/2020.
 //
 
-// TODO get expected results in tests impleented/
-
 #include "fileInput.h"
 
 TEST_CASE("include: check that empty string breaks correctly") {
   std::string a = "";
   std::string text = "";
   Result result = fileInput(text, a, "");
-  REQUIRE(result.state == 2);
+  REQUIRE(result.state == 10);
 }
 
 TEST_CASE("include: checks that non existent file reported correctly") {
   std::string a = "noExist.k";
   std::string text = "";
   Result result = fileInput(text, a, "");
-  REQUIRE(result.state == 2);
+  REQUIRE(result.state == 10);
 }
 
 TEST_CASE("include: loads an empty file") {
@@ -32,7 +30,7 @@ TEST_CASE("include: loads a valid file with a bad include") {
   std::string a = "test/include/badInclude.k";
   std::string text = "";
   Result result = fileInput(text, a, "");
-  REQUIRE(result.state == 2);
+  REQUIRE(result.state == 10);
 }
 
 TEST_CASE("include: check that a simple file is correctly included") {

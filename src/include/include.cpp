@@ -96,7 +96,7 @@ Result fileInput(std::string text, std::string file, std::string location) {
     result.state = 0;
     while (getline(src, line)) {
       // only puts new line if last line is not empty
-      if ('\n' != text.back()) {
+      if ('\n' != text.back() && !text.empty()) {
         // adds new line
         text += '\n';
       }
