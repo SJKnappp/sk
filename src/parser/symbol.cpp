@@ -14,6 +14,10 @@ symbolTable::symbolTable(std::string Symbol, std::string Type,
 // search a singe location if a varible exists
 bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
                 std::string search) {
+  if (location >= table.size()) {
+    return false;
+  }
+
   for (int i = 0; i < table.at(location).size(); i++) {
     if (table.at(location).at(i).symbol == search) {
       return true;
@@ -25,6 +29,7 @@ bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
 // search for function names
 bool searchArross(std::vector<std::vector<symbolTable>> table,
                   std::string search) {
+
   for (int i = 0; i < table.size(); i++) {
     if (table.at(i).at(0).symbol == search) {
       return true;
@@ -36,7 +41,7 @@ bool searchArross(std::vector<std::vector<symbolTable>> table,
 bool searchAll(std::vector<std::vector<symbolTable>> table,
                std::string search) {
   for (int i = 0; i < table.size(); i++) {
-    for (int j = 0; j < table.at(i).size(); i++) {
+    for (int j = 0; j < table.at(i).size(); j++) {
       if (table.at(i).at(j).symbol == search) {
         return true;
       }

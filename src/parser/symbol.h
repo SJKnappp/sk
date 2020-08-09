@@ -5,15 +5,16 @@
 #ifndef COMPILER_SYMBOL_H
 #define COMPILER_SYMBOL_H
 
+#include <iostream>
 #include <string>
-#include "vector"
+#include <vector>
 
 class symbolTable {
 public:
   symbolTable(std::string Symbol, std::string Type, std::string Scope);
-  std::string symbol;
-  std::string type;
-  std::string scope;
+  std::string symbol; // name
+  std::string type;   //
+  std::string scope;  // "l" local "g" global
 };
 
 bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
