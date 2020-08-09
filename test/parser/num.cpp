@@ -19,7 +19,7 @@ TEST_CASE("number: vailid idenfier", "[number]") {
 TEST_CASE("number: pass number", "[number]") {
   num test("n123");
   REQUIRE(test.data == "123");
-  REQUIRE(test.state == 21);
+  REQUIRE(test.state == 0);
 }
 
 TEST_CASE("number: empty idenfier", "[number]") {

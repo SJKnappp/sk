@@ -49,7 +49,7 @@ TEST_CASE("branch: legal token SEMICOLON", "[branch]") {
   branch test(&symbol, &lexed);
   REQUIRE(test.state == 0);
 }
-TEST_CASE("branch: llegal token IFSYM", "[branch]") {
+TEST_CASE("branch: legal token IFSYM", "[branch]") {
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
   lexed.push_back("");
