@@ -20,7 +20,7 @@
 class Node {
 public:
   Node() {}
-  Node *parent = nullptr;
+  int state;
   std::string data = "";
   std::string result = "";
   virtual std::string type() = 0;
@@ -31,8 +31,8 @@ public:
 // stores structrial information
 class branch : public Node {
 public:
-  branch(Node *Parent, std::vector<symbolTable> *symbol,
-         std::vector<std::string> *lexed, bool top = false);
+  branch(std::vector<symbolTable> *symbol, std::vector<std::string> *lexed,
+         bool top = false);
   std::vector<std::unique_ptr<Node>> branches; // stores ordered list of nodes
   bool failed;
   void display(std::string *text, std::string tab, bool top = false);
@@ -88,7 +88,7 @@ protected:
 // used to compare values
 class compare : public binaryTree {
 public:
-  compare(Node *Parent, std::string *Keyword);
+  compare(std::string *Keyword);
   void display(std::string *text, std::string tab, bool top = false);
 };
 

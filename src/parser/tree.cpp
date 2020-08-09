@@ -22,12 +22,10 @@ void condition(std::vector<std::string> *lexed, Node *current) {
   }
 }
 
-branch::branch(Node *Parent, std::vector<symbolTable> *symbol,
+branch::branch(std::vector<symbolTable> *symbol,
                std::vector<std::string> *lexed, bool top) {
   if (!top) {
-    parent = Parent;
   } else {
-    parent = nullptr;
     data = "top";
     lexed->insert(lexed->begin(), "first");
   }
@@ -49,7 +47,7 @@ branch::branch(Node *Parent, std::vector<symbolTable> *symbol,
     } else if (lexed->front() == "LCURLY") { // creates a new branch node
       std::vector<symbolTable> temp = {};
       std::unique_ptr<branch> Branch =
-          std::make_unique<branch>(branch(this, &temp, lexed));
+          std::make_unique<branch>(branch(&temp, lexed));
       Branch->result = "branch";
       branches.push_back(std::move(Branch));
     } else if (lexed->front() == "RCURLY") { // will be used to end the branch
@@ -179,14 +177,12 @@ binop::binop(std::vector<std::string> *lexed) {
   right = std::move(var);
 }
 
-compare::compare(Node *Parent, std::string *Keyword) {
-  if (Parent != nullptr) {
-    parent = Parent;
-  }
-  data = *Keyword;
-}
+compare::compare(std::string *Keyword) { data = *Keyword; }
 
-identifier::identifier(std::string flag) { data = flag; }
+identifier::identifier(std::string flag) {
+  data = flag;
+  state = 0;
+}
 
 num::num(std::string flag) { data = flag; }
 
