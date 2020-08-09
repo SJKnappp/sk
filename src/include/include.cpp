@@ -33,6 +33,7 @@ Result removePath(std::string location) {
 int path(std::string &file, std::string &location) {
   Result result;
   int state = 0;
+  int size = file.size();
 
   if (file == "") {
     state = 1; // no file input
@@ -40,7 +41,7 @@ int path(std::string &file, std::string &location) {
 
   std::string localPath;
   std::string tempPath;
-  for (int i = 0; i < file.size(); i++) {
+  for (int i = 0; i < size; i++) {
 
     switch (file.at(i)) {
     case '/':
@@ -62,13 +63,14 @@ int path(std::string &file, std::string &location) {
       }
     default:
       tempPath += file.at(i);
-      if (i == file.size() - 1) {
+      if (i == size - 1) {
         file = tempPath;
         location += localPath;
       }
       break;
     };
   }
+
   return state;
 }
 
@@ -164,5 +166,6 @@ Result fileInput(std::string text, std::string file, std::string location) {
     return result; // error cannot open the file
   }
 
+  result.text = text;
   return result;
 }

@@ -94,47 +94,6 @@ std::string tokens(std::string word) {
 }
 
 std::vector<std::string> lex(std::string src) {
-  std::string word;
-  std::vector<std::string> lexed;
-  for (int x = 0; x < src.length(); x++) {
-    if (src.at(x) == ' ' || src.at(x) == '\n' || src.at(x) == '\t') {
-      if (word != "") {
-        std::string temp = tokens(word);
-        if (temp != "UNKNOWN") {
-          lexed.push_back(temp);
-        } else {
-          return {};
-        }
-        word = "";
-      }
-    } else if ((src.at(x) < 65 || src.at(x) > 90) &&
-               (src.at(x) < 97 || src.at(x) > 122) &&
-               (src.at(x) < 48 || src.at(x) > 57)) {
-      std::string temp;
-      if (word.length() > 0) {
-        temp = tokens(word);
-        if (temp == "UNKNOWN") {
-          return {};
-        }
-        lexed.push_back(temp);
-      }
-      word = "";
-      temp = "";
-      temp += src.at(x);
-      temp = tokens(temp);
-      if (temp == "UNKNOWN") {
-        return {};
-      }
-      lexed.push_back(temp);
-    } else {
-      word += src.at(x);
-    }
-  }
-  return lexed;
-}
-*/
-
-std::vector<std::string> lex(std::string src) {
   std::string temp;
   bool isIdent = false;
   std::vector<std::string> lexed;
@@ -177,9 +136,11 @@ std::vector<std::string> lex(std::string src) {
 
       if (src.at(i) == '=' || src.at(i) == '!' || src.at(i) == '<' ||
           src.at(i) == '>') {
-        if (src.at(i + 1) == '=') {
-          i += 1;
-          temp += src.at(i);
+        if (i != src.size() - 1) {
+          if (src.at(i + 1) == '=') {
+            i += 1;
+            temp += src.at(i);
+          }
         }
       }
 
