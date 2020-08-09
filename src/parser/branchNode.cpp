@@ -47,15 +47,23 @@ branch::branch(std::vector<symbolTable> *symbol,
       lexed->erase(lexed->begin());
     } else if (lexed->front() == "CONSTSYM") {
       // todo
+      state = 22;
+      return;
     } else if (lexed->front() == "IFSYM") {
-      lexed->erase(lexed->begin()); // temp
+      // todo
+      state = 22;
+      return;
     } else if (lexed->front() == "WHILESYM") {
       // todo
+      state = 22;
+      return;
     } else if (lexed->front() == "INTSYM") {
       std::unique_ptr<assign> ret = std::make_unique<assign>(assign(lexed));
       branches.push_back(std::move(ret));
     } else if (lexed->front() == "VOIDSYM") {
       // todo
+      state = 22;
+      return;
     } else if (lexed->front() == "RETURNSYM") {
       // returnNode ReturnNode(lexed);
       std::unique_ptr<Node> ret =
