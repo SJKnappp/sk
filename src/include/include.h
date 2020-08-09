@@ -11,10 +11,9 @@ struct Result {
   int state;
 };
 
-Result fileInput(std::string text, std::string &file,
-                 std::string location = "");
+Result fileInput(std::string text, std::string file, std::string location = "");
 
-Result path(std::string, std::string location);
+int path(std::string &file, std::string &location);
 
 // remove an item off the path
 Result removePath(std::string location);

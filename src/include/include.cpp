@@ -26,50 +26,62 @@ Result removePath(std::string location) {
       hold += location.at(i);
     }
   }
+  result.state = 0;
   return result;
 }
 
-Result path(std::string text, std::string location) {
+int path(std::string &file, std::string &location) {
   Result result;
+  int state = 0;
 
-  for (int i = 0; i < text.size(); i++) {
-    std::string localPath;
-    std::string tempPath;
-    switch (text.at(i)) {
+  if (file == "") {
+    state = 1; // no file input
+  }
+
+  std::string localPath;
+  std::string tempPath;
+  for (int i = 0; i < file.size(); i++) {
+
+    switch (file.at(i)) {
     case '/':
+      tempPath += '/';
       localPath += tempPath;
       tempPath = "";
       break;
     case '.':
-      if (text.at(i + 1) == '.' && text.at(i + 2) == '/') {
+      if (file.at(i + 1) == '.' && file.at(i + 2) == '/') {
         if (localPath == "") {
           result = removePath(location);
           if (result.state == 0) {
             location = result.text;
           } else {
-            result.text = location;
-            result.state = 10; // error code for failed removePath function
-            return result;
+            return 10;
           }
         }
       }
-      break;
     default:
+      tempPath += file.at(i);
+      if (i == file.size() - 1) {
+        file = tempPath;
+      }
       break;
     };
   }
-
-  return result;
+  return state;
 }
 
 // recursive function text used to store the text
-Result fileInput(std::string text, std::string &file, std::string location) {
+Result fileInput(std::string text, std::string file, std::string location) {
 
   Result result;
-  Result collect;
+  int collect;
   std::string relativeLocation = "";
 
-  collect = path(text, location);
+  collect = path(file, location);
+  if (collect == 0) {
+    file = location + file;
+  } else {
+  }
 
   std::string line;
 
