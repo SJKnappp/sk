@@ -6,11 +6,17 @@
 
 branch::branch(std::vector<symbolTable> *symbol,
                std::vector<std::string> *lexed, bool top) {
+  state = 0;
   if (!top) {
   } else {
     data = "top";
     lexed->insert(lexed->begin(), "first");
   }
+
+  if (lexed == nullptr || lexed->empty()) {
+    return;
+  }
+
   lexed->erase(lexed->begin());
   while (lexed->size() > 0) {
     //    lexed->erase(lexed->begin());
@@ -39,7 +45,6 @@ branch::branch(std::vector<symbolTable> *symbol,
       break; // exits while loop to end the branch
     } else if (lexed->front() == "SEMICOLON") { // ends a line
       lexed->erase(lexed->begin());
-    } else if () { //
     } else if (lexed->front() == "CONSTSYM") {
       // todo
     } else if (lexed->front() == "IFSYM") {
@@ -64,6 +69,9 @@ branch::branch(std::vector<symbolTable> *symbol,
       identifier Iden(lexed->front());
       std::unique_ptr<Node> ret = std::make_unique<identifier>(Iden);
       branches.push_back(std::move(ret));
+    } else {
+      state = 22;
+      return;
     }
   }
 }
