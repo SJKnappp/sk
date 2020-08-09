@@ -22,9 +22,3 @@ Tasks to be completed
 <li>assembler</li>
 <li>include</li>
 </ul> </li> </ul>
-
-error codes:
-<ul>
-<li>0 commpleted sucssefully</li>
-<li>10 unable to open file</li>
-</ul>
