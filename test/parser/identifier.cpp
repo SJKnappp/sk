@@ -7,7 +7,7 @@
 TEST_CASE("Identifier: empty intialier") {
   identifier test("");
   REQUIRE(test.data == "");
-  REQUIRE(test.state == 21);
+  REQUIRE(test.state == 23);
 }
 
 TEST_CASE("Identifier: vailid idenfier") {

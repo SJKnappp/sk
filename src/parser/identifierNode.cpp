@@ -5,6 +5,17 @@
 #include "tree.h"
 
 identifier::identifier(std::string flag) {
+  try {
+    if (flag.at(0) != 'i' || flag.size() <= 1) {
+      state = 21;
+      return;
+    }
+  } catch (const std::exception &e) {
+    state = 23;
+    return;
+  }
+
+  flag.erase(0, 1);
   data = flag;
   state = 0;
 }
