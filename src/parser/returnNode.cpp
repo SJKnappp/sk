@@ -27,3 +27,13 @@ returnNode::returnNode(std::vector<std::string> *lexed) {
   }
   // temp = build(lexed, temp, NULL, false);
 }
+
+void returnNode::display(std::string *text, std::string tab, bool top) {
+  tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
+  if (this->val != nullptr) {
+    this->val->display(text, tab);
+  }
+}

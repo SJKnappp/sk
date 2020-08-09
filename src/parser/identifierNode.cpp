@@ -8,3 +8,10 @@ identifier::identifier(std::string flag) {
   data = flag;
   state = 0;
 }
+
+void identifier::display(std::string *text, std::string tab, bool top) {
+  tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
+}

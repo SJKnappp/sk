@@ -69,3 +69,15 @@ binop::binop(std::vector<std::string> *lexed) {
   std::unique_ptr<binop> var = std::make_unique<binop>(binop(&listLeft));
   right = std::move(var);
 }
+void binop::display(std::string *text, std::string tab, bool top) {
+  tab += "\t";
+  text->append("\n");
+  text->append(tab);
+  text->append(this->type());
+  if (this->left != nullptr) {
+    this->left->display(text, tab);
+  }
+  if (this->right != nullptr) {
+    this->right->display(text, tab);
+  }
+}

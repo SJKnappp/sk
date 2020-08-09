@@ -68,3 +68,25 @@ branch::branch(std::vector<symbolTable> *symbol,
     }
   }
 }
+
+void branch::display(std::string *text, std::string tab, bool top) {
+
+  if (top == false) {
+    tab += "\t";
+    text->append("\n");
+  }
+
+  std::string store = "";
+  text->append(tab);
+  text->append(this->type());
+  for (int x = 0; x < this->branches.size(); x++) {
+    this->branches.at(x)->display(text, tab);
+  }
+
+  if (top == true) {
+    std::ofstream file;
+    file.open("ast.txt");
+    file << *text;
+    file.close();
+  }
+}
