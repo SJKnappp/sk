@@ -5,25 +5,29 @@
 #include "parser.h"
 
 TEST_CASE("number: empty intialier", "[number]") {
-  num test("");
+  std::vector<std::vector<symbolTable>> a;
+  num test("", a, 0);
   REQUIRE(test.data == "");
   REQUIRE(test.state == 23);
 }
 
 TEST_CASE("number: vailid idenfier", "[number]") {
-  num test("iTEST");
+  std::vector<std::vector<symbolTable>> a;
+  num test("iTEST", a, 0);
   REQUIRE(test.data == "");
   REQUIRE(test.state == 21);
 }
 
 TEST_CASE("number: pass number", "[number]") {
-  num test("n123");
+  std::vector<std::vector<symbolTable>> a;
+  num test("n123", a, 0);
   REQUIRE(test.data == "123");
   REQUIRE(test.state == 0);
 }
 
 TEST_CASE("number: empty idenfier", "[number]") {
-  num test("n");
+  std::vector<std::vector<symbolTable>> a;
+  num test("n", a, 0);
   REQUIRE(test.data == "");
   REQUIRE(test.state == 21);
 }
