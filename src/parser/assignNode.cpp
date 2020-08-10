@@ -86,44 +86,50 @@ assign::assign(std::vector<std::string> *lexed,
       } else if (lexed->front() == "SEMICOLON") {
         lexed->erase(lexed->begin());
         running = false;
-      } else if (function == true) {
-        if (lexed->front() == "INTSYM") {
-          temp.push_back(tmp);
-        } else if (lexed->front() == "COMMA") {
-          temp.push_back(tmp);
-        } else if (lexed->front().at(0) == 'i') {
-          temp.push_back(tmp);
-        } else if (lexed->front() == "LPAREN") {
-          lexed->erase(lexed->begin());
-          if (lexed->size() > 1) {
-            if (lexed->front() == "RCURLY") {
-              lexed->erase(lexed->begin());
-              running = false;
-            }
-          } else {
-            state = 23;
-            return;
+      }
+    } else if (function == true) {
+      if (lexed->front() == "INTSYM") {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "COMMA") {
+        temp.push_back(tmp);
+      } else if (lexed->front().at(0) == 'i') {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "RPAREN") {
+        lexed->erase(lexed->begin());
+        if (lexed->size() > 1) {
+          if (lexed->front() == "LCURLY") {
+            lexed->erase(lexed->begin());
+            running = false;
+            break;
           }
         } else {
-          state = 21;
+          state = 23;
           return;
         }
-        lexed->erase(lexed->begin());
       } else {
-        state = 25;
+        state = 21;
         return;
       }
-    }
-
-    if (lexed->empty() == 0) {
-      state = 0;
+      lexed->erase(lexed->begin());
+    } else {
+      state = 25;
       return;
     }
+  }
 
-    if (function == true) {
-    }
+  if (lexed->size() == 0) {
+    state = 0;
+    return;
+  }
+
+  if (function == true) {
+    std::unique_ptr<branch> var =
+        std::make_unique<branch>(branch(lexed, symbol, location));
+    lexed->erase(lexed->begin());
+    right = std::move(var);
   }
 }
+
 void assign::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
   text->append("\n");
