@@ -10,6 +10,11 @@ assign::assign(std::vector<std::string> *lexed,
 
   std::vector<std::string> generated;
 
+  if (lexed->empty()) {
+    state = 23;
+    return;
+  }
+
   std::string type = lexed->front();
   lexed->erase(lexed->begin());
 
@@ -21,68 +26,105 @@ assign::assign(std::vector<std::string> *lexed,
   std::string Name = lexed->front();
   lexed->erase(lexed->begin());
 
-  if (Name.at(0) == 'i') {
-    std::unique_ptr<identifier> var =
-        std::make_unique<identifier>(identifier(Name, symbol, location));
-    left = std::move(var);
-  }
+  bool function = 0; // 0 false 1 intialised 2 unintialed
+  int varible = 0;
 
-  if (lexed->front() == "SEMICOLON") {
-
-    return;
-  } else if (lexed->front() != "EQL" && lexed->front() != "LPAREN") {
-
-    std::cout << "found unexpected symbole";
-    lexed = {};
+  if (lexed->front() == "EQL") {
+    varible = 1;
+  } else if (lexed->front() == "SEMICOLON") {
+    varible = 2;
+  } else if (lexed->front() == "LPAREN") {
+    function = true;
+  } else {
+    state = 25;
     return;
   }
 
   lexed->erase(lexed->begin());
 
-  int caseState = 0; // 0-failed 1-varible 2-function
-  bool running = true;
-  int i = 0;
-  while (running) {
-    if (lexed->at(i) == "SEMICOLON") {
-      running = false;
-      caseState = 1;
-    } else if (lexed->at(i) == "RPAREN") {
-      running = false;
-      caseState = 2;
+  if (Name.at(0) == 'i') {
+    std::unique_ptr<identifier> var = std::make_unique<identifier>(
+        identifier(Name, symbol, location, true, function));
+    if (var->state == 0) {
+      left = std::move(var);
     } else {
-      generated.push_back(lexed->at(i));
+      state = var->state;
+      return;
     }
-    lexed->erase(lexed->begin());
-  }
-
-  if (generated.size() == 0 && caseState == 1) {
-    std::cout << "expected an identifier";
+  } else if (Name.size() == 0) {
+    // todo return error code for empty name
+    state = 23;
     return;
   }
 
-  switch (generated.size()) {
-  case 0:
-    std::cout << "expected statment after equals sign";
-    break;
-  case 1:
-    if (generated.at(0).at(0) == 'i') {
-      std::unique_ptr<identifier> var;
-      var = std::make_unique<identifier>(
-          identifier(generated.at(0), symbol, location));
-      right = std::move(var);
-    } else if (generated.at(0).at(0) == 'n') {
-      std::unique_ptr<num> var;
-      var = std::make_unique<num>(num(generated.at(0), symbol, location));
-      right = std::move(var);
-    }
-    break;
-  default:
-    binop(*generated);
-    break;
+  if (varible == 1) {
+    state = 0;
+    return;
   }
-}
 
-void assign::display(std::string *text, std::string tab, bool top) {
+  bool running = true;
+  std::vector<std::string> temp;
+  while (running) {
+    std::string tmp;
+    if (varible == 2) {
+      if (lexed->front() == "PLUS") {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "MINUS") {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "TIMES") {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "SLASH") {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "LPAREN") {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "RPAREN") {
+        temp.push_back(tmp);
+      } else if (lexed->front().at(0) == 'i') {
+        temp.push_back(tmp);
+      } else if (lexed->front().at(0) == 'n') {
+        temp.push_back(tmp);
+      } else if (lexed->front() == "SEMICOLON") {
+        lexed->erase(lexed->begin());
+        running = false;
+      } else if (function == true) {
+        if (lexed->front() == "INTSYM") {
+          temp.push_back(tmp);
+        } else if (lexed->front() == "COMMA") {
+          temp.push_back(tmp);
+        } else if (lexed->front().at(0) == 'i') {
+          temp.push_back(tmp);
+        } else if (lexed->front() == "LPAREN") {
+          lexed->erase(lexed->begin());
+          if (lexed->size() > 1) {
+            if (lexed->front() == "RCURLY") {
+              lexed->erase(lexed->begin());
+              running = false;
+            }
+          } else {
+            state = 23;
+            return;
+          }
+        } else {
+          state = 21;
+          return;
+        }
+        lexed->erase(lexed->begin());
+      } else {
+        state = 25;
+        return;
+      }
+    }
+
+    if (lexed->empty() == 0) {
+      state = 0;
+      return;
+    }
+
+    if (function == true) {
+    }
+  }
+
+  void assign::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
   text->append("\n");
   text->append(tab);
