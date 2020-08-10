@@ -123,8 +123,8 @@ assign::assign(std::vector<std::string> *lexed,
     if (function == true) {
     }
   }
-
-  void assign::display(std::string *text, std::string tab, bool top) {
+}
+void assign::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
   text->append("\n");
   text->append(tab);
