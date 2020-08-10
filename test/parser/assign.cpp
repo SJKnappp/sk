@@ -43,12 +43,16 @@ TEST_CASE("assign: pass a non allowed function generation", "[assign]") {
 // todo
 TEST_CASE("assign: pass varible without assignment", "[assign]") {
   std::vector<std::vector<symbolTable>> a;
+  std::vector<symbolTable> b;
   std::vector<std::string> lexed;
+  symbolTable temp("", "", "");
+  b.push_back(temp);
+  a.push_back(b);
   lexed.push_back("int");
-  lexed.push_back("test");
+  lexed.push_back("itest");
   lexed.push_back("SEMICOLON");
   assign test(&lexed, a, 0);
-  REQUIRE(test.state == 23);
+  REQUIRE(test.state == 0);
 }
 TEST_CASE("assign: test that a variable is generated correctly", "[assign]") {
   std::vector<std::vector<symbolTable>> a;
