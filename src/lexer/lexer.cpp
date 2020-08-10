@@ -29,6 +29,8 @@ std::string tokens(std::string word) {
     return "SEMICOLON";
   } else if (word == ".") {
     return "PERIOD";
+  } else if (word == ",") {
+    return "COMMA";
   } else if (word == "=") {
     return "EQL";
   } else if (word == "==") {

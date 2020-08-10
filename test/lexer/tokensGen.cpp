@@ -45,6 +45,10 @@ TEST_CASE("Token case .") {
   std::string t = tokens(".");
   REQUIRE(t == "PERIOD");
 }
+TEST_CASE("Token case ,") {
+  std::string t = tokens(",");
+  REQUIRE(t == "COMMA");
+}
 TEST_CASE("Token case =") {
   std::string t = tokens("=");
   REQUIRE(t == "EQL");
