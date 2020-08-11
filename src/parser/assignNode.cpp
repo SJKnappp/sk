@@ -10,18 +10,13 @@ assign::assign(std::vector<std::string> *lexed,
 
   std::vector<std::string> generated;
 
-  if (lexed->empty()) {
+  if (lexed->size() <= 2) {
     state = 23;
     return;
   }
 
   std::string type = lexed->front();
   lexed->erase(lexed->begin());
-
-  if (lexed->empty()) {
-    state = 23;
-    return;
-  }
 
   std::string Name = lexed->front();
   lexed->erase(lexed->begin());
@@ -66,7 +61,7 @@ assign::assign(std::vector<std::string> *lexed,
   std::vector<std::string> temp;
   while (running) {
     std::string tmp;
-    if (varible == 2) {
+    if (varible == 1) {
       if (lexed->front() == "PLUS") {
         temp.push_back(tmp);
       } else if (lexed->front() == "MINUS") {
@@ -84,7 +79,6 @@ assign::assign(std::vector<std::string> *lexed,
       } else if (lexed->front().at(0) == 'n') {
         temp.push_back(tmp);
       } else if (lexed->front() == "SEMICOLON") {
-        lexed->erase(lexed->begin());
         running = false;
       }
       lexed->erase(lexed->begin());

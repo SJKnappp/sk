@@ -71,7 +71,7 @@ TEST_CASE("assign: pass a bad variable definition", "[assign]") {
   std::vector<std::string> lexed;
   lexed.push_back("int");
   lexed.push_back("test");
-  lexed.push_back("=");
+  lexed.push_back("EQL");
   lexed.push_back("SEMICOLON");
   assign test(&lexed, a, 0);
   REQUIRE(test.state == 23);

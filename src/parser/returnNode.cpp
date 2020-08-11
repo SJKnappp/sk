@@ -24,6 +24,7 @@ returnNode::returnNode(std::vector<std::string> *lexed,
       lexed->erase(lexed->begin());
       state = 0;
     } else if (lexed->front() == "SEMICOLON") {
+      state = 0;
       lexed->erase(lexed->begin());
     } else {
       lexed = {};

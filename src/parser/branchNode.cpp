@@ -14,6 +14,7 @@ branch::branch(std::vector<std::string> *lexed,
   }
 
   if (lexed == nullptr || lexed->empty()) {
+    state = 26;
     return;
   }
 
@@ -35,15 +36,20 @@ branch::branch(std::vector<std::string> *lexed,
       std::cout << lexed->front() << " token not reconised";
       return;
     } else if (lexed->front() == "LCURLY") { // creates a new branch node
-      std::vector<symbolTable> temp = {};
+      lexed->erase(lexed->begin());
       std::unique_ptr<branch> Branch =
           std::make_unique<branch>(branch(lexed, symbol, 0));
+      state = Branch->state;
       Branch->result = "branch";
       branches.push_back(std::move(Branch));
     } else if (lexed->front() == "RCURLY") { // will be used to end the branch
       break; // exits while loop to end the branch
     } else if (lexed->front() == "SEMICOLON") { // ends a line
       lexed->erase(lexed->begin());
+      if (lexed->size() == 0) {
+        state = 26;
+        return;
+      }
     } else if (lexed->front() == "CONSTSYM") {
       // todo
       state = 22;
@@ -93,7 +99,6 @@ branch::branch(std::vector<std::string> *lexed,
       return;
     }
   }
-  state = 0;
 }
 
 void branch::display(std::string *text, std::string tab, bool top) {
