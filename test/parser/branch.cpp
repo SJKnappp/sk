@@ -21,10 +21,8 @@ TEST_CASE("branch: pass an empty array into constructor", "[branch]") {
 
 TEST_CASE("branch: illegal token passed into function", "[branch]") {
   std::vector<std::vector<symbolTable>> a;
-
   std::vector<symbolTable> symbol;
   std::vector<std::string> lexed;
-  lexed.push_back("");
   lexed.push_back("PLUS");
   branch test(&lexed, a, 0);
   REQUIRE(test.state == 21);

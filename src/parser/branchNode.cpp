@@ -11,14 +11,12 @@ branch::branch(std::vector<std::string> *lexed,
   if (!top) {
   } else {
     data = "top";
-    lexed->insert(lexed->begin(), "first");
   }
 
   if (lexed == nullptr || lexed->empty()) {
     return;
   }
 
-  lexed->erase(lexed->begin());
   while (lexed->size() > 0) {
     //    lexed->erase(lexed->begin());
     if (lexed->empty()) {
@@ -89,7 +87,13 @@ branch::branch(std::vector<std::string> *lexed,
       state = 22;
       return;
     }
+
+    if (branches.back()->state != 0) {
+      state = branches.back()->state;
+      return;
+    }
   }
+  state = 0;
 }
 
 void branch::display(std::string *text, std::string tab, bool top) {

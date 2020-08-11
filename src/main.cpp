@@ -24,11 +24,16 @@ int main(int argc, char **argv) {
 
   // start ast tree
   branch start(&lexed, symbol, 0, true);
+
   bool isDisplay = true;
 
   if (isDisplay == true) {
     std::string text;
     start.display(&text, std::string(), true);
+  }
+
+  if (start.state != 0) {
+    return start.state;
   }
   //  std::unique_ptr<Node> ret = std::make_unique<branch>(start);
   //  std::string test = start.branches()[0]->data;

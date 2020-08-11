@@ -51,13 +51,13 @@ assign::assign(std::vector<std::string> *lexed,
       state = var->state;
       return;
     }
+
   } else if (Name.size() == 0) {
-    // todo return error code for empty name
     state = 23;
     return;
   }
 
-  if (varible == 1) {
+  if (varible == 2) {
     state = 0;
     return;
   }
@@ -87,6 +87,7 @@ assign::assign(std::vector<std::string> *lexed,
         lexed->erase(lexed->begin());
         running = false;
       }
+      lexed->erase(lexed->begin());
     } else if (function == true) {
       if (lexed->front() == "INTSYM") {
         temp.push_back(tmp);
@@ -123,10 +124,12 @@ assign::assign(std::vector<std::string> *lexed,
   }
 
   if (function == true) {
+    location = symbol.size() - 1;
     std::unique_ptr<branch> var =
         std::make_unique<branch>(branch(lexed, symbol, location));
     lexed->erase(lexed->begin());
     right = std::move(var);
+    state = right->state;
   }
 }
 
