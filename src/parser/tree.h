@@ -26,7 +26,8 @@ public:
   virtual std::string type() = 0;
   virtual void display(std::string *text, std::string tab,
                        bool top = false) = 0;
-  virtual void assembly(std::string &text) = 0;
+  virtual void assembly(std::string &text, std::vector<std::string> &function,
+                        std::string &data) = 0;
 };
 
 // stores structrial information
@@ -38,7 +39,8 @@ public:
   std::vector<std::unique_ptr<Node>> branches; // stores ordered list of nodes
   bool failed;
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "branch"; }
@@ -51,7 +53,8 @@ public:
              std::vector<std::vector<symbolTable>> &symbol, int location);
   std::unique_ptr<Node> val = nullptr; // hold identifier or number
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "returnNode"; }
@@ -64,7 +67,8 @@ public:
   std::unique_ptr<Node> left = nullptr;
   std::unique_ptr<Node> right = nullptr;
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "binaryTree"; }
@@ -77,7 +81,8 @@ public:
   assign(std::vector<std::string> *lexed,
          std::vector<std::vector<symbolTable>> &symbol, int location);
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "assign"; }
@@ -89,7 +94,8 @@ public:
   binop(std::vector<std::string> *lexed,
         std::vector<std::vector<symbolTable>> &symbol, int location);
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "binop"; }
@@ -100,7 +106,8 @@ class compare : public binaryTree {
 public:
   compare(std::string *Keyword);
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 };
 
 // stores information about numbers
@@ -109,7 +116,8 @@ public:
   num(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
       int location);
   void display(std::string *text, std::string tab, bool top = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "Num"; }
@@ -120,7 +128,8 @@ class identifier : public Node {
 public:
   identifier(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
              int location, bool def = false, bool function = false);
-  void assembly(std::string &text);
+  void assembly(std::string &text, std::vector<std::string> &function,
+                std::string &data);
 
 protected:
   std::string type() { return "Identifier"; }

@@ -161,4 +161,5 @@ void assign::display(std::string *text, std::string tab, bool top) {
   }
 }
 
-void assembly(std::string &text) {}
+void assembly(std::string &text, std::vector<std::string> &function,
+              std::string &data) {}

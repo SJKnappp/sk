@@ -12,6 +12,8 @@ std::string gen(branch *base) {
   std::vector<std::string> function;
   std::string data;
 
+  base->assembly(text, function, data);
+
   init(&text, &function, &data);
 
   std::string result = finial(&text, &function, &data);
