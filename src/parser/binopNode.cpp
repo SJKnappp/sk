@@ -80,9 +80,26 @@ binop::binop(std::vector<std::string> *lexed,
       }
     }
   }
-  std::unique_ptr<binop> var =
-      std::make_unique<binop>(binop(&listLeft, symbol, location));
-  right = std::move(var);
+
+  if (listLeft.size() > 1) {
+    std::unique_ptr<binop> var =
+        std::make_unique<binop>(binop(&listLeft, symbol, location));
+    right = std::move(var);
+  } else if (listLeft.size() == 1) {
+    std::unique_ptr<identifier> var = std::make_unique<identifier>(
+        identifier(listLeft.at(0), symbol, location));
+    right = std::move(var);
+  }
+
+  if (listRight.size() > 1) {
+    std::unique_ptr<binop> var =
+        std::make_unique<binop>(binop(&listRight, symbol, location));
+    left = std::move(var);
+  } else if (listRight.size() == 1) {
+    std::unique_ptr<identifier> var = std::make_unique<identifier>(
+        identifier(listRight.at(0), symbol, location));
+    left = std::move(var);
+  }
 }
 void binop::display(std::string *text, std::string tab, bool top) {
   tab += "\t";

@@ -63,32 +63,32 @@ assign::assign(std::vector<std::string> *lexed,
     std::string tmp;
     if (varible == 1) {
       if (lexed->front() == "PLUS") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "MINUS") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "TIMES") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "SLASH") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "LPAREN") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "RPAREN") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front().at(0) == 'i') {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front().at(0) == 'n') {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "SEMICOLON") {
         running = false;
       }
       lexed->erase(lexed->begin());
     } else if (function == true) {
       if (lexed->front() == "INTSYM") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "COMMA") {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front().at(0) == 'i') {
-        temp.push_back(tmp);
+        temp.push_back(lexed->front());
       } else if (lexed->front() == "RPAREN") {
         lexed->erase(lexed->begin());
         if (lexed->size() > 1) {
@@ -118,6 +118,7 @@ assign::assign(std::vector<std::string> *lexed,
   }
 
   if (function == true) {
+
     location = symbol.size() - 1;
     std::unique_ptr<branch> var =
         std::make_unique<branch>(branch(lexed, symbol, location));
@@ -127,8 +128,21 @@ assign::assign(std::vector<std::string> *lexed,
   }
 
   if (varible == 1) {
+    if (temp.size() == 1) {
+      if (temp.at(0).at(0) == 'i') {
+        std::unique_ptr<identifier> var = std::make_unique<identifier>(
+            identifier(temp.at(0), symbol, location));
+        right = std::move(var);
+        return;
+      } else if (temp.at(0).at(0) == 'n') {
+        std::unique_ptr<num> var =
+            std::make_unique<num>(num(temp.at(0), symbol, location));
+        right = std::move(var);
+        return;
+      }
+    }
     std::unique_ptr<binop> var =
-        std::make_unique<binop>(binop(lexed, symbol, location));
+        std::make_unique<binop>(binop(&temp, symbol, location));
     right = std::move(var);
     state = right->state;
   }
