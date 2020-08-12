@@ -14,24 +14,35 @@ binop::binop(std::vector<std::string> *lexed,
   std::vector<std::string> listLeft;
   std::vector<std::string> listRight;
 
+  if (lexed->size() < 3) {
+    state = 23;
+    return;
+  }
+
   if (lexed->size() == 3) {
     if (lexed->at(0).at(0) == 'i' || lexed->at(0).at(0) == 'n') {
       std::unique_ptr<identifier> var = std::make_unique<identifier>(
           identifier(lexed->at(0), symbol, location));
       left = std::move(var);
     } else {
+      state = 21;
+      return;
     }
     if (lexed->at(1) == "PLUS" || lexed->at(1) == "MINUS" ||
         lexed->at(1) == "TIMES" || lexed->at(1) == "SLASH" ||
         lexed->at(1) == "LPAREN" || lexed->at(1) == "RPAREN") {
       data = lexed->at(1);
     } else {
+      state = 21;
+      return;
     }
     if (lexed->at(2).at(0) == 'i' || lexed->at(2).at(0) == 'n') {
       std::unique_ptr<identifier> var = std::make_unique<identifier>(
           identifier(lexed->at(2), symbol, location));
       right = std::move(var);
     } else {
+      state = 21;
+      return;
     }
     return;
   }

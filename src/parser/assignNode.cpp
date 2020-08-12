@@ -125,6 +125,13 @@ assign::assign(std::vector<std::string> *lexed,
     right = std::move(var);
     state = right->state;
   }
+
+  if (varible == 1) {
+    std::unique_ptr<binop> var =
+        std::make_unique<binop>(binop(lexed, symbol, location));
+    right = std::move(var);
+    state = right->state;
+  }
 }
 
 void assign::display(std::string *text, std::string tab, bool top) {

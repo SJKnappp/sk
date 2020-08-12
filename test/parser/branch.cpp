@@ -115,3 +115,5 @@ TEST_CASE("branch: legal token number", "[branch]") {
   branch test(&lexed, a, 0);
   REQUIRE(test.state == 0);
 }
+
+// todo test display
