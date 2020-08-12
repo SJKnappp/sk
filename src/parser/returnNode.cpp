@@ -45,3 +45,5 @@ void returnNode::display(std::string *text, std::string tab, bool top) {
     this->val->display(text, tab);
   }
 }
+
+void assembly(std::string &text) {}

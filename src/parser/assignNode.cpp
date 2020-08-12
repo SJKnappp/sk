@@ -160,3 +160,5 @@ void assign::display(std::string *text, std::string tab, bool top) {
     this->right->display(text, tab);
   }
 }
+
+void assembly(std::string &text) {}

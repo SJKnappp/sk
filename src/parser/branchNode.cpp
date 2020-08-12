@@ -122,3 +122,5 @@ void branch::display(std::string *text, std::string tab, bool top) {
     file.close();
   }
 }
+
+void assembly(std::string &text) {}

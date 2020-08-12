@@ -21,7 +21,8 @@ binop::binop(std::vector<std::string> *lexed,
 
   if (lexed->size() == 3) {
     if (lexed->at(0).at(0) == 'i' || lexed->at(0).at(0) == 'n') {
-      std::unique_ptr<identifier> var = std::make_unique<identifier>(
+      std::unique_ptr<identifier> var;
+      var = std::make_unique<identifier>(
           identifier(lexed->at(0), symbol, location));
       left = std::move(var);
     } else {
@@ -60,7 +61,7 @@ binop::binop(std::vector<std::string> *lexed,
     } else if (lexed->at(1) == "PLUS" || lexed->at(1) == "MINUS" ||
                lexed->at(1) == "TIMES" || lexed->at(1) == "SLASH" ||
                lexed->at(1) == "LPAREN" || lexed->at(1) == "RPAREN") {
-      if (numExpected == false) {
+      if (!numExpected) {
         numExpected = true;
         if (firstExpresion) {
           firstExpresion = false;
@@ -113,3 +114,5 @@ void binop::display(std::string *text, std::string tab, bool top) {
     this->right->display(text, tab);
   }
 }
+
+void assembly(std::string &text) {}

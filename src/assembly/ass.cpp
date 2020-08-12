@@ -23,7 +23,7 @@ void init(std::string *text, std::vector<std::string> *body,
           std::string *data) {
   text->append("Section .text\n\tglobal _start");
   // first function will be start
-  body->push_back("\n_start");
+  body->push_back("\n_start:");
   data->append("\nSection .data");
 }
 

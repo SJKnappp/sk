@@ -10,3 +10,5 @@ void binaryTree::display(std::string *text, std::string tab, bool top) {
   text->append(tab);
   text->append(this->type());
 }
+
+void assembly(std::string &text) {}

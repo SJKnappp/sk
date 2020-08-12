@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
     std::cout << "produced empty lexed file";
     return 100;
   } else {
-    std::vector<std::string> lexcopy = lexed;
+    std::vector<std::string> lexCopy = lexed;
   }
   std::vector<std::vector<symbolTable>> symbol;
 
@@ -28,8 +28,8 @@ int main(int argc, char **argv) {
   bool isDisplay = true;
 
   if (isDisplay == true) {
-    std::string text;
-    start.display(&text, std::string(), true);
+    std::string tempText;
+    start.display(&tempText, std::string(), true);
   }
 
   if (start.state != 0) {
