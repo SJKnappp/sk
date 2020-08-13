@@ -18,6 +18,8 @@ identifier::identifier(std::string flag,
     return;
   }
 
+  isFunction = function;
+
   flag.erase(0, 1);
   bool exists = false;
   if (def == true) { // is a defintion
@@ -52,5 +54,7 @@ void identifier::display(std::string *text, std::string tab, bool top) {
   text->append(this->type());
 }
 
-void assembly(std::string &text, std::vector<std::string> &function,
-              std::string &data) {}
+void identifier::assembly(std::string &text, std::vector<std::string> &function,
+              std::string &data, std::vector<std::vector<symbolTable>> &symbol) {
+
+}

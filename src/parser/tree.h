@@ -23,11 +23,13 @@ public:
   int state;
   std::string data = "";
   std::string result = "";
+  bool isFunction;
   virtual std::string type() = 0;
   virtual void display(std::string *text, std::string tab,
                        bool top = false) = 0;
   virtual void assembly(std::string &text, std::vector<std::string> &function,
-                        std::string &data) = 0;
+                        std::string &data,
+                        std::vector<std::vector<symbolTable>> &symbol) = 0;
 };
 
 // stores structrial information
@@ -40,7 +42,8 @@ public:
   bool failed;
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "branch"; }
@@ -54,7 +57,8 @@ public:
   std::unique_ptr<Node> val = nullptr; // hold identifier or number
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "returnNode"; }
@@ -68,7 +72,8 @@ public:
   std::unique_ptr<Node> right = nullptr;
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "binaryTree"; }
@@ -82,7 +87,8 @@ public:
          std::vector<std::vector<symbolTable>> &symbol, int location);
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "assign"; }
@@ -95,7 +101,8 @@ public:
         std::vector<std::vector<symbolTable>> &symbol, int location);
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "binop"; }
@@ -107,7 +114,8 @@ public:
   compare(std::string *Keyword);
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 };
 
 // stores information about numbers
@@ -117,7 +125,8 @@ public:
       int location);
   void display(std::string *text, std::string tab, bool top = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "Num"; }
@@ -129,7 +138,8 @@ public:
   identifier(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
              int location, bool def = false, bool function = false);
   void assembly(std::string &text, std::vector<std::string> &function,
-                std::string &data);
+                std::string &data,
+                std::vector<std::vector<symbolTable>> &symbol);
 
 protected:
   std::string type() { return "Identifier"; }

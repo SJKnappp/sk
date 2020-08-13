@@ -102,6 +102,7 @@ binop::binop(std::vector<std::string> *lexed,
     left = std::move(var);
   }
 }
+
 void binop::display(std::string *text, std::string tab, bool top) {
   tab += "\t";
   text->append("\n");
@@ -115,5 +116,6 @@ void binop::display(std::string *text, std::string tab, bool top) {
   }
 }
 
-void assembly(std::string &text, std::vector<std::string> &function,
-              std::string &data) {}
+void binop::assembly(std::string &text, std::vector<std::string> &function,
+                     std::string &data,
+                     std::vector<std::vector<symbolTable>> &symbol) {}

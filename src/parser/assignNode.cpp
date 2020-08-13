@@ -161,5 +161,27 @@ void assign::display(std::string *text, std::string tab, bool top) {
   }
 }
 
-void assembly(std::string &text, std::vector<std::string> &function,
-              std::string &data) {}
+void assign::assembly(std::string &text, std::vector<std::string> &function,
+                      std::string &data,
+                      std::vector<std::vector<symbolTable>> &symbol) {
+
+  if (left == nullptr) {
+
+    return;
+  }
+
+  std::string temp;
+  if (left->isFunction == true) {
+    temp += "\n_" + left->data + ":";
+
+    // end of statment
+    if (left->data == "start") {
+      temp += "\n\tmov eax, 1\n\tint 0x80";
+    }
+  }
+
+  if (right != nullptr)
+    right->assembly(text, function, data, symbol);
+
+  function.push_back(temp);
+}

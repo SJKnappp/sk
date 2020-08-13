@@ -9,7 +9,7 @@
 
 // namespace contains all assembly file building commands
 namespace ass {
-std::string gen(branch *base);
+std::string gen(branch *base, std::vector<std::vector<symbolTable>> &symbol);
 void init(std::string *text, std::vector<std::string> *boby, std::string *data);
 std::string finial(std::string *text, std::vector<std::string> *body,
                    std::string *data);

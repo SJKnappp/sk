@@ -5,16 +5,16 @@
 #include "ass.h"
 
 namespace ass {
-std::string gen(branch *base) {
+std::string gen(branch *base, std::vector<std::vector<symbolTable>> &symbol) {
 
   // holds each section of data
   std::string text;
   std::vector<std::string> function;
   std::string data;
 
-  base->assembly(text, function, data);
-
   init(&text, &function, &data);
+
+  base->assembly(text, function, data, symbol);
 
   std::string result = finial(&text, &function, &data);
 
@@ -24,14 +24,10 @@ std::string gen(branch *base) {
 void init(std::string *text, std::vector<std::string> *body,
           std::string *data) {
   text->append("Section .text\n\tglobal _start");
-  // first function will be start
-  body->push_back("\n_start:");
-  data->append("\nSection .data");
 }
 
 std::string finial(std::string *text, std::vector<std::string> *function,
                    std::string *data) {
-  function->at(0).append("\n\tmov eax, 1\n\tint 0x80");
 
   std::string body;
   for (int i = 0; i < function->size(); i++)

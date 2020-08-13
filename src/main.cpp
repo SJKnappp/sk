@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
     return 1;
   }
 
-  std::string ass = ass::gen(&start);
+  std::string ass = ass::gen(&start, symbol);
 
   std::ofstream file;
   file.open("asm.asm");

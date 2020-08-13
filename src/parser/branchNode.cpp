@@ -8,7 +8,7 @@ branch::branch(std::vector<std::string> *lexed,
                std::vector<std::vector<symbolTable>> &symbol, int location,
                bool top) {
   state = 0;
-  if (!top) {
+  if (top==false) {
   } else {
     data = "top";
   }
@@ -123,5 +123,10 @@ void branch::display(std::string *text, std::string tab, bool top) {
   }
 }
 
-void assembly(std::string &text, std::vector<std::string> &function,
-              std::string &data) {}
+void branch::assembly(std::string &text, std::vector<std::string> &function,
+                      std::string &data,
+                      std::vector<std::vector<symbolTable>> &symbol) {
+  for(int i = 0; i < branches.size();i++){
+    branches.at(i)->assembly(text, function, data, symbol);
+  }
+}
