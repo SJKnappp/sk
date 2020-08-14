@@ -179,13 +179,14 @@ void assign::assembly(std::string &text, std::vector<std::string> &function,
     }
 
     for (int i = 0; i < symbol.at(location).size(); i++) {
-      if (symbol.at(location).at(i).type == "int") {
+      if (symbol.at(location).at(i).type == "INTSYM") {
         size += 4;
       }
     }
 
     temp += "\n_" + left->data + ":";
     temp += "\n\tpush rbp\n\tmov rbp, rsp";
+    temp += "\n\tsub rsp, " + std::to_string(size);
 
     // end of statment
     if (left->data == "start") {
