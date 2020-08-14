@@ -52,8 +52,8 @@ int main(int argc, char **argv) {
 
   //  std::cout << text;
 
-  system("nasm -f elf asm.asm -o asm.o");
-  system("ld -m elf_i386 -s -o asm asm.o");
+  system("nasm -f elf64 asm.asm -o asm.o");
+  system("ld -m elf_x86_64 -s -o asm asm.o");
 
   return 0;
 }

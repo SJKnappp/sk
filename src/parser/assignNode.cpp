@@ -173,10 +173,13 @@ void assign::assembly(std::string &text, std::vector<std::string> &function,
   std::string temp;
   if (left->isFunction == true) {
     temp += "\n_" + left->data + ":";
+    temp += "\n\tpush rbp\n\tmov rbp, rsp";
 
     // end of statment
     if (left->data == "start") {
       temp += "\n\tmov eax, 1\n\tint 0x80";
+    } else {
+      temp += "\n\tpop rbp";
     }
   }
 
