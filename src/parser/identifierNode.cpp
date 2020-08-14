@@ -6,7 +6,8 @@
 
 identifier::identifier(std::string flag,
                        std::vector<std::vector<symbolTable>> &symbol,
-                       int location, bool def, bool function) {
+                       int location, bool def, bool function,
+                       std::string type) {
   // used try and catch as only test cases call empty flags
   try {
     if (flag.at(0) != 'i' || flag.size() <= 1) {
@@ -21,24 +22,25 @@ identifier::identifier(std::string flag,
   isFunction = function;
 
   flag.erase(0, 1);
-  bool exists = false;
+  int exists = false;
   if (def == true) { // is a defintion
     if (function == true) {
       exists = searchArross(symbol, flag);
-      if (!exists) {
+      if (exists == -1) {
         std::vector<symbolTable> temp;
         // todo add type in incldue
-        temp.push_back(symbolTable(flag, "", "g"));
+        temp.push_back(symbolTable(flag, type, "g"));
         symbol.push_back(temp);
       }
     } else {
       exists = searchDown(symbol, location, flag);
       if (!exists) {
-        symbol.at(location).push_back(symbolTable(flag, "", "l"));
+        symbol.at(location).push_back(symbolTable(flag, type, "l"));
       }
+      exists--;
     }
   }
-  if (exists == false) {
+  if (exists == -1) {
     data = flag;
     state = 0;
   } else {
@@ -55,6 +57,5 @@ void identifier::display(std::string *text, std::string tab, bool top) {
 }
 
 void identifier::assembly(std::string &text, std::vector<std::string> &function,
-              std::string &data, std::vector<std::vector<symbolTable>> &symbol) {
-
-}
+                          std::string &data,
+                          std::vector<std::vector<symbolTable>> &symbol) {}

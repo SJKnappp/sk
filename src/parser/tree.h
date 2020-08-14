@@ -136,7 +136,7 @@ protected:
 class identifier : public Node {
 public:
   identifier(std::string flag, std::vector<std::vector<symbolTable>> &symbol,
-             int location, bool def = false, bool function = false);
+             int location, bool def = false, bool function = false, std::string type = "");
   void assembly(std::string &text, std::vector<std::string> &function,
                 std::string &data,
                 std::vector<std::vector<symbolTable>> &symbol);

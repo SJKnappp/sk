@@ -19,9 +19,8 @@ public:
 
 bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
                 std::string search);
-bool searchArross(std::vector<std::vector<symbolTable>> table,
-                  std::string search);
-bool searchAll(std::vector<std::vector<symbolTable>> table,
-               std::string search);
+int searchArross(std::vector<std::vector<symbolTable>> table,
+                 std::string search);
+bool searchAll(std::vector<std::vector<symbolTable>> table, std::string search);
 
 #endif // COMPILER_SYMBOL_H

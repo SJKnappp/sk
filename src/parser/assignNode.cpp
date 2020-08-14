@@ -39,7 +39,7 @@ assign::assign(std::vector<std::string> *lexed,
 
   if (Name.at(0) == 'i') {
     std::unique_ptr<identifier> var = std::make_unique<identifier>(
-        identifier(Name, symbol, location, true, function));
+        identifier(Name, symbol, location, true, function, type));
     if (var->state == 0) {
       left = std::move(var);
     } else {
@@ -166,12 +166,24 @@ void assign::assembly(std::string &text, std::vector<std::string> &function,
                       std::vector<std::vector<symbolTable>> &symbol) {
 
   if (left == nullptr) {
-
     return;
   }
 
   std::string temp;
   if (left->isFunction == true) {
+    int size;
+    int location = searchArross(symbol, left->data);
+    if (location == -1) {
+      state = 27;
+      return;
+    }
+
+    for (int i = 0; i < symbol.at(location).size(); i++) {
+      if (symbol.at(location).at(i).type == "int") {
+        size += 4;
+      }
+    }
+
     temp += "\n_" + left->data + ":";
     temp += "\n\tpush rbp\n\tmov rbp, rsp";
 
@@ -179,7 +191,7 @@ void assign::assembly(std::string &text, std::vector<std::string> &function,
     if (left->data == "start") {
       temp += "\n\tmov eax, 1\n\tint 0x80";
     } else {
-      temp += "\n\tpop rbp";
+      temp += "\n\tpop rbp\n\tret";
     }
   }
 

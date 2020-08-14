@@ -26,20 +26,20 @@ bool searchDown(std::vector<std::vector<symbolTable>> table, int location,
   return false;
 }
 
-// search for function names
-bool searchArross(std::vector<std::vector<symbolTable>> table,
-                  std::string search) {
+// search for function names returns location
+int searchArross(std::vector<std::vector<symbolTable>> table,
+                 std::string search) {
 
   if (table.size() == 0) {
-    return false;
+    return -1;
   }
 
   for (int i = 0; i < table.size(); i++) {
     if (table.at(i).at(0).symbol == search) {
-      return true;
+      return i;
     }
   }
-  return false;
+  return -1;
 }
 
 bool searchAll(std::vector<std::vector<symbolTable>> table,
