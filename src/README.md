@@ -10,4 +10,5 @@ error codes:
 <li>25 assign failed</li>
 <li>26 expected more tokens</li>
 <li>27 search failed</li>
+<li>30 unexpectedly empty array</li>
 </ul>

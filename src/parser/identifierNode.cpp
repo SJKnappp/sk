@@ -10,7 +10,7 @@ identifier::identifier(std::string flag,
                        std::string type) {
   // used try and catch as only test cases call empty flags
   if (flag.size() > 0) {
-      if (flag.at(0) != 'i' || flag.size() <= 1) {
+      if (flag.at(0) != 'i' || flag.size() == 1) {
           state = 21;
           return;
       }
@@ -35,11 +35,15 @@ identifier::identifier(std::string flag,
     } else {
         exists = searchDown(symbol, location, flag);
         if (!exists) {
-            symbol.at(location).push_back(symbolTable(flag, type, "l"));
+            if (symbol.size() == 0) {
+                state = 30;
+            } else {
+                symbol.at(location).push_back(symbolTable(flag, type, "l"));
+            }
         }
         exists--;
     }
-  } else {
+  } else { //checking function exists
 
   }
     if (exists == -1) {

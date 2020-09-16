@@ -13,7 +13,7 @@ TEST_CASE("Identifier: empty intialier") {
 
 TEST_CASE("Identifier: vailid idenfier") {
   std::vector<std::vector<symbolTable>> a;
-  identifier test("iTEST", a, 0);
+    identifier test("iTEST", a, 0, true);
   REQUIRE(test.data == "TEST");
   REQUIRE(test.state == 0);
 }
