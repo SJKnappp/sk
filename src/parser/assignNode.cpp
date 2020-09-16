@@ -11,8 +11,8 @@ assign::assign(std::vector<std::string> *lexed,
   std::vector<std::string> generated;
 
   if (lexed->size() <= 2) {
-    state = 23;
-    return;
+      state = 23;
+      return;
   }
 
   std::string type = lexed->front();
@@ -192,7 +192,7 @@ void assign::assembly(std::string &text, std::vector<std::string> &function,
     if (left->data == "start") {
       temp += "\n\tmov eax, 1\n\tint 0x80";
     } else {
-      temp += "\n\tpop rbp\n\tret";
+        temp += "\n\tleave\n\tret";
     }
   }
 

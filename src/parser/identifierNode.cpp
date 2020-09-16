@@ -29,24 +29,26 @@ identifier::identifier(std::string flag,
       if (exists == -1) {
         std::vector<symbolTable> temp;
         // todo add type in incldue
-        temp.push_back(symbolTable(flag, type, "g"));
-        symbol.push_back(temp);
+          temp.push_back(symbolTable(flag, type, "g"));
+          symbol.push_back(temp);
       }
     } else {
-      exists = searchDown(symbol, location, flag);
-      if (!exists) {
-        symbol.at(location).push_back(symbolTable(flag, type, "l"));
-      }
-      exists--;
+        exists = searchDown(symbol, location, flag);
+        if (!exists) {
+            symbol.at(location).push_back(symbolTable(flag, type, "l"));
+        }
+        exists--;
     }
-  }
-  if (exists == -1) {
-    data = flag;
-    state = 0;
   } else {
-    state = 24;
-    return;
+
   }
+    if (exists == -1) {
+        data = flag;
+        state = 0;
+    } else {
+        state = 24;
+        return;
+    }
 }
 
 void identifier::display(std::string *text, std::string tab, bool top) {
