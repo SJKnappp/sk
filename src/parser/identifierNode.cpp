@@ -9,14 +9,14 @@ identifier::identifier(std::string flag,
                        int location, bool def, bool function,
                        std::string type) {
   // used try and catch as only test cases call empty flags
-  try {
-    if (flag.at(0) != 'i' || flag.size() <= 1) {
-      state = 21;
+  if (flag.size() > 0) {
+      if (flag.at(0) != 'i' || flag.size() <= 1) {
+          state = 21;
+          return;
+      }
+  } else {
+      state = 23;
       return;
-    }
-  } catch (const std::exception &e) {
-    state = 23;
-    return;
   }
 
   isFunction = function;
