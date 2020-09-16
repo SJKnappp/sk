@@ -7,18 +7,19 @@
 namespace ass {
 std::string gen(branch *base, std::vector<std::vector<symbolTable>> &symbol) {
 
-  // holds each section of data
-  std::string text;
-  std::vector<std::string> function;
-  std::string data;
+    // holds each section of data
+    std::string text;
+    std::vector<std::string> function;
+    std::string data;
 
-  init(&text, &function, &data);
+    init(&text, &function, &data);
 
-  base->assembly(text, function, data, symbol);
+    if (base != nullptr) {
+        base->assembly(text, function, data, symbol);
+    }
+    std::string result = finial(&text, &function, &data);
 
-  std::string result = finial(&text, &function, &data);
-
-  return result;
+    return result;
 }
 
 void init(std::string *text, std::vector<std::string> *body,
